@@ -54,7 +54,7 @@
                             <i class="fa fa-fw fa-pencil"></i>
                             Editar
                         </a>
-                        <form action="{{ url('/admin/apprentice/'.$da->id) }}" style="display: inline-block;"data-nombre="{{ $da->nombre_completo }}"  method="POST" class="btn-delete-tbl btn btn-action">
+                        <form action="{{ url('/admin/apprentice/'.$da->id) }}" style="display: inline-block;" data-nombre="{{ $da->nombre_ficha }}"  method="POST" class="btn-delete-tbl btn btn-action">
                             {{ method_field('delete') }}
                             {!! csrf_field()  !!}
                             <i class="fa fa-fw fa-trash"></i>

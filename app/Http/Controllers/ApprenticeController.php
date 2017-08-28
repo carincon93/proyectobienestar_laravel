@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ApprenticeRequest;
 use App\Apprentice;
 
+
 class ApprenticeController extends Controller
 {
     /**
@@ -125,6 +126,7 @@ class ApprenticeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Apprentice::destroy($id);
+        return redirect('/admin/apprentice')->with('status', 'El aprendiz fue eliminado con éxito');
     }
 }

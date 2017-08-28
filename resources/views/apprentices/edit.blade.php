@@ -16,8 +16,9 @@
 @section('content')
 	<div class="col-md-8">
 		<div class="card-form">
-			<form action="{{ url('/admin/apprentice'.$dataApprentice->id) }}" method="POST">
+			<form action="{{ url('/admin/apprentice/'.$dataApprentice->id) }}" method="POST">
 				{!! csrf_field()  !!}
+				{{ method_field('PUT') }}
 				<div class="form-group{{ $errors->has('nombre_completo') ? ' has-error' : '' }}">
 					<label for="nombre_completo" class="control-label">
 						Nombre completo *

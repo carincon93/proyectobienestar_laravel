@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-08-2017 a las 05:09:03
+-- Tiempo de generación: 28-08-2017 a las 22:12:55
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -36,7 +36,7 @@ CREATE TABLE `apprentices` (
   `direccion` varchar(91) COLLATE utf8mb4_unicode_ci NOT NULL,
   `barrio` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `estrato` smallint(6) NOT NULL,
-  `telefono` int(11) NOT NULL,
+  `telefono` bigint(20) DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `programa_formacion` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `numero_ficha` int(11) NOT NULL,
@@ -45,13 +45,20 @@ CREATE TABLE `apprentices` (
   `pregunta2` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `pregunta3` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `otro_apoyo` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `compromiso_informar` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `compromiso_normas` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `compromiso_informar` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no',
+  `compromiso_normas` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no',
   `justificacion_suplemento` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estado_beneficio` tinyint(1) NOT NULL,
+  `estado_beneficio` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `apprentices`
+--
+
+INSERT INTO `apprentices` (`id`, `nombre_completo`, `tipo_documento`, `numero_documento`, `direccion`, `barrio`, `estrato`, `telefono`, `email`, `programa_formacion`, `numero_ficha`, `jornada`, `pregunta1`, `pregunta2`, `pregunta3`, `otro_apoyo`, `compromiso_informar`, `compromiso_normas`, `justificacion_suplemento`, `estado_beneficio`, `created_at`, `updated_at`) VALUES
+(1, 'holi', 'CEDULA', 1053, 'CRA', 'enea', 3, 0, 'jaime@mail.com', 'adsi', 112, 'mixta', 'papa', 'mec', 'ninguna', 'ninguno', 'si', 'si', 'oye no', 0, NULL, '2017-08-29 04:27:33');
 
 -- --------------------------------------------------------
 
@@ -61,8 +68,7 @@ CREATE TABLE `apprentices` (
 
 CREATE TABLE `history_records` (
   `id` int(10) UNSIGNED NOT NULL,
-  `estado_beneficio` tinyint(1) NOT NULL,
-  `numero_documento` int(10) UNSIGNED NOT NULL,
+  `id_aprendiz` int(10) UNSIGNED NOT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -121,7 +127,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'angela', 'angela@mail.com', '$2y$10$8GUSODGaLdJ/VHDMRiCpye9XWe9vcWhQrjxnKZHqeKwWEiDrG2B42', NULL, '2017-08-20 11:16:26', '2017-08-20 11:16:26');
+(1, 'angela', 'angela@mail.com', '$2y$10$lZ01/Ua9YxZqCFaiEuFXUe1fOhocwo3xG2LHyiKxoQpOWYz7Ke08C', NULL, '2017-08-20 16:16:26', '2017-08-29 04:35:15');
 
 --
 -- Índices para tablas volcadas
@@ -140,7 +146,7 @@ ALTER TABLE `apprentices`
 --
 ALTER TABLE `history_records`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `history_records_numero_documento_foreign` (`numero_documento`);
+  ADD KEY `history_records_id_aprendiz_foreign` (`id_aprendiz`);
 
 --
 -- Indices de la tabla `migrations`
@@ -169,7 +175,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `apprentices`
 --
 ALTER TABLE `apprentices`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `history_records`
 --
@@ -193,7 +199,7 @@ ALTER TABLE `users`
 -- Filtros para la tabla `history_records`
 --
 ALTER TABLE `history_records`
-  ADD CONSTRAINT `history_records_numero_documento_foreign` FOREIGN KEY (`numero_documento`) REFERENCES `apprentices` (`numero_documento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `history_records_id_aprendiz_foreign` FOREIGN KEY (`id_aprendiz`) REFERENCES `apprentices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
