@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/{id}/aprendizaceptado', 'AdminController@Aprendizaceptado');
+Route::get('/admin/{id}/aprendizrechazado', 'AdminController@Aprendizrechazado');
+
 
 
 

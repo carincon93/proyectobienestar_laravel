@@ -37,5 +37,10 @@ class AdminController extends Controller
 
         }
     }
+    public function Aprendizrechazado($id)
+    {
+        Apprentice::destroy($id);
+        return redirect('admin')->with('status', 'El aprendiz fue rechazado con exito!');
+    }
 
 }
