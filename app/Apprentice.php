@@ -27,7 +27,8 @@ class Apprentice extends Model
         'justificacion_suplemento',
         'estado_beneficio',
     ];
-    public function history_record() {
-    	return $this->hasMany('App\History_record');
+
+    public function historyrecords() {
+    	return $this->hasMany('App\HistoryRecord');
     }
 }

@@ -29,6 +29,9 @@ Route::get('admin/password', 'AdminController@password');
 Route::post('admin/updatepassword', 'AdminController@updatePassword');
 
 
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/{id}/solicitudaceptado', 'AdminController@solicitudAceptado');
+Route::get('/admin/{id}/solicitudrechazado', 'AdminController@solicitudRechazado');
 
 // Redirección - Error 404
 Route::get('error', function()

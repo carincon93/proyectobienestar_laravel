@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class History_record extends Model
+class HistoryRecord extends Model
 {
     protected $fillable = [
-        'id_aprendiz', 'fecha',
+        'apprentice_id', 'fecha',
     ];
 
     public function apprentice() {

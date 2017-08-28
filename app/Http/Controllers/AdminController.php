@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PasswordRequest;
-use Auth;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
+
+use Auth;
+
 use App\User;
 use Excel;
 use App\Apprentice;
-use Illuminate\Support\Facades\Schema;
-use App\History_Record;
+use App\HistoryRecord;
 
 class AdminController extends Controller
 {
@@ -21,7 +23,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -31,7 +33,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admins.dashboard');
+        $apprentice = Apprentice::all();
+        return view('admin.dashboard')->with('apprentice', $apprentice);
     }
     public function password(){
         return View('admins.password');
@@ -79,7 +82,7 @@ class AdminController extends Controller
                             }
                         } else {
                             $compromiso_informar = 'no';
-                            $compromiso_normas = 'no';                            
+                            $compromiso_normas = 'no';
                         }
                         $dataArray[] =
                         [
@@ -121,4 +124,20 @@ class AdminController extends Controller
 
         return redirect('/admin')->with('status', 'Todos los registros de los aprendices fueron eliminados con éxito!');
     }
+    public function solicitudAceptado($id)
+    {
+        $apprentice = Apprentice::find($id);
+        $apprentice->estado_beneficio = 1;
+        if($apprentice->save()){
+            return redirect('admin')->with('status', 'El Aprendiz <strong>'.$apprentice->nombre_completo.'</strong>
+            fue modificado con exito!');
+
+        }
+    }
+    public function solicitudRechazado($id)
+    {
+        Apprentice::destroy($id);
+        return redirect('admin')->with('status', 'El aprendiz fue rechazado con exito!');
+    }
+
 }
