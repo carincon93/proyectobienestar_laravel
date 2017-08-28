@@ -25,13 +25,14 @@
                     	<tbody>
                     	@foreach($apprentice as $ap)
                     		<tr>
-                    			<td>{{$ap->nombre_completo}}</td>
-                    			<td>{{$ap->numero_documento}}</</td>
-                    			<td>
-								<a class="btn btn-success" href="{{url('admin/'.$ap->id.'/aprendizaceptado')}}">Aceptado</a>
-								<a class="btn btn-danger" href="{{url('admin/'.$ap->id.'/aprendizrechazado')}}">No Aceptado</a>
-
-								</td>
+                    			@if($ap->estado_beneficio == '')
+	                    			<td>{{$ap->nombre_completo}}</td>
+	                    			<td>{{$ap->numero_documento}}</</td>
+	                    			<td>
+									<a class="btn btn-success" href="{{url('admin/'.$ap->id.'/aprendizaceptado')}}">Aceptado</a>
+									<a class="btn btn-danger" href="{{url('admin/'.$ap->id.'/aprendizrechazado')}}">No Aceptado</a>
+									</td>	
+                    			@endif
                     		</tr>
 
                     	@endforeach
