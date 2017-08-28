@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Excel;
 use App\Apprentice;
+use Illuminate\Support\Facades\Schema;
+use App\History_Record;
 
 class AdminController extends Controller
 {
@@ -109,5 +111,14 @@ class AdminController extends Controller
                 }
             }
         }
+    }
+    public function truncateall()
+    {
+        Schema::disableForeignKeyConstraints();
+        Apprentice::truncate();
+        History_Record::truncate();
+        Schema::enableForeignKeyConstraints();
+
+        return redirect('/admin')->with('status', 'Todos los registros de los aprendices fueron eliminados con éxito!');
     }
 }

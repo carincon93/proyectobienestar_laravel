@@ -1,6 +1,5 @@
 *Modal busqueda de aprendices
 *Seleccionar aprendices - Maicol
-*Truncate de lista aprendices
 *Restringir aprendiz para recibir suplemento
 *Ver historial aprendices - Yisus
 *Busqueda de entregas de suplementos HISTORIAL por fechas

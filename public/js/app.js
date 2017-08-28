@@ -47,3 +47,16 @@ $('.table-full').on('click', '.btn-delete-tbl', function (e) {
         $formDel.submit();
     });
 });
+
+//eliminar todos los registros
+$('body').on('click', '.form-truncate-aprendiz', function (e) {
+    e.preventDefault();
+    var $formTruncFic = $(this),
+        $modalTrun = $('#confirm-delete');
+    $modalTrun.find('.modal-title').text('Eliminar todos los registros');
+    $modalTrun.find('.modal-body').text('Va a eliminar todos los registros de esta tabla. ¿Está seguro que desea eliminar todos los registros?');
+    $modalTrun.find('#btn-delete').text('Eliminar todo');
+    $modalTrun.modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
+        $formTruncFic.submit();
+    });
+});

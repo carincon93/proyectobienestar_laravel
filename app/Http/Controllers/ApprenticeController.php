@@ -129,4 +129,5 @@ class ApprenticeController extends Controller
         Apprentice::destroy($id);
         return redirect('/admin/apprentice')->with('status', 'El aprendiz fue eliminado con éxito');
     }
+    
 }

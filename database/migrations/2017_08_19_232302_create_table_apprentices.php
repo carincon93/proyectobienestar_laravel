@@ -17,7 +17,7 @@ class CreateTableApprentices extends Migration
             $table->increments('id');
             $table->string('nombre_completo', 128);
         	$table->string('tipo_documento', 32);
-        	$table->integer('numero_documento')->unique()->unsigned();
+        	$table->integer('numero_documento')->unsigned();
         	$table->string('direccion', 91);
         	$table->string('barrio', 64);
         	$table->smallInteger('estrato');
