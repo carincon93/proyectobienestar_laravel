@@ -142,6 +142,9 @@
                                     </div>
                                 </div>
                             </form>
+                            <!-- / -->
+                            angela@mail.com
+                            pwd: admin123
                         </div>
                         @endif
                     </div>

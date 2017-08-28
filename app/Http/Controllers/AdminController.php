@@ -63,6 +63,22 @@ class AdminController extends Controller
                 {
                     if(!empty($row))
                     {
+                        $compromiso = $row['compromiso_del_aprendiz'];
+                        if(isset($compromiso)) {
+                            if (strpos($compromiso, 'informar') !== false) {
+                                $compromiso_informar = 'si';
+                            } else {
+                                $compromiso_informar = 'no';
+                            }
+                            if(strpos($compromiso, 'normas') !== false) {
+                                $compromiso_normas = 'si';
+                            } else {
+                                $compromiso_normas = 'no';
+                            }
+                        } else {
+                            $compromiso_informar = 'no';
+                            $compromiso_normas = 'no';                            
+                        }
                         $dataArray[] =
                         [
                             'nombre_completo' => $row['nombre_completo'],
@@ -80,8 +96,8 @@ class AdminController extends Controller
                             'pregunta2' => $row['oficio_que_realiza_de_quien_depende.'],
                             'pregunta3' => $row['tiene_personas_que_dependan_de_usted'],
                             'otro_apoyo' => $row['es_usted_beneficiario_de_algun_apoyo'],
-                            // 'compromiso_informar' => $row['correo_electronico'],
-                            // 'compromiso_normas' => $row['correo_electronico'],
+                            'compromiso_informar' => $compromiso_informar,
+                            'compromiso_normas' => $compromiso_normas,
                             'justificacion_suplemento' => $row['explique_a_profundidad_por_que_requiere_el_suplemento.'],
                         ];
                     }
@@ -89,6 +105,7 @@ class AdminController extends Controller
                 if(!empty($dataArray))
                 {
                     Apprentice::insert($dataArray);
+                    return redirect('/admin')->with('status', 'Se ha importado el archivo con éxito!');
                 }
             }
         }

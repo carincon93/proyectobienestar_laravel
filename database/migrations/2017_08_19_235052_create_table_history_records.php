@@ -15,9 +15,9 @@ class CreateTableHistoryRecords extends Migration
     {
         Schema::create('history_records', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_aprendiz')->unsigned();
+            $table->integer('apprentice_id')->unsigned();
             $table->date('fecha');
-            $table->foreign('id_aprendiz')->references('id')->on('apprentices')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('apprentice_id')->references('id')->on('apprentices')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
             $table->dropColumn(['created_at', 'updated_at']);
