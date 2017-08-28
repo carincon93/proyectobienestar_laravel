@@ -16,5 +16,22 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//admin
+Route::get('/admin', 'AdminController@index');
+Route::post('/admin/import', 'AdminController@import');
+Route::resource('/admin/collaborator', 'CollaboratorController');
+Route::post('/admin/truncate', 'AdminController@truncateall');
+//aprendiz
+Route::resource('/admin/apprentice','ApprenticeController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//cambio de contraseña
+Route::get('admin/password', 'AdminController@password');
+Route::post('admin/updatepassword', 'AdminController@updatePassword');
+
+
+
+// Redirección - Error 404
+Route::get('error', function()
+{
+	return Response::view('error.error404', array(), 404);
+});

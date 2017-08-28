@@ -17,11 +17,11 @@ class CreateTableApprentices extends Migration
             $table->increments('id');
             $table->string('nombre_completo', 128);
         	$table->string('tipo_documento', 32);
-        	$table->integer('numero_documento')->unique()->unsigned();
+        	$table->integer('numero_documento')->unsigned();
         	$table->string('direccion', 91);
         	$table->string('barrio', 64);
         	$table->smallInteger('estrato');
-        	$table->integer('telefono');
+        	$table->bigInteger('telefono')->nullable();
         	$table->string('email')->unique();
         	$table->string('programa_formacion', 128);
         	$table->integer('numero_ficha');
@@ -30,10 +30,10 @@ class CreateTableApprentices extends Migration
         	$table->longText('pregunta2');
         	$table->longText('pregunta3');
         	$table->string('otro_apoyo', 128);
-        	$table->string('compromiso_informar', 2);
-        	$table->string('compromiso_normas', 2);
+        	$table->string('compromiso_informar', 2)->default('no');
+        	$table->string('compromiso_normas', 2)->default('no');
         	$table->longText('justificacion_suplemento');
-        	$table->boolean('estado_beneficio');
+        	$table->boolean('estado_beneficio')->nullable();
             $table->timestamps();
         });
     }

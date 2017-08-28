@@ -8,73 +8,177 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+    @include('layouts.modal')
+    @if (Auth::check())
+    <aside id="sidebar">
+        <div id="sidebar-logo">
+            <h4 class="text-center">
+                <a href="{{ url('/admin') }}">BIENESTAR CPIC</a>
+            </h4>
+        </div>
+        <div id="sidebar-admin">
+            <div>
+                <h4 class="text-capitalize">{{ Auth::user()->name }}</h4>
+                <div>
+                    <a href="{{url('admin/password')}}" style="font-size:13px;">Cambiar mi contraseña</a><br>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();" class="logout">
+                        <i class="fa fa-fw fa-sign-out"></i>
+                        Cerrar Sesión
                     </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
-        </nav>
+        </div>
+        <div id="sidebar-content">
+            <ul class="sidebar-menu list-unstyled">
+                <li>Administración</li>
+                <li>
+                    <a href="{{ url('/admin/collaborator') }}"><i class="fa fa-fw fa-cog"></i>Administradores</a>
+                </li>
+                <li>
+                    <a href="{{ url('/admin/apprentice') }}"><i class="fa fa-fw fa-cog"></i>Aprendices</a>
+                </li>
+                <li>Acciones</li>
+                <li>
+                    <a href="{{ url('/') }}"><i class="fa fa-fw fa-key"></i>Recibir suplemento</a>
+                </li>
+                <li>
+                    <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-line-chart"></i>Historial de aprendices</a>
+                </li>
+                <li>
+                    <form action="{{ url('/admin/truncate') }}" method="POST" style="display: inline-block;" class="form-truncate-aprendiz btn">
+                        {!! csrf_field()  !!}
+                        <i class="fa fa-fw fa-trash"></i>
+                        Eliminar todos los registros
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    @endif
+    <main id="app">
+        <div class="{{ Auth::check() ? 'app-check' : ''}}">
+            <nav class="navbar navbar-default navbar-fixed-top {{ Auth::check() ? 'mleft' : '' }}">
+                <div class="container">
+                    @yield('navbar-top')
+                </div>
+            </nav>
+        <div class="main-content">
 
-        @yield('content')
-    </div>
+            <div class="row no-gutter">
+                <div class="{{ Auth::guest() ? 'col-md-9' : 'col-md-12' }} big-content">
+                    <div class="big-content-desc clearfix">
+                        @yield('big-content-desc')
+                    </div>
+                    @yield('content')
+                </div>
+                <div class="{{ Auth::guest() ? 'col-md-3 right-content' : ''}}">
+                    <div>
+                        @yield('right-content')
+
+                        @if(!Auth::check())
+                        <div class="card-form">
+                            <form method="POST" action="{{ route('login') }}">
+                                {{ csrf_field() }}
+
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <label for="email" class="control-label">Correo electrónico</label>
+
+                                    <div class="">
+                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                                        @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            {{ $errors->first('email') }}
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <label for="password" class="control-label">Contraseña</label>
+
+                                    <div class="">
+                                        <input id="password" type="password" class="form-control" name="password" required>
+
+                                        @if ($errors->has('password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recuerda mi cuenta
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="">
+                                        <button type="submit" class="btn btn-primary">
+                                            Iniciar sesión
+                                        </button>
+
+                                        <a class="btn-link pwd-req" href="{{ route('password.request') }}">
+                                            ¿Olvidaste tu contraseña?
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- / -->
+                            angela@mail.com
+                            pwd: admin123
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </main>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // =========================== Active Links =================================
+            var current_url = "{{ Request::fullUrl() }}";
+            var full_url = current_url+location.search;
+            var $navLinks = $("ul.sidebar-menu li a");
+            // First look for an exact match including the search string
+            var $curentPageLink = $navLinks.filter(
+                function() { return $(this).attr('href') === full_url; }
+            );
+            // If not found, look for the link that starts with the url
+            if(!$curentPageLink.length > 0){
+                $curentPageLink = $navLinks.filter(
+                    function() { return $(this).attr('href').startsWith(current_url) || current_url.startsWith($(this).attr('href')); }
+                );
+            }
+
+            $curentPageLink.parents('li').addClass('active');
+        });
+    </script>
+    <!-- <script src="{{ asset('js/master.js') }}"></script> -->
+    @stack('scripts')
 </body>
 </html>
