@@ -13,7 +13,7 @@ class ApprenticeController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
