@@ -33,7 +33,7 @@ class CreateTableApprentices extends Migration
         	$table->string('compromiso_informar', 2);
         	$table->string('compromiso_normas', 2);
         	$table->longText('justificacion_suplemento');
-        	$table->boolean('estado_beneficio');
+        	$table->boolean('estado_beneficio')->nullable();
             $table->timestamps();
         });
     }

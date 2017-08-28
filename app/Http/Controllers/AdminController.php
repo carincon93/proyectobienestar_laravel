@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Apprentice;
 
 class AdminController extends Controller
 {
@@ -13,7 +14,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +24,18 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $apprentice = Apprentice::all();
+        return view('admin.dashboard')->with('apprentice', $apprentice);
     }
+    public function Aprendizaceptado($id)
+    {
+        $apprentice = Apprentice::find($id);
+        $apprentice->estado_beneficio = 1;
+        if($apprentice->save()){
+            return redirect('admin')->with('status', 'El Aprendiz <strong>'.$apprentice->nombre_completo.'</strong>
+            fue modificad@ con exito!');
+
+        }
+    }
+
 }
