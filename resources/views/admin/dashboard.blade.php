@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 				@if (session('status'))
 				<div class="alert alert-success alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert"><span 
+					<button type="button" class="close" data-dismiss="alert"><span
 					aria-hidden="true">&times;</span></button>
 						{!! html_entity_decode(session('status')) !!}
 				</div>
@@ -29,9 +29,9 @@
 	                    			<td>{{$ap->nombre_completo}}</td>
 	                    			<td>{{$ap->numero_documento}}</</td>
 	                    			<td>
-									<a class="btn btn-success" href="{{url('admin/'.$ap->id.'/aprendizaceptado')}}">Aceptado</a>
-									<a class="btn btn-danger" href="{{url('admin/'.$ap->id.'/aprendizrechazado')}}">No Aceptado</a>
-									</td>	
+									<a class="btn btn-success" href="{{url('admin/'.$ap->id.'/solicitudaceptado')}}">Aceptado</a>
+									<a class="btn btn-danger" href="{{url('admin/'.$ap->id.'/solicitudrechazado')}}">No Aceptado</a>
+									</td>
                     			@endif
                     		</tr>
 
