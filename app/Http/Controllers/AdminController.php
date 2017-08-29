@@ -34,8 +34,14 @@ class AdminController extends Controller
     public function index()
     {
         $apprentice = Apprentice::all();
-        return view('admin.dashboard')->with('apprentice', $apprentice);
+        return view('admins.dashboard')->with('apprentice', $apprentice);
     }
+
+    public function redirect()
+    {
+        return redirect('admin/dashboard');
+    }
+
     public function password(){
         return View('admins.password');
     }
@@ -115,11 +121,11 @@ class AdminController extends Controller
             }
         }
     }
-    public function truncateall()
+    public function truncateAll()
     {
         Schema::disableForeignKeyConstraints();
         Apprentice::truncate();
-        History_Record::truncate();
+        HistoryRecord::truncate();
         Schema::enableForeignKeyConstraints();
 
         return redirect('/admin')->with('status', 'Todos los registros de los aprendices fueron eliminados con éxito!');

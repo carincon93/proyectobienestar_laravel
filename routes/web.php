@@ -16,22 +16,23 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-//admin
-Route::get('/admin', 'AdminController@index');
+// Admin
+Route::get('/admin', 'AdminController@redirect');
+Route::get('/admin/dashboard', 'AdminController@index');
 Route::post('/admin/import', 'AdminController@import');
-Route::resource('/admin/collaborator', 'CollaboratorController');
-Route::post('/admin/truncate', 'AdminController@truncateall');
-//aprendiz
-Route::resource('/admin/apprentice','ApprenticeController');
-
-//cambio de contraseña
-Route::get('admin/password', 'AdminController@password');
-Route::post('admin/updatepassword', 'AdminController@updatePassword');
-
-
-Route::get('/admin', 'AdminController@index');
+Route::post('/admin/truncate', 'AdminController@truncateAll');
 Route::get('/admin/{id}/solicitudaceptado', 'AdminController@solicitudAceptado');
 Route::get('/admin/{id}/solicitudrechazado', 'AdminController@solicitudRechazado');
+
+// Collaborador
+Route::resource('/admin/collaborator', 'CollaboratorController');
+
+// Aprendiz
+Route::resource('/admin/apprentice','ApprenticeController');
+
+// Cambio de contraseña
+Route::get('admin/password', 'AdminController@password');
+Route::post('admin/updatepassword', 'AdminController@updatePassword');
 
 // Redirección - Error 404
 Route::get('error', function()
