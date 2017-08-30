@@ -6,6 +6,11 @@
     <input type="file" name="imported-file" class="form-control" accept=".xlsx">
     <button type="submit">Importar</button>
 </form>
+<form action="{{ url('/admin/truncate') }}" method="POST" style="display: inline-block;" class="form-truncate-aprendiz btn">
+    {!! csrf_field()  !!}
+    <i class="fa fa-fw fa-trash"></i>
+    Eliminar todos los registros
+</form>
 <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
         <div class="panel-heading">Dashboard</div>

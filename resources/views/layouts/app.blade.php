@@ -21,7 +21,7 @@
     <aside id="sidebar">
         <div id="sidebar-logo">
             <h4 class="text-center">
-                <a href="{{ url('/admin') }}">BIENESTAR CPIC</a>
+                <a href="{{ url('/admin/dashboard') }}"><img src="{{ asset('/images/logo-bienestar.svg') }}" alt="" class="img-responsive"></a>
             </h4>
         </div>
         <div id="sidebar-admin">
@@ -51,17 +51,10 @@
                 </li>
                 <li>Acciones</li>
                 <li>
-                    <a href="{{ url('/') }}"><i class="fa fa-fw fa-key"></i>Recibir suplemento</a>
+                    <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-cutlery"></i>Entregar suplemento</a>
                 </li>
                 <li>
                     <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-line-chart"></i>Historial de aprendices</a>
-                </li>
-                <li>
-                    <form action="{{ url('/admin/truncate') }}" method="POST" style="display: inline-block;" class="form-truncate-aprendiz btn">
-                        {!! csrf_field()  !!}
-                        <i class="fa fa-fw fa-trash"></i>
-                        Eliminar todos los registros
-                    </form>
                 </li>
             </ul>
         </div>
