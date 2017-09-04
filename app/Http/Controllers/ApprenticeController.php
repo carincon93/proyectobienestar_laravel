@@ -57,7 +57,7 @@ class ApprenticeController extends Controller
         $dataApprentice->compromiso_normas   = $request->get('compromiso_normas');
         $dataApprentice->justificacion_suplemento = $request->get('justificacion_suplemento');
         if ($dataApprentice->save()){
-            return redirect('/admin/apprentice')->with('status', 'El aprendiz '.$dataApprentice->nombre_completo.' fue adicionado con éxito');
+            return redirect('/admin/dashboard')->with('status', 'El aprendiz '.$dataApprentice->nombre_completo.' fue adicionado con éxito');
         }
     }
 
@@ -113,7 +113,7 @@ class ApprenticeController extends Controller
         $dataApprentice->compromiso_normas     = $request->get('compromiso_normas');
         $dataApprentice->justificacion_suplemento = $request->get('justificacion_suplemento');
         if ($dataApprentice->save()){
-            return redirect('/admin/apprentice')->with('status', 'El aprendiz '.$dataApprentice->nombre_completo.' fue modificado con éxito');
+            return redirect('/admin/dashboard')->with('status', 'El aprendiz '.$dataApprentice->nombre_completo.' fue modificado con éxito');
         }
     }
 
@@ -126,7 +126,7 @@ class ApprenticeController extends Controller
     public function destroy($id)
     {
         Apprentice::destroy($id);
-        return redirect('/admin/apprentice')->with('status', 'El aprendiz fue eliminado con éxito');
+        return redirect('/admin/dashboard')->with('status', 'El aprendiz fue eliminado con éxito');
     }
 
     public function solicitudAceptado($id)
@@ -134,7 +134,7 @@ class ApprenticeController extends Controller
         $dataApprentice = Apprentice::find($id);
         $dataApprentice->estado_solicitud = 1;
         if($dataApprentice->save()){
-            return redirect('admin')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+            return redirect('admin/dashboard')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
             fue modificado con exito!');
         }
     }
@@ -142,7 +142,7 @@ class ApprenticeController extends Controller
     public function solicitudRechazado($id)
     {
         Apprentice::destroy($id);
-        return redirect('admin')->with('status', 'La solicitud del aprendiz fue rechazada!');
+        return redirect('admin/dashboard')->with('status', 'La solicitud del aprendiz fue rechazada!');
     }
 
     public function obtener_solicitud(Request $id)
@@ -155,9 +155,8 @@ class ApprenticeController extends Controller
     {
         $dataApprentice = Apprentice::find($id);
         $dataApprentice->estado_beneficio = 1;
-        $dataApprentice->fecha_entrega = date('Y-m-d H:i:s');
         if($dataApprentice->save()){
-            return redirect('admin')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+            return redirect('admin/dashboard')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
             ha recibido el suplemento con éxito!');
         }
     }
