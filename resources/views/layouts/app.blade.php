@@ -51,6 +51,13 @@
                 <li>
                     <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-line-chart"></i>Historial de aprendices</a>
                 </li>
+                <li>
+                    <form action="{{ url('/admin/truncate') }}" method="POST" style="display: inline-block;" class="form-truncate-aprendiz btn">
+                        {!! csrf_field() !!}
+                        <i class="fa fa-fw fa-trash"></i>
+                        Eliminar todos los registros
+                    </form>
+                </li>
             </ul>
         </div>
     </aside>

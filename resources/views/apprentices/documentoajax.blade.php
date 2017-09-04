@@ -4,7 +4,7 @@
         $fecha = substr($his->fecha, 0, -9);
         @endphp
     @endforeach
-    @if(isset($fecha) && $fecha == date('Y-m-d') && $da->estado_beneficio == 1)
+    @if(isset($fecha) && $fecha == date('Y-m-d'))
         El aprendiz ya recibió el suplemento!
     @else
     <form action="{{ url('admin/'.$da->id.'/entrega_suplemento') }}" id="formEntrega">

@@ -43,6 +43,13 @@
         <!-- Session Mensajes -->
         @include('layouts.messages')
         <a href="{{ url('/admin/apprentice/create') }}" class="action-round"><i class="fa fa-fw fa-plus"></i></a>
+
+        <form class="" action="{{ url('/admin/import') }}" method="post" enctype="multipart/form-data">
+            {!! csrf_field() !!}
+            <input type="file" name="imported-file" class="form-control" accept=".xlsx">
+            <button type="submit">Importar</button>
+
+        </form>
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default card">
                 <div class="panel-heading">Dashboard</div>
