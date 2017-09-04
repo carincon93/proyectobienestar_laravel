@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\HistoryRecord;
+
 class HistoryRecordController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class HistoryRecordController extends Controller
      */
     public function index()
     {
-        //
+        $dataHistoryRecord = HistoryRecord::all();
+        return view('history_records.index')
+            ->with('dataHistoryRecord', $dataHistoryRecord);
     }
 
     /**
@@ -32,9 +36,13 @@ class HistoryRecordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $dataHistoryRecord = new HistoryRecord();
+
+        $dataHistoryRecord->apprentice_id = $id;
+        $dataHistoryRecord->fecha = date('Y-m-d H:i:s');
+        $dataHistoryRecord->save();
     }
 
     /**

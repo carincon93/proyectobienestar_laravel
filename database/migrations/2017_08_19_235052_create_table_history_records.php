@@ -16,7 +16,7 @@ class CreateTableHistoryRecords extends Migration
         Schema::create('history_records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('apprentice_id')->unsigned();
-            $table->date('fecha');
+            $table->dateTime('fecha');
             $table->foreign('apprentice_id')->references('id')->on('apprentices')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();

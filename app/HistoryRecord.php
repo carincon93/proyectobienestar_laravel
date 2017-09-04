@@ -13,4 +13,6 @@ class HistoryRecord extends Model
     public function apprentice() {
     	return $this->belongsTo('App\Apprentice');
     }
+
+    public $timestamps = false;
 }

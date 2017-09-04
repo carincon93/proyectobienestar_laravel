@@ -20,9 +20,7 @@
     @if (Auth::check())
     <aside id="sidebar">
         <div id="sidebar-logo">
-            <h4 class="text-center">
-                <a href="{{ url('/admin/dashboard') }}"><img src="{{ asset('/images/logo-bienestar.svg') }}" alt="" class="img-responsive"></a>
-            </h4>
+            <a href="{{ url('/admin/dashboard') }}"><img src="{{ asset('/images/logo-bienestar.svg') }}" alt="" class="img-responsive"></a>
         </div>
         <div id="sidebar-admin">
             <div>
@@ -46,12 +44,9 @@
                 <li>
                     <a href="{{ url('/admin/collaborator') }}"><i class="fa fa-fw fa-cog"></i>Administradores</a>
                 </li>
-                <li>
-                    <a href="{{ url('/admin/apprentice') }}"><i class="fa fa-fw fa-cog"></i>Aprendices</a>
-                </li>
                 <li>Acciones</li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-cutlery"></i>Entregar suplemento</a>
+                    <a href="#" data-toggle="modal" data-target="#modalEntrega"><i class="fa fa-fw fa-cutlery"></i>Entregar suplemento</a>
                 </li>
                 <li>
                     <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-line-chart"></i>Historial de aprendices</a>

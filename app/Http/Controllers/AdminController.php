@@ -33,8 +33,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $apprentice = Apprentice::all();
-        return view('admins.dashboard')->with('apprentice', $apprentice);
+        $dataApprentice  = Apprentice::all()->sortBy('nombre_completo');
+        return view('admins.dashboard')->with('dataApprentice', $dataApprentice );
     }
 
     public function redirect()
@@ -129,21 +129,6 @@ class AdminController extends Controller
         Schema::enableForeignKeyConstraints();
 
         return redirect('/admin')->with('status', 'Todos los registros de los aprendices fueron eliminados con éxito!');
-    }
-    public function solicitudAceptado($id)
-    {
-        $apprentice = Apprentice::find($id);
-        $apprentice->estado_beneficio = 1;
-        if($apprentice->save()){
-            return redirect('admin')->with('status', 'El Aprendiz <strong>'.$apprentice->nombre_completo.'</strong>
-            fue modificado con exito!');
-
-        }
-    }
-    public function solicitudRechazado($id)
-    {
-        Apprentice::destroy($id);
-        return redirect('admin')->with('status', 'El aprendiz fue rechazado con exito!');
     }
 
 }

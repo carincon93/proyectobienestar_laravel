@@ -35,8 +35,8 @@
 					</label>
 					<select name="tipo_documento" class="form-control">
 					<option value="">Seleccione el tipo de documento..</option>
-						<option value="CEDULA" {{ (old("tipo_documento") == 'CEDULA' ? "selected" : "")}}>CEDULA</option>
-						<option value="TI" {{ (old("tipo_documento") == 'TI' ? "selected" : "")}}>TI</option>
+						<option value="CEDULA" {{ (old("tipo_documento") == 'CEDULA' ? "selected" : "")}}>Cédula de ciudadanía</option>
+						<option value="TI" {{ (old("tipo_documento") == 'TI' ? "selected" : "")}}>Tarjeta de identidad</option>
 					</select>
 					@if ($errors->has('tipo_documento'))
 						<span class="help-block">

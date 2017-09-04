@@ -800,7 +800,54 @@ window.Vue = __webpack_require__(35);
 Vue.component('example', __webpack_require__(36));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
+});
+
+$modalSolicitud = $('#modalSolicitud');
+var request = null;
+var url = window.location.href.split("/");
+url = url[0] + "//" + url[2] + "/";
+
+$('.modal').on('shown.bs.modal', function () {
+    $(this).find('[autofocus]').focus();
+    // $('.modal-busqueda').click(function (event) {
+    //     $(this).find('[autofocus]').focus();
+    // });
+});
+
+$('body').on('click', 'button[data-target="#modalSolicitud"]', function (event) {
+    event.preventDefault();
+    $id = $(this).attr('data-id');
+    $modalSolicitud.find('a[id="aceptarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudaceptado');
+    $modalSolicitud.find('a[id="cancelarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudrechazado');
+    $modalSolicitud.find('button[data-id]').attr('data-id', $id);
+    $.get('/obtener_solicitud/', { id: $id }, function (data, textStatus, xhr) {
+        $('#mbody-solicitud').html(data);
+    });
+});
+$('body').on('click', '#entregarSuplemento', function (event) {
+    $id = $('#formEntrega').find('input[name=apprentice_id]').val();
+    $token = $('#formEntrega').find('input[name=_token]').val();
+    $.post('/history_record/store/' + $id, { _token: $token, id: $id }, function (data, textStatus, xhr) {});
+});
+$('body').on('keyup', '#numero_documento', function (event) {
+    event.preventDefault();
+    var $numero_documento = $(this).val();
+    if ($numero_documento > 0) {
+        if (request != null) request.abort();
+
+        request = $.get('/apprenticeajax', { numero_documento: $numero_documento }, function (data, textStatus, xhr) {
+            if (data) {
+                $('#apprentice').html(data);
+            } else {
+                $('#apprentice').text('El aprendiz no existe o su solicitud no ha sido aceptada aun!');
+            }
+        });
+    } else {
+        setTimeout(function () {
+            // $('#resultado_instructor').children().remove();
+        }, 500);
+    }
 });
 
 /***/ }),

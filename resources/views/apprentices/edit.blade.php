@@ -35,8 +35,8 @@
 						Tipo de documento *
 					</label>
 					<select name="tipo_documento" class="form-control">
-						<option value="CEDULA" {{ $dataApprentice->tipo_documento == 'CEDULA' ? 'selected="selected"' : '' }}>CEDULA</option>
-						<option value="TI" {{ $dataApprentice->tipo_documento == 'TI' ? 'selected="selected"' : '' }}>TI</option>
+						<option value="CEDULA" {{ $dataApprentice->tipo_documento == 'CEDULA' ? 'selected="selected"' : '' }}>Cédula de ciudadanía</option>
+						<option value="TI" {{ $dataApprentice->tipo_documento == 'TI' ? 'selected="selected"' : '' }}>Tarjeta de identidad</option>
 					</select>
 					@if ($errors->has('tipo_documento'))
 						<span class="help-block">
