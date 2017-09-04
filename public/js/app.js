@@ -875,6 +875,12 @@ $('body').on('click', '.form-truncate-aprendiz', function (e) {
     $modalTrun.modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
         $formTruncFic.submit();
     });
+
+});
+$('#sandbox-container .input-daterange').datepicker({
+    format: "dd/mm/yyyy",
+    language: "es",
+    autoclose: true
 });
 
 /***/ }),
