@@ -26,8 +26,18 @@ class Apprentice extends Model
         'compromiso_normas',
         'justificacion_suplemento',
         'estado_beneficio',
+        'fecha_entrega',
+        'estado_solicitud',
     ];
-    public function history_record() {
-    	return $this->hasMany('App\History_record');
+
+    public function scopeNumero_documento($query, $numero_documento)
+    {
+        if (trim($numero_documento) != '') {
+            $query->where('numero_documento', '=', "$numero_documento")->where('estado_solicitud', 1);
+        }
+    }
+
+    public function historyrecords() {
+    	return $this->hasMany('App\HistoryRecord');
     }
 }

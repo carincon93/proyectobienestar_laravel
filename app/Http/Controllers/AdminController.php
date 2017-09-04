@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PasswordRequest;
-use Auth;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
+
+use Auth;
+
 use App\User;
 use Excel;
 use App\Apprentice;
-use Illuminate\Support\Facades\Schema;
-use App\History_Record;
+use App\HistoryRecord;
 
 class AdminController extends Controller
 {
@@ -31,8 +33,15 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admins.dashboard');
+        $dataApprentice  = Apprentice::all()->sortBy('nombre_completo');
+        return view('admins.dashboard')->with('dataApprentice', $dataApprentice );
     }
+
+    public function redirect()
+    {
+        return redirect('admin/dashboard');
+    }
+
     public function password(){
         return View('admins.password');
     }
@@ -79,7 +88,7 @@ class AdminController extends Controller
                             }
                         } else {
                             $compromiso_informar = 'no';
-                            $compromiso_normas = 'no';                            
+                            $compromiso_normas = 'no';
                         }
                         $dataArray[] =
                         [
@@ -112,13 +121,14 @@ class AdminController extends Controller
             }
         }
     }
-    public function truncateall()
+    public function truncateAll()
     {
         Schema::disableForeignKeyConstraints();
         Apprentice::truncate();
-        History_Record::truncate();
+        HistoryRecord::truncate();
         Schema::enableForeignKeyConstraints();
 
         return redirect('/admin')->with('status', 'Todos los registros de los aprendices fueron eliminados con éxito!');
     }
+
 }

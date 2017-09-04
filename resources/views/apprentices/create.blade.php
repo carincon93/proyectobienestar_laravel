@@ -4,7 +4,7 @@
 
 @section('navbar-top')
 <ul class="breadcrumb">
-	<li><a href="{{ url('/admin/apprentice') }}" class="btn-link">Lista de aprendices</a></li>
+	<li><a href="{{ url('/admin/dashboard') }}" class="btn-link">Lista de aprendices</a></li>
 	<li>Adicionar aprendiz</li>
 </ul>
 @endsection
@@ -35,8 +35,8 @@
 					</label>
 					<select name="tipo_documento" class="form-control">
 					<option value="">Seleccione el tipo de documento..</option>
-						<option value="CEDULA" {{ (old("tipo_documento") == 'CEDULA' ? "selected" : "")}}>CEDULA</option>
-						<option value="TI" {{ (old("tipo_documento") == 'TI' ? "selected" : "")}}>TI</option>
+						<option value="CEDULA" {{ (old("tipo_documento") == 'CEDULA' ? "selected" : "")}}>Cédula de ciudadanía</option>
+						<option value="TI" {{ (old("tipo_documento") == 'TI' ? "selected" : "")}}>Tarjeta de identidad</option>
 					</select>
 					@if ($errors->has('tipo_documento'))
 						<span class="help-block">
@@ -46,7 +46,7 @@
 				</div>
 				<div class="form-group{{ $errors->has('numero_documento') ? ' has-error' : '' }}">
 					<label for="numero_documento" class="control-label">
-						Numero de documento *
+						Número de documento *
 					</label>
 					<input type="number" name="numero_documento" min="0" class="form-control" value="{{ old('numero_documento') }}">
 					@if ($errors->has('numero_documento'))
@@ -55,10 +55,10 @@
 						</span>
 					@endif
 				</div>
-				
+
 				<div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
 					<label for="direccion" class="control-label">
-						Direccion *
+						Dirección *
 					</label>
 					<input type="text" name="direccion" class="form-control" value="{{ old('direccion') }}">
 					@if ($errors->has('direccion'))
@@ -82,27 +82,22 @@
 					<label for="estrato" class="control-label">
 						Estrato *
 					</label>
-					<input type="number" name="estrato" class="form-control" value="{{ old('estrato') }}">
+					<input type="number" name="estrato" class="form-control" value="{{ old('estrato') }}" min="0">
 					@if ($errors->has('estrato'))
 						<span class="help-block">
 							{{ $errors->first('estrato') }}
 						</span>
 					@endif
 				</div>
-				<div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
+				<div class="form-group">
 					<label for="telefono" class="control-label">
-						Telefono
+						Teléfono
 					</label>
-					<input type="number" name="telefono" class="form-control" value="{{ old('telefono') }}">
-					@if ($errors->has('telefono'))
-						<span class="help-block">
-							{{ $errors->first('telefono') }}
-						</span>
-					@endif
+					<input type="number" name="telefono" class="form-control" value="{{ old('telefono') }}" min="0">
 				</div>
 				<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 					<label for="email" class="control-label">
-						Email *
+						Correo electrónico *
 					</label>
 					<input type="text" name="email" class="form-control" value="{{ old('email') }}">
 					@if ($errors->has('email'))
@@ -113,7 +108,7 @@
 				</div>
 				<div class="form-group{{ $errors->has('programa_formacion') ? ' has-error' : '' }}">
 					<label for="programa_formacion" class="control-label">
-						programa de formacion*
+						Programa de formación *
 					</label>
 					<input type="text" name="programa_formacion" class="form-control" value="{{ old('programa_formacion') }}">
 					@if ($errors->has('programa_formacion'))
@@ -124,18 +119,18 @@
 				</div>
 				<div class="form-group{{ $errors->has('numero_ficha') ? ' has-error' : '' }}">
 					<label for="numero_ficha" class="control-label">
-						numero de ficha *
+						Número de ficha *
 					</label>
-					<input type="number" name="numero_ficha" class="form-control" value="{{ old('numero_ficha') }}">
+					<input type="number" name="numero_ficha" class="form-control" value="{{ old('numero_ficha') }}" min="0">
 					@if ($errors->has('numero_ficha'))
 						<span class="help-block">
 							{{ $errors->first('numero_ficha') }}
 						</span>
 					@endif
-				</div>						
+				</div>
 				<div class="form-group{{ $errors->has('jornada') ? ' has-error' : '' }}">
 					<label for="jornada" class="control-label">
-						jornada*
+						Jornada *
 					</label>
 					<input type="text" name="jornada" class="form-control" value="{{ old('jornada') }}">
 					@if ($errors->has('jornada'))
@@ -146,7 +141,7 @@
 				</div>
 				<div class="form-group{{ $errors->has('pregunta1') ? ' has-error' : '' }}">
 					<label for="pregunta1" class="control-label">
-						De quien depende usted*
+						De quien depende usted? *
 					</label>
 					<input type="text" name="pregunta1" class="form-control" value="{{ old('pregunta1') }}">
 					@if ($errors->has('pregunta1'))
@@ -157,7 +152,7 @@
 				</div>
 				<div class="form-group{{ $errors->has('pregunta2') ? ' has-error' : '' }}">
 					<label for="pregunta2" class="control-label">
-						Oficio que realiza de quien depende*
+						Oficio que realiza de quien depende *
 					</label>
 					<input type="text" name="pregunta2" class="form-control" value="{{ old('pregunta2') }}">
 					@if ($errors->has('pregunta2'))
@@ -168,7 +163,7 @@
 				</div>
 				<div class="form-group{{ $errors->has('pregunta3') ? ' has-error' : '' }}">
 					<label for="pregunta3" class="control-label">
-						Tiene personas que dependan de usted?*
+						Tiene personas que dependan de usted? *
 					</label>
 					<input type="text" name="pregunta3" class="form-control" value="{{ old('pregunta3') }}">
 					@if ($errors->has('pregunta3'))
@@ -179,10 +174,10 @@
 				</div>
 				<div class="form-group{{ $errors->has('otro_apoyo') ? ' has-error' : '' }}">
 					<label for="otro_apoyo" class="control-label">
-						Es usted beneficiario de algún tipo de apoyo*
+						Es usted beneficiario de algún tipo de apoyo? *
 					</label>
 					<select name="otro_apoyo" class="form-control">
-						<option value="">Seleccione el tipo de apoyo..</option>
+						<option value="">Seleccione el tipo de apoyo...</option>
 						<option value="monitoria" {{ (old("otro_apoyo") == 'MONITORIA' ? "selected" : "")}}>MONITORIA</option>
 						<option value="fic" {{ (old("otro_apoyo") == 'fic' ? "selected" : "")}}>FIC</option>
 						<option value="apoyo de sostenimiento" {{ (old("otro_apoyo") == 'apoyo de sostenimiento' ? "selected" : "")}}>APOYO DE SOSTENIMIENTO</option>
@@ -198,31 +193,21 @@
 					</span>
 					@endif
 				</div>
-				<div class="checkbox form-group{{ $errors->has('compromiso_informar') ? ' has-error' : '' }}">
-					<label for="compromiso_informar" class="control-label">
+				<div class="checkbox form-group">
+					<label>
 						<input type="checkbox" name="compromiso_informar" value="si" {{ (old("compromiso_informar") == 'si' ? "checked" : "")}}>Se compromete a informar en la oficina de Bienestar al Aprendiz el momento en que usted reciba contrato de aprendizaje, consiguió empleo, o cualquier otro beneficio del Gobierno o del SENA (Monitorias, FIC, Apoyos de sostenimiento, entre otros).
 					</label>
-					@if ($errors->has('compromiso_informar'))
-					<span class="help-block">
-						{{ $errors->first('compromiso_informar') }}
-					</span>
-					@endif
 				</div>
-				<div class="checkbox form-group{{ $errors->has('compromiso_normas') ? ' has-error' : '' }}">
-					<label for="compromiso_normas" class="control-label">
+				<div class="checkbox form-group">
+					<label>
 						<input type="checkbox" name="compromiso_normas" value="si" {{ (old("compromiso_normas") == 'si' ? "checked" : "")}}>Se compromete acatar las normas sobre el manejo adecuado del suplemento.
 					</label>
-					@if ($errors->has('compromiso_normas'))
-					<span class="help-block">
-						{{ $errors->first('compromiso_normas') }}
-					</span>
-					@endif
 				</div>
 				<div class="form-group{{ $errors->has('justificacion_suplemento') ? ' has-error' : '' }}">
 					<label for="justificacion_suplemento" class="control-label">
 						Explíque a profundidad por que requiere el suplemento *
 					</label>
-					<input type="text" name="justificacion_suplemento" class="form-control" value="{{ old('justificacion_suplemento') }}">
+					<textarea name="justificacion_suplemento" class="form-control" rows="8" cols="80">{{ old('justificacion_suplemento') }}</textarea>
 					@if ($errors->has('justificacion_suplemento'))
 						<span class="help-block">
 							{{ $errors->first('justificacion_suplemento') }}

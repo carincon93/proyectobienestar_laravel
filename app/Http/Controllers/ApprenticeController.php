@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ApprenticeRequest;
 use App\Apprentice;
+use Auth;
 
 
 class ApprenticeController extends Controller
@@ -14,10 +15,15 @@ class ApprenticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $dataApprentice = [];
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('entrega_suplemento', 'ajax');
+    }
     public function index()
     {
-        $dataApprentice  = Apprentice::all()->sortBy('nombre_completo');
-        return view('apprentices.index')->with('dataApprentice', $dataApprentice );
+        redirect('admin/dashboard');
     }
 
     /**
@@ -39,26 +45,26 @@ class ApprenticeController extends Controller
     public function store(ApprenticeRequest $request)
     {
         $dataApprentice = new Apprentice();
-        $dataApprentice->nombre_completo       = $request->get('nombre_completo');
-        $dataApprentice->tipo_documento   = $request->get('tipo_documento');
-        $dataApprentice->numero_documento  = $request->get('numero_documento');
-        $dataApprentice->direccion = $request->get('direccion');
-        $dataApprentice->barrio = $request->get('barrio');
-        $dataApprentice->estrato = $request->get('estrato');
-        $dataApprentice->telefono = $request->get('telefono');
-        $dataApprentice->email = $request->get('email');
-        $dataApprentice->programa_formacion = $request->get('programa_formacion');
-        $dataApprentice->numero_ficha = $request->get('numero_ficha');
-        $dataApprentice->jornada = $request->get('jornada');
-        $dataApprentice->pregunta1 = $request->get('pregunta1');
-        $dataApprentice->pregunta2 = $request->get('pregunta2');
-        $dataApprentice->pregunta3 = $request->get('pregunta3');
-        $dataApprentice->otro_apoyo = $request->get('otro_apoyo');
+        $dataApprentice->nombre_completo     = $request->get('nombre_completo');
+        $dataApprentice->tipo_documento      = $request->get('tipo_documento');
+        $dataApprentice->numero_documento    = $request->get('numero_documento');
+        $dataApprentice->direccion           = $request->get('direccion');
+        $dataApprentice->barrio              = $request->get('barrio');
+        $dataApprentice->estrato             = $request->get('estrato');
+        $dataApprentice->telefono            = $request->get('telefono');
+        $dataApprentice->email               = $request->get('email');
+        $dataApprentice->programa_formacion  = $request->get('programa_formacion');
+        $dataApprentice->numero_ficha        = $request->get('numero_ficha');
+        $dataApprentice->jornada             = $request->get('jornada');
+        $dataApprentice->pregunta1           = $request->get('pregunta1');
+        $dataApprentice->pregunta2           = $request->get('pregunta2');
+        $dataApprentice->pregunta3           = $request->get('pregunta3');
+        $dataApprentice->otro_apoyo          = $request->get('otro_apoyo');
         $dataApprentice->compromiso_informar = $request->get('compromiso_informar');
-        $dataApprentice->compromiso_normas = $request->get('compromiso_normas');
+        $dataApprentice->compromiso_normas   = $request->get('compromiso_normas');
         $dataApprentice->justificacion_suplemento = $request->get('justificacion_suplemento');
         if ($dataApprentice->save()){
-            return redirect('/admin/apprentice')->with('status', 'El aprendiz '.$dataApprentice->nombre_completo.' fue adicionado con éxito');
+            return redirect('/admin/dashboard')->with('status', 'El aprendiz '.$dataApprentice->nombre_completo.' fue adicionado con éxito');
         }
     }
 
@@ -96,25 +102,25 @@ class ApprenticeController extends Controller
     {
         $dataApprentice = Apprentice::find($id);
         $dataApprentice->nombre_completo       = $request->get('nombre_completo');
-        $dataApprentice->tipo_documento   = $request->get('tipo_documento');
-        $dataApprentice->numero_documento  = $request->get('numero_documento');
-        $dataApprentice->direccion = $request->get('direccion');
-        $dataApprentice->barrio = $request->get('barrio');
-        $dataApprentice->estrato = $request->get('estrato');
-        $dataApprentice->telefono = $request->get('telefono');
-        $dataApprentice->email = $request->get('email');
-        $dataApprentice->programa_formacion = $request->get('programa_formacion');
-        $dataApprentice->numero_ficha = $request->get('numero_ficha');
-        $dataApprentice->jornada = $request->get('jornada');
-        $dataApprentice->pregunta1 = $request->get('pregunta1');
-        $dataApprentice->pregunta2 = $request->get('pregunta2');
-        $dataApprentice->pregunta3 = $request->get('pregunta3');
-        $dataApprentice->otro_apoyo = $request->get('otro_apoyo');
-        $dataApprentice->compromiso_informar = $request->get('compromiso_informar');
-        $dataApprentice->compromiso_normas = $request->get('compromiso_normas');
+        $dataApprentice->tipo_documento        = $request->get('tipo_documento');
+        $dataApprentice->numero_documento      = $request->get('numero_documento');
+        $dataApprentice->direccion             = $request->get('direccion');
+        $dataApprentice->barrio                = $request->get('barrio');
+        $dataApprentice->estrato               = $request->get('estrato');
+        $dataApprentice->telefono              = $request->get('telefono');
+        $dataApprentice->email                 = $request->get('email');
+        $dataApprentice->programa_formacion    = $request->get('programa_formacion');
+        $dataApprentice->numero_ficha          = $request->get('numero_ficha');
+        $dataApprentice->jornada               = $request->get('jornada');
+        $dataApprentice->pregunta1             = $request->get('pregunta1');
+        $dataApprentice->pregunta2             = $request->get('pregunta2');
+        $dataApprentice->pregunta3             = $request->get('pregunta3');
+        $dataApprentice->otro_apoyo            = $request->get('otro_apoyo');
+        $dataApprentice->compromiso_informar   = $request->get('compromiso_informar');
+        $dataApprentice->compromiso_normas     = $request->get('compromiso_normas');
         $dataApprentice->justificacion_suplemento = $request->get('justificacion_suplemento');
         if ($dataApprentice->save()){
-            return redirect('/admin/apprentice')->with('status', 'El aprendiz '.$dataApprentice->nombre_completo.' fue modificado con éxito');
+            return redirect('/admin/dashboard')->with('status', 'El aprendiz '.$dataApprentice->nombre_completo.' fue modificado con éxito');
         }
     }
 
@@ -127,7 +133,51 @@ class ApprenticeController extends Controller
     public function destroy($id)
     {
         Apprentice::destroy($id);
-        return redirect('/admin/apprentice')->with('status', 'El aprendiz fue eliminado con éxito');
+        return redirect('/admin/dashboard')->with('status', 'El aprendiz fue eliminado con éxito');
     }
-    
+
+    public function solicitudAceptado($id)
+    {
+        $dataApprentice = Apprentice::find($id);
+        $dataApprentice->estado_solicitud = 1;
+        if($dataApprentice->save()){
+            return redirect('admin/dashboard')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+            fue modificado con exito!');
+        }
+    }
+
+    public function solicitudRechazado($id)
+    {
+        Apprentice::destroy($id);
+        return redirect('admin/dashboard')->with('status', 'La solicitud del aprendiz fue rechazada!');
+    }
+
+    public function obtener_solicitud(Request $id)
+    {
+        $dataApprentice = Apprentice::find($id);
+        return view('apprentices.ajax', compact('dataApprentice'));
+    }
+
+    public function entrega_suplemento($id)
+    {
+        $dataApprentice = Apprentice::find($id);
+        $dataApprentice->estado_beneficio = 1;
+        if (Auth::check()) {
+            if($dataApprentice->save()){
+                return redirect('admin/dashboard')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+                ha recibido el suplemento con éxito!');
+            }
+        }
+        else{
+            return redirect('/')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+                ha recibido el suplemento con éxito!');
+        }
+    }
+
+    public function ajax(Request $request)
+    {
+        $query = Apprentice::numero_documento($request->get('numero_documento'))->get();
+        return view('apprentices.documentoajax', compact('query'));
+    }
+
 }

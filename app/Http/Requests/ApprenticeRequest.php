@@ -23,7 +23,7 @@ class ApprenticeRequest extends FormRequest
      */
     public function rules()
    {
-       if ($this->method()=='PUT') {
+       if ($this->method() == 'PUT') {
            return [
               'nombre_completo'=>'required',
               'tipo_documento'=>'required',
@@ -40,7 +40,6 @@ class ApprenticeRequest extends FormRequest
               'pregunta3'=>'required',
               'otro_apoyo'=>'required',
               'justificacion_suplemento'=>'required',
-              
            ];
        }
        else {
@@ -59,10 +58,7 @@ class ApprenticeRequest extends FormRequest
               'pregunta2'=>'required',
               'pregunta3'=>'required',
               'otro_apoyo'=>'required',
-              'compromiso_informar'=>'required',
-              'compromiso_normas'=>'required',
               'justificacion_suplemento'=>'required',
-              
            ];
        }
    }
@@ -71,17 +67,17 @@ class ApprenticeRequest extends FormRequest
         return [
            'nombre_completo.required'=>'El campo nombre completo es requerido',
            'tipo_documento.required'=>'El campo tipo de documento es requerido',
-           'numero_documento.required'=>'El campo numero de documento es requerido',
-           'direccion.required'=>'El campo direccion es requerido',
+           'numero_documento.required'=>'El campo número de documento es requerido',
+           'direccion.required'=>'El campo dirección es requerido',
            'barrio.required'=>'El campo barrio es requerido',
            'estrato.required'=>'El campo estrato es requerido',
            'email.required'=>'El campo correo electrónico es requerido',
            'email.unique'=>'Este correo electrónico ya existe',
-           'programa_formacion.required'=>'El campo programa de formacion es requerido',
-           'numero_ficha.required'=>'El campo numero_ficha es requerido',
+           'programa_formacion.required'=>'El campo programa de formación es requerido',
+           'numero_ficha.required'=>'El campo número de ficha es requerido',
            'jornada.required'=>'El campo jornada es requerido',
            'pregunta1.required'=>'Este campo es requerido',
-           'pregunta1.required'=>'Este campo es requerido',
+           'pregunta2.required'=>'Este campo es requerido',
            'pregunta3.required'=>'Este campo es requerido',
            'otro_apoyo.required'=>'Este campo es requerido',
            'justificacion_suplemento.required'=>'Este campo es requerido',

@@ -30,10 +30,11 @@ class CreateTableApprentices extends Migration
         	$table->longText('pregunta2');
         	$table->longText('pregunta3');
         	$table->string('otro_apoyo', 128);
-        	$table->string('compromiso_informar', 2)->default('no');
-        	$table->string('compromiso_normas', 2)->default('no');
-        	$table->longText('justificacion_suplemento');
-        	$table->boolean('estado_beneficio')->nullable();
+        	$table->string('compromiso_informar', 2)->nullable()->default('no');
+        	$table->string('compromiso_normas', 2)->nullable()->default('no');
+            $table->longText('justificacion_suplemento');
+            $table->boolean('estado_beneficio')->nullable();
+            $table->boolean('estado_solicitud')->nullable();
             $table->timestamps();
         });
     }
