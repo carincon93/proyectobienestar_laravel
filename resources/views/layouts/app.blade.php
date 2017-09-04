@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 </head>
 <body>
     @include('layouts.modal')
@@ -153,6 +154,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+
     <script>
         $(document).ready(function() {
             // =========================== Active Links =================================
@@ -172,6 +175,7 @@
 
             $curentPageLink.parents('li').addClass('active');
         });
+        
     </script>
     <!-- <script src="{{ asset('js/master.js') }}"></script> -->
     @stack('scripts')

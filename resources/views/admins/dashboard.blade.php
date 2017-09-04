@@ -41,7 +41,6 @@
             </div>
         </div>
         <!-- Session Mensajes -->
-        @include('layouts.messages')
         <a href="{{ url('/admin/apprentice/create') }}" class="action-round"><i class="fa fa-fw fa-plus"></i></a>
 
         <form class="" action="{{ url('/admin/import') }}" method="post" enctype="multipart/form-data">

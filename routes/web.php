@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 // Admin
@@ -23,7 +23,8 @@ Route::get('/admin/dashboard', 'AdminController@index');
 //
 Route::post('/admin/import', 'AdminController@import');
 Route::post('/admin/truncate', 'AdminController@truncateAll');
-
+//welcome
+Route::get('/', 'WelcomeController@index')->name('welcome');
 // Collaborador
 Route::resource('/admin/collaborator', 'CollaboratorController');
 

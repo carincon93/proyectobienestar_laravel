@@ -4,7 +4,7 @@
 
 @section('navbar-top')
 <ul class="breadcrumb">
-	<li><a href="{{ url('/admin/apprentice') }}" class="btn-link">Lista de aprendices</a></li>
+	<li><a href="{{ url('/admin/dashboard') }}" class="btn-link">Lista de aprendices</a></li>
 	<li>Adicionar aprendiz</li>
 </ul>
 @endsection

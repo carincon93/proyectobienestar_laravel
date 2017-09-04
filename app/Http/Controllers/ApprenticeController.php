@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ApprenticeRequest;
 use App\Apprentice;
+use Auth;
 
 
 class ApprenticeController extends Controller
@@ -14,6 +15,12 @@ class ApprenticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $dataApprentice = [];
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('entrega_suplemento', 'ajax');
+    }
     public function index()
     {
         redirect('admin/dashboard');
@@ -155,9 +162,15 @@ class ApprenticeController extends Controller
     {
         $dataApprentice = Apprentice::find($id);
         $dataApprentice->estado_beneficio = 1;
-        if($dataApprentice->save()){
-            return redirect('admin/dashboard')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
-            ha recibido el suplemento con éxito!');
+        if (Auth::check()) {
+            if($dataApprentice->save()){
+                return redirect('admin/dashboard')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+                ha recibido el suplemento con éxito!');
+            }
+        }
+        else{
+            return redirect('/')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+                ha recibido el suplemento con éxito!');
         }
     }
 
