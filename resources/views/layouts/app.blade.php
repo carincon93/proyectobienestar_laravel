@@ -25,30 +25,21 @@
         </div>
         <div id="sidebar-admin">
             <div>
-                <h4 class="text-capitalize">{{ Auth::user()->name }}</h4>
                 <div>
-                    <a href="{{url('admin/password')}}" style="font-size:13px;">Cambiar mi contraseña</a><br>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();" class="logout">
-                        <i class="fa fa-fw fa-sign-out"></i>
-                        Cerrar Sesión
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
                 </div>
             </div>
         </div>
         <div id="sidebar-content">
             <ul class="sidebar-menu list-unstyled">
+                <li>Dashboard</li>
+                <li>
+                    <a href="{{ url('/admin/dashboard') }}"><i class="fa fa-fw fa-cog"></i>Dashboard</a>
+                </li>
                 <li>Administración</li>
                 <li>
                     <a href="{{ url('/admin/collaborator') }}"><i class="fa fa-fw fa-cog"></i>Administradores</a>
                 </li>
                 <li>Acciones</li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#modalEntrega"><i class="fa fa-fw fa-cutlery"></i>Entregar suplemento</a>
-                </li>
                 <li>
                     <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-line-chart"></i>Historial de aprendices</a>
                 </li>
@@ -65,86 +56,129 @@
     @endif
     <main id="app">
         <div class="{{ Auth::check() ? 'app-check' : ''}}">
-            <nav class="navbar navbar-default navbar-fixed-top {{ Auth::check() ? 'mleft' : '' }}">
-                <div class="container">
-                    @yield('navbar-top')
-                </div>
+            <nav class="navbar navbar-default {{ Auth::check() ? 'mleft' : '' }}">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            @if(!Auth::check())
+                            <li><img src="{{ url('/images/logo1.png') }}" class="img-responsive logobienestar-navbar"></li>
+                            <li class="dropdown {{ count($errors) > 0 ? 'open' : '' }}">
+                                <a class="top-login dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Iniciar sesión</a>
+                                <div class="dropdown-menu login-box">
+                                    <div class="">
+                                        <form method="POST" action="{{ route('login') }}">
+                                            {{ csrf_field() }}
+
+                                            <div class="secpart-login">
+                                                <h4 class="login-title">Ingresa a tu cuenta</h4>
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} no-margin">
+                                                <div class="">
+                                                    <i class="fa fa-fw fa-envelope icon-form"></i>
+                                                    <input id="email" type="email" class="form-control form-login" name="email" value="{{ old('email') }}" placeholder="Correo electrónico" required>
+
+                                                    @if ($errors->has('email'))
+                                                    <span class="help-block">
+                                                        {{ $errors->first('email') }}
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} no-margin">
+                                                <div class="">
+                                                    <i class="fa fa-fw fa-key icon-form"></i>
+                                                    <input id="password" type="password" class="form-control form-login" name="password" placeholder="Contraseña" required>
+
+                                                    @if ($errors->has('password'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('password') }}</strong>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="secpart-login">
+                                                <div class="form-group">
+                                                    <div class="">
+                                                        <div class="checkbox">
+                                                            <label class="control control--checkbox"> Recuerda mi cuenta
+                                                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                                <div class="control__indicator"></div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="">
+                                                        <button type="submit" class="btn btn-login">
+                                                            Iniciar sesión
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                                <a class="btn-link" href="{{ route('password.request') }}">
+                                                    ¿Olvidaste tu contraseña?
+                                                </a>
+                                                <!-- / -->
+                                                angela@mail.com
+                                                pwd: admin123
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle text-capitalize user-name" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{url('admin/password')}}">Cambiar mi contraseña</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();" class="">
+                                            <i class="fa fa-fw fa-sign-out"></i>
+                                            Cerrar Sesión
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                            @endif
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
             </nav>
         <div class="main-content">
 
             <div class="row no-gutter">
-                <div class="{{ Auth::guest() ? 'col-md-9' : 'col-md-12' }} big-content">
+                <div class="col-md-12 big-content">
+                <!-- <div class="{{ Auth::guest() ? 'col-md-9' : 'col-md-12' }} big-content"> -->
                     <div class="big-content-desc clearfix">
                         @yield('big-content-desc')
                     </div>
                     @yield('content')
                 </div>
-                <div class="{{ Auth::guest() ? 'col-md-3 right-content' : ''}}">
+                <!-- <div class="{{ Auth::guest() ? 'col-md-3 right-content' : ''}}">
                     <div>
                         @yield('right-content')
-
-                        @if(!Auth::check())
-                        <div class="card-form">
-                            <form method="POST" action="{{ route('login') }}">
-                                {{ csrf_field() }}
-
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label for="email" class="control-label">Correo electrónico</label>
-
-                                    <div class="">
-                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                        @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            {{ $errors->first('email') }}
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="control-label">Contraseña</label>
-
-                                    <div class="">
-                                        <input id="password" type="password" class="form-control" name="password" required>
-
-                                        @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recuerda mi cuenta
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="">
-                                        <button type="submit" class="btn btn-primary">
-                                            Iniciar sesión
-                                        </button>
-
-                                        <a class="btn-link pwd-req" href="{{ route('password.request') }}">
-                                            ¿Olvidaste tu contraseña?
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- / -->
-                            angela@mail.com
-                            pwd: admin123
-                        </div>
-                        @endif
                     </div>
-                </div>
+                </div> -->
             </div>
 
         </div>
@@ -161,21 +195,27 @@
             // =========================== Active Links =================================
             var current_url = "{{ Request::fullUrl() }}";
             var full_url = current_url+location.search;
+            // console.log(current_url.indexOf('/'));
             var $navLinks = $("ul.sidebar-menu li a");
             // First look for an exact match including the search string
-            var $curentPageLink = $navLinks.filter(
-                function() { return $(this).attr('href') === full_url; }
-            );
+            var $curentPageLink = $navLinks.filter( function() {
+                // console.log($(this).attr('href') === full_url);
+                return $(this).attr('href') === full_url;
+            });
             // If not found, look for the link that starts with the url
-            if(!$curentPageLink.length > 0){
-                $curentPageLink = $navLinks.filter(
-                    function() { return $(this).attr('href').startsWith(current_url) || current_url.startsWith($(this).attr('href')); }
-                );
+            if($curentPageLink.length == 0){
+                $curentPageLink = $navLinks.filter(function() {
+                    // console.log(current_url.startsWith($(this).attr('href')));
+                    return $(this).attr('href').startsWith(current_url) || current_url.startsWith($(this).attr('href'));
+                });
             }
+            var loc = document.location.href;
+            console.log(loc);
+            if(!loc == current_url)
+                $curentPageLink.parents('li').addClass('active');
 
-            $curentPageLink.parents('li').addClass('active');
         });
-        
+
     </script>
     <!-- <script src="{{ asset('js/master.js') }}"></script> -->
     @stack('scripts')

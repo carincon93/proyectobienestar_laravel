@@ -1,8 +1,4 @@
 @foreach($dataApprentice as $da)
-    <div class="col-md-12">
-        <h5>Nombre completo del aprendiz</h5>
-        <p>{{ $da->nombre_completo }}</p>
-    </div>
     <div class="col-md-6">
         <h5>Tipo de documento</h5>
         <p>{{ $da->tipo_documento }}</p>
@@ -53,7 +49,7 @@
     </div>
     <div class="col-md-12">
         <h5>Personas las cuales dependen del aprendiz</h5>
-        <p>{{ $da->pregunta3 }}</p>        
+        <p>{{ $da->pregunta3 }}</p>
     </div>
     <h5>Apoyos a los cuales esta vinculado el aprendiz</h5>
     <p>{{ $da->otro_apoyo }}</p>

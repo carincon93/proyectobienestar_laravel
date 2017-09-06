@@ -30,7 +30,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
                     </div>
                     <div class="modal-body" id="mbody-solicitud"></div>
                     <div class="modal-footer">
@@ -82,7 +82,7 @@
                                     <td>{{ $da->tipo_documento }}</td>
                                     <td>{{ $da->numero_documento }}</td>
                                     <td class="td-actions">
-                                        <button class="btn btn-round" data-toggle="modal" data-target="#modalSolicitud" data-id="{{ $da->id }}">
+                                        <button class="btn btn-round" data-toggle="modal" data-target="#modalSolicitud" data-id="{{ $da->id }}" data-nombre="{{ $da->nombre_completo }}">
                                             <i class="fa fa-fw fa-search"></i>
                                         </button>
                                         <a class="btn btn-round" href="{{ url('/admin/apprentice/'.$da->id.'/edit') }}">
