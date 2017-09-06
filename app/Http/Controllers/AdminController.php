@@ -37,11 +37,6 @@ class AdminController extends Controller
         return view('admins.dashboard')->with('dataApprentice', $dataApprentice );
     }
 
-    public function redirect()
-    {
-        return redirect('admin/dashboard');
-    }
-
     public function password(){
         return View('admins.password');
     }

@@ -34,6 +34,7 @@
                 <li>Dashboard</li>
                 <li>
                     <a href="{{ url('/admin/dashboard') }}"><i class="fa fa-fw fa-cog"></i>Dashboard</a>
+                    <a href="{{ url('/admin/importar') }}"><i class="fa fa-fw download"></i>Importar solicitudes</a>
                 </li>
                 <li>Administración</li>
                 <li>
@@ -195,29 +196,21 @@
             // =========================== Active Links =================================
             var current_url = "{{ Request::fullUrl() }}";
             var full_url = current_url+location.search;
-            // console.log(current_url.indexOf('/'));
             var $navLinks = $("ul.sidebar-menu li a");
             // First look for an exact match including the search string
-            var $curentPageLink = $navLinks.filter( function() {
-                // console.log($(this).attr('href') === full_url);
-                return $(this).attr('href') === full_url;
-            });
+            var $curentPageLink = $navLinks.filter(
+                function() { return $(this).attr('href') === full_url; }
+            );
             // If not found, look for the link that starts with the url
-            if($curentPageLink.length == 0){
-                $curentPageLink = $navLinks.filter(function() {
-                    // console.log(current_url.startsWith($(this).attr('href')));
-                    return $(this).attr('href').startsWith(current_url) || current_url.startsWith($(this).attr('href'));
-                });
+            if(!$curentPageLink.length > 0){
+                $curentPageLink = $navLinks.filter(
+                    function() { return $(this).attr('href').startsWith(current_url) || current_url.startsWith($(this).attr('href')); }
+                );
             }
-            var loc = document.location.href;
-            console.log(loc);
-            if(!loc == current_url)
-                $curentPageLink.parents('li').addClass('active');
+
+            $curentPageLink.parents('li').addClass('active');
 
         });
-
     </script>
-    <!-- <script src="{{ asset('js/master.js') }}"></script> -->
-    @stack('scripts')
 </body>
 </html>

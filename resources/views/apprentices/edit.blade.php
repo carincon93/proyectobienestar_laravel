@@ -9,10 +9,6 @@
 </ul>
 @endsection
 
-@section('big-content-desc')
-<h4>Editar aprendiz</h4>
-@endsection
-
 @section('content')
 	<div class="col-md-8">
 		<div class="card-form">

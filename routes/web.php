@@ -10,21 +10,28 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
+
+Route::get('/', function () {
+    return redirect('admin/dashboard');
+});
+
+
 // Admin
-Route::get('/admin', 'AdminController@redirect');
+Route::get('/admin', function () {
+	return redirect('admin/dashboard');
+});
+
+Route::get('/admin/importar', function () {
+    return view('admins.import');
+});
 Route::get('/admin/dashboard', 'AdminController@index');
 
 //
 Route::post('/admin/import', 'AdminController@import');
 Route::post('/admin/truncate', 'AdminController@truncateAll');
 //welcome
-Route::get('/', 'WelcomeController@index')->name('welcome');
+// Route::get('/', 'WelcomeController@index')->name('welcome');
 // Collaborador
 Route::resource('/admin/collaborator', 'CollaboratorController');
 
