@@ -862,6 +862,34 @@ $('body').on('keyup', '#numero_documento', function (event) {
         }, 500);
     }
 });
+// ======================== Truncate class_groups ========================================
+$('body').on('click', '.form-truncate-aprendiz', function (e) {
+    e.preventDefault();
+    var $formTruncFic = $(this),
+        $modalTrun = $('#confirm-delete');
+    $modalTrun.find('.modal-title').text('Eliminar todos los registros');
+    $modalTrun.find('.modal-body').text('Va a eliminar todos los registros de esta tabla. ¿Está seguro que desea eliminar todos los registros?');
+    $modalTrun.find('#btn-delete').text('Eliminar todo');
+    $modalTrun.modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
+        setTimeout(function () {
+            $formTruncFic.submit();
+        }, 500);
+    });
+});
+
+// Eliminar registros - Modal eliminar
+$('.table-full').on('click', '.btn-delete-tbl', function (e) {
+    e.preventDefault();
+    var $formDel = $(this),
+        $nombre_elemento = $formDel.attr('data-nombre');
+
+    $('.modal').find('.modal-title').text('Nombre: ' + $nombre_elemento);
+    $('.modal').find('.modal-body').text('Está seguro que desea eliminar este registro?');
+    $('#btn-delete').text('Eliminar');
+    $('#confirm-delete').modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
+        $formDel.submit();
+    });
+});
 
 /**
  *
