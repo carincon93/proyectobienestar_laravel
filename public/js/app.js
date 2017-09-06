@@ -889,7 +889,9 @@ $('.table-full').on('click', '.btn-delete-tbl', function (e) {
     $('#confirm-delete').modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
         $formDel.submit();
     });
+
 });
+
 
 /**
  *

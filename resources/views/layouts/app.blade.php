@@ -14,7 +14,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/daterangepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/bootstrap-datepicker.standalone.min.css') }}" rel="stylesheet"> 
 </head>
 <body>
     @include('layouts.modal')
@@ -187,8 +189,10 @@
     </main>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>   
+        <script src="{{ asset('js/moment.min.js') }}"></script>
+        <script src="{{ asset('js/daterangepicker.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -213,7 +217,57 @@
             console.log(loc);
             if(!loc == current_url)
                 $curentPageLink.parents('li').addClass('active');
-
+            //el que no
+            // $('#sandbox-container .input-daterange').datepicker({
+            //     format: "dd/mm/yyyy",
+            //     language: "es",
+            //     autoclose: true
+            // });
+            //el que funciono
+        //     $(function () {
+        //         $('.datapicker').daterangepicker({
+        //             "locale": {
+        //                 "format": "DD/MM/YYYY",
+        //                 "separator": " - ",
+        //                 "autoApply": true,
+        //                 "applyLabel": "Guardar",
+        //                 "cancelLabel": "Cancelar",
+        //                 "fromLabel": "Desde",
+        //                 "toLabel": "Hasta",
+        //                 "customRangeLabel": "Personalizar",
+        //                 "daysOfWeek": [
+        //                     "Do",
+        //                     "Lu",
+        //                     "Ma",
+        //                     "Mi",
+        //                     "Ju",
+        //                     "Vi",
+        //                     "Sa"
+        //                 ],
+        //                 "monthNames": [
+        //                     "Enero",
+        //                     "Febrero",
+        //                     "Marzo",
+        //                     "Abril",
+        //                     "Mayo",
+        //                     "Junio",
+        //                     "Julio",
+        //                     "Agosto",
+        //                     "Setiembre",
+        //                     "Octubre",
+        //                     "Noviembre",
+        //                     "Diciembre"
+        //                 ],
+        //                 "firstDay": 1
+        //             },
+        //             "opens": "right"
+        //         });
+        //     });
+                $('.datapickerr').datepicker({
+                    format: "dd/mm/yyyy",
+                    language: "es",
+                    autoclose: true
+                });
         });
 
     </script>

@@ -1,14 +1,18 @@
 @extends('layouts.app')
-    {{-- @section('navbar-top')
-        <div class="input-daterange input-group" id="datepicker">
-            <input type="text" class="input-sm form-control" name="start" />
-            <span class="input-group-addon">to</span>
-            <input type="text" class="input-sm form-control" name="end" />
-        </div>
-    @endsection --}}
 @section('content')
 @include('layouts.modal')
 <a href="{{ url('history_record/excel') }}" class="btn btn-success"><i class="fa fa-fw fa-cloud-download"></i>Exportar historial a Excel</a>
+
+{{-- <div class="row">
+    <h5>hacer busqueda por fecha</h5>
+    <i class="fa fa-calendar fa-2"></i>
+    <input type="text" name="daterange" class="datapicker">
+</div> --}}
+<div class="input-daterange input-group datapickerr" id="datepicker">
+    <input type="text" class="input-sm form-control" name="start" />
+    <span class="input-group-addon">to</span>
+    <input type="text" class="input-sm form-control" name="end" />
+</div>
 <div class="card">
     <div class="table-responsive">
         <table class="table table-full table-hover">
