@@ -38,6 +38,7 @@ Route::get('/admin/{id}/entrega_suplemento', 'ApprenticeController@entrega_suple
 
 // Historial
 Route::resource('/admin/history_record','HistoryRecordController');
+Route::get('/admin/history_record/{id}','HistoryRecordController@show');
 Route::post('/history_record/store/{id}', 'HistoryRecordController@store');
 
 // Cambio de contraseña

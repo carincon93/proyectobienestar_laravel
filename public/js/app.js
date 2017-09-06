@@ -810,26 +810,39 @@ url = url[0] + "//" + url[2] + "/";
 
 $('.modal').on('shown.bs.modal', function () {
     $(this).find('[autofocus]').focus();
-    // $('.modal-busqueda').click(function (event) {
-    //     $(this).find('[autofocus]').focus();
-    // });
+    $('.modal-body').click(function (event) {
+        $(this).find('[autofocus]').focus();
+    });
 });
 
 $('body').on('click', 'button[data-target="#modalSolicitud"]', function (event) {
     event.preventDefault();
     $id = $(this).attr('data-id');
+    $nombre_aprendiz = $('button[data-target="#modalSolicitud"]').attr('data-nombre');
     $modalSolicitud.find('a[id="aceptarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudaceptado');
+    $modalSolicitud.find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
     $modalSolicitud.find('a[id="cancelarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudrechazado');
     $modalSolicitud.find('button[data-id]').attr('data-id', $id);
     $.get('/obtener_solicitud/', { id: $id }, function (data, textStatus, xhr) {
         $('#mbody-solicitud').html(data);
     });
 });
+/**
+ * [description]
+ * @param  {[type]} event [description]
+ * @return {[type]}       [description]
+ */
 $('body').on('click', '#entregarSuplemento', function (event) {
     $id = $('#formEntrega').find('input[name=apprentice_id]').val();
     $token = $('#formEntrega').find('input[name=_token]').val();
     $.post('/history_record/store/' + $id, { _token: $token, id: $id }, function (data, textStatus, xhr) {});
 });
+/**
+ * @author Cristian Vasquez
+ * @description Evento que encarga de  buscar el aprendiz por el número de documento
+ * @return Si se encuentra el aprendiz, la función retorna un htm donde esta el formulario con los datos del aprendiz
+ *         Si no lo encuentra arroja mensaje de error
+ */
 $('body').on('keyup', '#numero_documento', function (event) {
     event.preventDefault();
     var $numero_documento = $(this).val();
@@ -850,38 +863,13 @@ $('body').on('keyup', '#numero_documento', function (event) {
     }
 });
 
-// Eliminar registros - Modal eliminar
-$('.table-full').on('click', '.btn-delete-tbl', function (e) {
-    e.preventDefault();
-    var $formDel = $(this),
-        $nombre_elemento = $formDel.attr('data-nombre');
-
-    $('.modal').find('.modal-title').text('Nombre: ' + $nombre_elemento);
-    $('.modal').find('.modal-body').text('Está seguro que desea eliminar este registro?');
-    $('#btn-delete').text('Eliminar');
-    $('#confirm-delete').modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
-        $formDel.submit();
-    });
-});
-
-// Eliminar todos los registros
-$('body').on('click', '.form-truncate-aprendiz', function (e) {
-    e.preventDefault();
-    var $formTruncFic = $(this),
-        $modalTrun = $('#confirm-delete');
-    $modalTrun.find('.modal-title').text('Eliminar todos los registros');
-    $modalTrun.find('.modal-body').text('Va a eliminar todos los registros de esta tabla. ¿Está seguro que desea eliminar todos los registros?');
-    $modalTrun.find('#btn-delete').text('Eliminar todo');
-    $modalTrun.modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
-        $formTruncFic.submit();
-    });
-
-});
-$('#sandbox-container .input-daterange').datepicker({
-    format: "dd/mm/yyyy",
-    language: "es",
-    autoclose: true
-});
+/**
+ *
+ */
+var name = $('#name').text();
+var $intials = $('#name').text().charAt(0);
+console.log(name);
+$('#userImage').text($intials);
 
 /***/ }),
 /* 10 */

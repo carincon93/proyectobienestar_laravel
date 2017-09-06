@@ -16,8 +16,7 @@ class HistoryRecordController extends Controller
     public function index()
     {
         $dataHistoryRecord = HistoryRecord::all();
-        return view('history_records.index')
-            ->with('dataHistoryRecord', $dataHistoryRecord);
+        return view('history_records.index', compact('dataHistoryRecord'));
     }
 
     /**
@@ -53,7 +52,8 @@ class HistoryRecordController extends Controller
      */
     public function show($id)
     {
-        //
+        $dataHistoryRecord = HistoryRecord::all()->where('apprentice_id', '=', $id);
+        return view('history_records.index', compact('dataHistoryRecord'));
     }
 
     /**
