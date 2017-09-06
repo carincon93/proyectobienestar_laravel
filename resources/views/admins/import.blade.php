@@ -10,6 +10,9 @@
     @section('content')
         <section class="import-section">
             <h1 class="text-center">Importar solicitudes</h1>
+            <p>
+
+            </p>
 
             <!-- <form class="" action="{{ url('/admin/import') }}" method="post" enctype="multipart/form-data">
                 {!! csrf_field() !!}
