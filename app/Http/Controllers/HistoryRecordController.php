@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+use App\Apprentice;
 use App\HistoryRecord;
 
 class HistoryRecordController extends Controller
@@ -15,8 +17,14 @@ class HistoryRecordController extends Controller
      */
     public function index()
     {
-        $dataHistoryRecord = HistoryRecord::all();
-        return view('history_records.index', compact('dataHistoryRecord'));
+        $history_records = HistoryRecord::all();
+        $hh = DB::table('history_records')
+                    ->select('apprentices.id', 'apprentices.nombre_completo', DB::raw('count(history_records.apprentice_id) as total'))
+                    ->join('apprentices', 'apprentices.id', '=', 'history_records.apprentice_id')
+                    ->groupBy('apprentices.id', 'apprentices.nombre_completo')
+                    ->take(5)
+                    ->get();
+        return view('history_records.index', compact('history_records', 'hh'));
     }
 
     /**
@@ -52,8 +60,8 @@ class HistoryRecordController extends Controller
      */
     public function show($id)
     {
-        $dataHistoryRecord = HistoryRecord::all()->where('apprentice_id', '=', $id);
-        return view('history_records.index', compact('dataHistoryRecord'));
+        $history_records = HistoryRecord::all()->where('apprentice_id', '=', $id);
+        return view('history_records.show', compact('history_records'));
     }
 
     /**

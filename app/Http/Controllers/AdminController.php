@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Http\Request;
+use App\Http\Requests\PasswordRequest;
 
 use Auth;
 
 use App\User;
-use Excel;
 use App\Apprentice;
 use App\HistoryRecord;
 
@@ -34,7 +35,8 @@ class AdminController extends Controller
     public function index()
     {
         $dataApprentice  = Apprentice::all()->sortBy('nombre_completo');
-        return view('admins.dashboard')->with('dataApprentice', $dataApprentice );
+        $nroApprentices  = Apprentice::all()->count();
+        return view('admins.dashboard', compact('dataApprentice', 'nroApprentices'));
     }
 
     public function password(){
@@ -54,68 +56,7 @@ class AdminController extends Controller
             return redirect('admin/password')->with('message', 'Su contraseña actual es incorrecta');
         }
     }
-    public function import(Request $request)
-    {
-        if($request->file('imported-file'))
-        {
-            $path = $request->file('imported-file')->getRealPath();
 
-            $data = Excel::selectSheets('Respuestas de formulario 1')->load($path, function($reader)
-            {
-            })->get();
-            if(!empty($data) && $data->count())
-            {
-                foreach ($data->toArray() as $row)
-                {
-                    if(!empty($row))
-                    {
-                        $compromiso = $row['compromiso_del_aprendiz'];
-                        if(isset($compromiso)) {
-                            if (strpos($compromiso, 'informar') !== false) {
-                                $compromiso_informar = 'si';
-                            } else {
-                                $compromiso_informar = 'no';
-                            }
-                            if(strpos($compromiso, 'normas') !== false) {
-                                $compromiso_normas = 'si';
-                            } else {
-                                $compromiso_normas = 'no';
-                            }
-                        } else {
-                            $compromiso_informar = 'no';
-                            $compromiso_normas = 'no';
-                        }
-                        $dataArray[] =
-                        [
-                            'nombre_completo' => $row['nombre_completo'],
-                            'tipo_documento' => $row['tipo_de_documento_de_identidad'],
-                            'numero_documento' => $row['numero_de_documento'],
-                            'direccion' => $row['direccion'],
-                            'barrio' => $row['barrio'],
-                            'estrato' => $row['estrato'],
-                            'telefono' => $row['telefono'],
-                            'email' => $row['email'],
-                            'programa_formacion' => $row['programa_de_formacion'],
-                            'numero_ficha' => $row['n0_de_ficha'],
-                            'jornada' => $row['jornada'],
-                            'pregunta1' => $row['de_quien_depende_usted'],
-                            'pregunta2' => $row['oficio_que_realiza_de_quien_depende.'],
-                            'pregunta3' => $row['tiene_personas_que_dependan_de_usted'],
-                            'otro_apoyo' => $row['es_usted_beneficiario_de_algun_apoyo'],
-                            'compromiso_informar' => $compromiso_informar,
-                            'compromiso_normas' => $compromiso_normas,
-                            'justificacion_suplemento' => $row['explique_a_profundidad_por_que_requiere_el_suplemento.'],
-                        ];
-                    }
-                }
-                if(!empty($dataArray))
-                {
-                    Apprentice::insert($dataArray);
-                    return redirect('/admin')->with('status', 'Se ha importado el archivo con éxito!');
-                }
-            }
-        }
-    }
     public function truncateAll()
     {
         Schema::disableForeignKeyConstraints();
