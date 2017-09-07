@@ -14,7 +14,7 @@
                         El aprendiz solo puede recibir el suplemento alimenticio una vez por día.
                     </div> -->
                     <li>{{ $da->numero_documento }}</li>
-                    <li>{{ $da->programa_formacion }}</li>
+                    <li class="text-uppercase">{{ $da->programa_formacion }}</li>
                 </ul>
             </div>
             <div class="col-md-6">
