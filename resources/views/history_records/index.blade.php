@@ -2,12 +2,6 @@
 @section('content')
 @include('layouts.modal')
 <a href="{{ url('history_record/excel') }}" class="btn btn-success"><i class="fa fa-fw fa-cloud-download"></i>Exportar historial a Excel</a>
-
-{{-- <div class="row">
-    <h5>hacer busqueda por fecha</h5>
-    <i class="fa fa-calendar fa-2"></i>
-    <input type="text" name="daterange" class="datapicker">
-</div> --}}
 <div class="input-daterange input-group datapickerr" id="datepicker">
     <input type="text" class="input-sm form-control" name="start" />
     <span class="input-group-addon">to</span>
