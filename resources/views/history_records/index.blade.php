@@ -2,20 +2,28 @@
 
 @section('big-content-desc')
     <a href="{{ url('admin/history_record/excel') }}" class="btn btn-success"><i class="fa fa-fw fa-download"></i>Exportar historial a Excel</a>
+    <form action="{{ url('datesearch') }}" method="POST">
+        {!! csrf_field()  !!} 
+        <h5>hacer busqueda por fecha</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-daterange input-group datapickerr" id="datepicker">
+                    <input type="text" class="input-sm form-control" name="inicio"  autocomplete="off" />
+                    <span class="input-group-addon">hasta</span>
+                    <input type="text" class="input-sm form-control" name="fin" autocomplete="off" />
+                </div>
+                <br>
+                <div>
+                    <button type="button" class="btn btn-primary enviarfechas">enviar</button>
+                    <button type="button" class="btn btn-danger reset">borrar fechas</button>
+                </div>
+                
+            </div>
+        </div>
+    </form>
 @endsection
 @section('content')
 @include('layouts.modal')
-
-<!-- <div class="row">
-    <h5>hacer busqueda por fecha</h5>
-    <i class="fa fa-calendar fa-2"></i>
-    <input type="text" name="daterange" class="datapicker">
-</div> -->
-<div class="input-daterange input-group datapickerr" id="datepicker">
-    <input type="text" class="input-sm form-control" name="start" />
-    <span class="input-group-addon">hasta</span>
-    <input type="text" class="input-sm form-control" name="end" />
-</div>
 <div class="col-md-8">
     <div class="panel panel-default card">
         <div class="panel-heading"></div>
@@ -28,7 +36,7 @@
                         <th>Fecha de entrega</th>
                     </tr>
                 </thead>
-                <tbody  id="myTableAprendiz">
+                <tbody class="history" id="myTableAprendiz">
                     @php
                     $count = 1;
                     @endphp

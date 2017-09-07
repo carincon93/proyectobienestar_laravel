@@ -896,6 +896,27 @@ $('.table-full').on('click', '.btn-delete-tbl', function (e) {
         $formDel.submit();
     });
 });
+//busqueda por fechas
+$('body').on('click', '.enviarfechas', function(event) {
+  event.preventDefault();
+  $inicio=$('input[name=inicio]').val();
+  $fin=$('input[name=fin]').val();
+  $token=$('input[name=_token]').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $token
+            }
+        });
+
+        $.post('/datesearch', { _token: $token, inicio: $inicio, fin: $fin}, function (data, textStatus, xhr) {
+           $('.history').html(data);
+        });
+});
+$('body').on('click', '.reset', function(event) {
+  $('input[name=inicio]').val("");
+  $('input[name=fin]').val("");
+  $(".enviarfechas").click(); 
+});
 
 /**
  *

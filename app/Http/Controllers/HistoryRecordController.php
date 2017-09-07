@@ -97,4 +97,16 @@ class HistoryRecordController extends Controller
     {
         //
     }
+    public function datesearch(Request $request)
+    {
+        if ($request->get('inicio')=='' && $request->get('fin')=='') {
+            $hr = HistoryRecord::orderBy('fecha', 'DESC')->paginate(15);
+            return view('history_records.ajax')->with('hr',$hr);
+        }
+        else{
+            $hr=HistoryRecord::whereBetween('fecha',[$request->get('inicio'),$request->get('fin')])->get();
+            return view('history_records.ajax')->with('hr',$hr);
+            
+        }
+    }
 }

@@ -40,6 +40,7 @@ Route::get('/admin/{id}/entrega_suplemento', 'ApprenticeController@entrega_suple
 // Historial
 Route::resource('/admin/history_record','HistoryRecordController');
 Route::post('/history_record/store/{id}', 'HistoryRecordController@store');
+Route::post('/datesearch','HistoryRecordController@datesearch');
 
 // Cambio de contraseña
 Route::get('admin/password', 'AdminController@password');
