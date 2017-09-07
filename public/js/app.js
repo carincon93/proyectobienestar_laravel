@@ -803,6 +803,11 @@ var app = new Vue({
     el: '#app'
 });
 
+$('.top-login').on('click', '.selector', function (event) {
+    event.preventDefault();
+    $('form').find('input[name=email]').focus();
+});
+
 $modalSolicitud = $('#modalSolicitud');
 var request = null;
 var url = window.location.href.split("/");
@@ -862,7 +867,8 @@ $('body').on('keyup', '#numero_documento', function (event) {
         }, 500);
     }
 });
-// ======================== Truncate class_groups ========================================
+
+// ======================== Truncate solicitudes - historial ========================================
 $('body').on('click', '.form-truncate-aprendiz', function (e) {
     e.preventDefault();
     var $formTruncFic = $(this),
@@ -889,16 +895,34 @@ $('.table-full').on('click', '.btn-delete-tbl', function (e) {
     $('#confirm-delete').modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
         $formDel.submit();
     });
-
 });
+//busqueda por fechas
+$('body').on('click', '.enviarfechas', function(event) {
+  event.preventDefault();
+  $inicio=$('input[name=inicio]').val();
+  $fin=$('input[name=fin]').val();
+  $token=$('input[name=_token]').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $token
+            }
+        });
 
+        $.post('/datesearch', { _token: $token, inicio: $inicio, fin: $fin}, function (data, textStatus, xhr) {
+           $('.history').html(data);
+        });
+});
+$('body').on('click', '.reset', function(event) {
+  $('input[name=inicio]').val("");
+  $('input[name=fin]').val("");
+  $(".enviarfechas").click(); 
+});
 
 /**
  *
  */
-var name = $('#name').text();
-var $intials = $('#name').text().charAt(0);
-console.log(name);
+var name = $('#nameUser').text();
+var $intials = $('#nameUser').text().charAt(0);
 $('#userImage').text($intials);
 
 /***/ }),

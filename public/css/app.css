@@ -8380,7 +8380,6 @@ input,
   border-bottom: 1px solid #eee;
   -webkit-box-shadow: none;
           box-shadow: none;
-  margin-bottom: 1rem;
   padding-left: 0;
   width: 22rem;
 }
@@ -8408,6 +8407,7 @@ button:focus {
 }
 
 .btn-round {
+  background: transparent;
   border-radius: 50%;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -8416,6 +8416,12 @@ button:focus {
   line-height: 30px;
   padding: 0;
   width: 30px;
+}
+
+.btn-solicitud {
+  background: #becd0d;
+  color: #fff;
+  padding: 0.1rem 1rem;
 }
 
 .action-round {
@@ -8432,6 +8438,11 @@ button:focus {
   z-index: 3;
 }
 
+.action-round:hover {
+  -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
 .btn-round:hover {
   background: #cfc;
 }
@@ -8440,6 +8451,42 @@ button:focus {
   background: #e02517;
   text-decoration: line-through;
   color: #fff;
+}
+
+.blockquote {
+  line-height: 1;
+  font-size: 14px;
+}
+
+.blockquote-success {
+  background: #becd0d;
+  color: #fff;
+}
+
+.blockquote-danger {
+  background: red;
+  color: #fff;
+}
+
+.blockquote-danger form {
+  display: inline-block;
+  background: #fff;
+  color: #666;
+  padding: 0.4rem 0.8rem;
+  margin-top: 1rem;
+}
+
+.btn-modal-historial {
+  background: #fff;
+  color: #666;
+  margin-top: 1.6rem;
+  padding: 0.4rem 4rem;
+}
+
+.blockquote-success span.btn {
+  background: #fff;
+  color: #666;
+  padding: 0.3rem 1rem;
 }
 
 .pagination > .active > a,
@@ -8495,6 +8542,17 @@ button:focus {
   color: #3097D1;
 }
 
+.btn.btn-danger {
+  background: red;
+}
+
+.btn-import {
+  background: #4bd427;
+  color: #fff;
+  font-size: 2rem;
+  width: 40rem;
+}
+
 a:hover,
 a:focus,
 a.focus,
@@ -8521,7 +8579,7 @@ a.focus,
 }
 
 .page-section {
-  padding: 8rem 0rem;
+  padding: 0rem 0rem;
 }
 
 .btn-delete {
@@ -8601,9 +8659,27 @@ a.top-login:after {
   outline-offset: 0;
 }
 
+[data-target="#modalEntrega"]:hover {
+  cursor: pointer;
+}
+
+li.li-entrega div:nth-child(2) {
+  margin-top: 0.8rem;
+}
+
+.li-item {
+  color: #fff;
+}
+
+.li-item-solicitudes {
+  background: -ms-linear-gradient(-26.76deg, #24cd00 0%, #59d735 100%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#24CD00', endColorstr='#59D735' ,GradientType=0)";
+  background: linear-gradient(116.76deg, #24cd00 0%, #59d735 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#24CD00',endColorstr='#59D735' , GradientType=1);
+}
+
 #sidebar {
-  background: #10b8bb;
-  color: #ffffff;
+  background: #eaeaea;
   position: fixed;
   height: 100%;
   width: 260px;
@@ -8614,17 +8690,21 @@ a.top-login:after {
   width: 70%;
 }
 
-#sidebar #sidebar-admin {
-  background: #1a9ea0;
-  padding: 2rem;
+.li-entrega {
+  background: -ms-linear-gradient(0deg, #dccd00 0%, #b6cd11 100%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#DCCD00', endColorstr='#B6CD11' ,GradientType=0)";
+  background: -webkit-gradient(linear, left top, right top, from(#dccd00), to(#b6cd11));
+  background: linear-gradient(90deg, #dccd00 0%, #b6cd11 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DCCD00',endColorstr='#B6CD11' , GradientType=1);
 }
 
 #sidebar #sidebar-content {
-  padding: 2rem;
+  padding: 1rem;
 }
 
 #sidebar #sidebar-content ul li {
   margin: 8px 0;
+  padding: 0.8rem;
 }
 
 #sidebar #sidebar-content ul li.active {
@@ -8641,7 +8721,7 @@ a.top-login:after {
 }
 
 #sidebar #sidebar-content ul li a i {
-  font-size: 16px;
+  font-size: 25px;
   line-height: 31px;
   display: block;
   float: left;
@@ -8660,8 +8740,22 @@ a.top-login:after {
   right: 1rem;
 }
 
+.mas-entregas {
+  border: 1px solid #f7dd17;
+}
+
+.mas-entregas i {
+  color: #f7dd17;
+  font-size: 4rem;
+  display: block;
+}
+
 table caption {
   padding: 10px 15px;
+}
+
+.table-desc {
+  margin-top: 0.8rem;
 }
 
 .search-table {
@@ -8676,9 +8770,13 @@ table caption {
   top: 0.6rem;
 }
 
+.table-hover > tbody > tr:hover {
+  background-color: #fdfdfd;
+}
+
 .table-full thead tr th,
 .table-full tbody tr td {
-  border-top: 1px solid #F9F9F9;
+  border-top: 1px solid #e8e8e8;
   padding: 1rem 2rem;
 }
 
@@ -8741,19 +8839,23 @@ table caption {
 
 .big-content {
   padding-bottom: 40px;
-  padding-top: 51px;
   padding-left: 40px;
   padding-right: 40px;
 }
 
 .big-content .big-content-desc {
-  padding: 20px;
-  padding-left: 0;
+  border: 1px solid #eee;
+  padding: 1rem;
+  margin: 1.6rem;
 }
 
 .big-content .big-content-desc a i {
-  color: #302f42;
   font-size: 2rem;
+}
+
+.big-content-desc h4 {
+  color: #9e9e9e;
+  font-size: 17px;
 }
 
 .logo-suplemento {
@@ -8900,6 +9002,18 @@ table caption {
   background: #7b7b7b;
 }
 
+#userImage {
+  background: #becd0d;
+  border-radius: 50%;
+  color: #fff;
+  display: block;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  margin-right: 3rem;
+  padding: 0 0.7rem;
+  width: 2.5rem;
+}
+
 .logobienestar-navbar {
   float: right;
   margin-right: 3rem;
@@ -8969,5 +9083,39 @@ table caption {
   left: 35px;
   position: absolute;
   top: 1.1rem;
+}
+
+.aprendiz-card {
+  background: -ms-linear-gradient(0deg, #dccd00 0%, #b6cd11 100%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#DCCD00', endColorstr='#B6CD11' ,GradientType=0)";
+  background: -webkit-gradient(linear, left top, right top, from(#dccd00), to(#b6cd11));
+  background: linear-gradient(90deg, #dccd00 0%, #b6cd11 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DCCD00',endColorstr='#B6CD11' , GradientType=1);
+  -webkit-box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.07), 1px 2px 5px 0 rgba(0, 0, 0, 0.06);
+          box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.07), 1px 2px 5px 0 rgba(0, 0, 0, 0.06);
+  color: #fff;
+  margin-top: 2rem;
+  padding: 1rem 1rem 0rem;
+}
+
+.aprendiz-card::before {
+  bottom: -4.5rem;
+  content: '+';
+  color: #fff;
+  font-size: 14rem;
+  position: absolute;
+  right: -1rem;
+  -webkit-transform: rotate(-24deg);
+          transform: rotate(-24deg);
+}
+
+.aprendiz-card li {
+  margin: 0;
+}
+
+.entrega-warning {
+  background: #E91E63;
+  color: #fff;
+  padding: 0.3rem 1rem;
 }
 

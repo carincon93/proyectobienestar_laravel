@@ -14,8 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet"> 
-    <link href="{{ asset('css/bootstrap-datepicker.standalone.min.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 </head>
 <body>
     @include('layouts.modal')
@@ -32,25 +31,41 @@
         </div>
         <div id="sidebar-content">
             <ul class="sidebar-menu list-unstyled">
-                <li>Dashboard</li>
-                <li>
-                    <a href="{{ url('/admin/dashboard') }}"><i class="fa fa-fw fa-cog"></i>Dashboard</a>
+                <li class="li-item li-entrega clearfix" data-toggle="modal" data-target="#modalEntrega">
+                    <div class="col-md-8">
+                        <img src="{{ url('/images/suplemento.png') }}" alt="" class="img-responsive logo-suplemento-sidebar">
+                    </div>
+                    <div class="col-md-4">
+                        Entregar
+                    </div>
                 </li>
-                <li>Administración</li>
-                <li>
-                    <a href="{{ url('/admin/collaborator') }}"><i class="fa fa-fw fa-cog"></i>Administradores</a>
+
+                <li class="li-item li-item-solicitudes">
+                    <a href="{{ url('/admin/dashboard') }}">
+                        <i class="fa fa-fw fa-file-excel-o"></i>
+                        Solicitudes
+                    </a>
                 </li>
-                <li>Acciones</li>
-                <li>
-                    <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-line-chart"></i>Historial de aprendices</a>
+
+                <li class="li-item li-item-import">
+                    <a href="{{ url('/admin/apprentice/import') }}">
+                        <i class="fa fa-fw fa-upload"></i>
+                        Importar solicitudes
+                    </a>
                 </li>
-                <li>
+
+                <li class="li-item li-item-import">
+                    <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-list"></i>
+                        Historial de aprendices
+                    </a>
+                </li>
+                <!-- <li>
                     <form action="{{ url('/admin/truncate') }}" method="POST" style="display: inline-block;" class="form-truncate-aprendiz btn">
                         {!! csrf_field() !!}
                         <i class="fa fa-fw fa-trash"></i>
                         Eliminar todos los registros
                     </form>
-                </li>
+                </li> -->
             </ul>
         </div>
     </aside>
@@ -88,7 +103,7 @@
                                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} no-margin">
                                                 <div class="">
                                                     <i class="fa fa-fw fa-envelope icon-form"></i>
-                                                    <input id="email" type="email" class="form-control form-login" name="email" value="{{ old('email') }}" placeholder="Correo electrónico" required>
+                                                    <input id="email" type="email" class="form-control form-login" name="email" value="{{ old('email') }}" placeholder="Correo electrónico" required autofocus>
 
                                                     @if ($errors->has('email'))
                                                     <span class="help-block">
@@ -143,8 +158,9 @@
                                 </div>
                             </li>
                             @else
+                            <li><span id="userImage" class="text-uppercase"></span></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle text-capitalize user-name" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
+                                <a id="nameUser" href="#" class="dropdown-toggle text-capitalize user-name" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{url('admin/password')}}">Cambiar mi contraseña</a></li>
                                     <li role="separator" class="divider"></li>
@@ -190,39 +206,37 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.es.min.js') }}"></script>
+
+    @stack('scripts')
 
     <script>
         $(document).ready(function() {
             // =========================== Active Links =================================
-            var current_url = "{{ Request::fullUrl() }}";
-            var full_url = current_url+location.search;
-            // console.log(current_url.indexOf('/'));
-            var $navLinks = $("ul.sidebar-menu li a");
-            // First look for an exact match including the search string
-            var $curentPageLink = $navLinks.filter( function() {
-                // console.log($(this).attr('href') === full_url);
-                return $(this).attr('href') === full_url;
-            });
-            // If not found, look for the link that starts with the url
-            if($curentPageLink.length == 0){
-                $curentPageLink = $navLinks.filter(function() {
-                    // console.log(current_url.startsWith($(this).attr('href')));
-                    return $(this).attr('href').startsWith(current_url) || current_url.startsWith($(this).attr('href'));
-                });
-            }
-            var loc = document.location.href;
-            console.log(loc);
-            if(!loc == current_url)
-                $curentPageLink.parents('li').addClass('active');
-                $('.datapickerr').datepicker({
-                    format: "dd/mm/yyyy",
-                    language: "es",
-                    autoclose: true
-                });
-        });
+            // var current_url = "{{ Request::fullUrl() }}";
+            // var full_url = current_url+location.search;
+            // var $navLinks = $("ul.sidebar-menu li a");
+            // // First look for an exact match including the search string
+            // var $curentPageLink = $navLinks.filter(
+            //     function() { return $(this).attr('href') === full_url; }
+            // );
+            // // If not found, look for the link that starts with the url
+            // if(!$curentPageLink.length > 0){
+            //     $curentPageLink = $navLinks.filter(
+            //         function() { return $(this).attr('href').startsWith(current_url) || current_url.startsWith($(this).attr('href')); }
+            //     );
+            // }
+            //
+            // $curentPageLink.parents('li').addClass('active');
 
+
+            $('.datapickerr').datepicker({
+                format: "yyyy/mm/dd",
+                language: "es",
+                autoclose: true
+            });
+
+        });
     </script>
-    <!-- <script src="{{ asset('js/master.js') }}"></script> -->
-    @stack('scripts')
 </body>
 </html>

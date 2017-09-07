@@ -1,14 +1,12 @@
 @extends('layouts.app')
-@section('big-content-desc')
-<h3>Cambiar mi contraseña</h3>
-@endsection
+
 @section('content')
-<div class="col-md-8">
+<div class="col-md-6">
 	<div class="card-form">
 		<form method="POST" action="{{url('admin/updatepassword')}}">
 			{{csrf_field()}}
 			<div class="form-group{{ $errors->has('mypassword') ? ' has-error' : '' }}">
-				<label for="mypassword" class="control-label">Introduce tu actual contraseña:</label>
+				<label for="mypassword" class="control-label">Introduce tu contraseña actual:</label>
 				<input type="password" name="mypassword" class="form-control">
 				@if ($errors->has('mypassword'))
 				<span class="help-block">
@@ -32,6 +30,12 @@
 			<button type="submit" class="btn btn-primary">Cambiar contraseña</button>
 		</form>
 	</div>
+</div>
+<div class="col-md-6">
+	<h3>
+		<i class="fa fa-fw fa-lock"></i>
+		Cambiar mi contraseña
+	</h3>
 </div>
 
 @endsection

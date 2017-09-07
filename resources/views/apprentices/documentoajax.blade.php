@@ -4,17 +4,29 @@
         $fecha = substr($his->fecha, 0, -9);
         @endphp
     @endforeach
-    @if(isset($fecha) && $fecha == date('Y-m-d'))
-        El aprendiz ya recibió el suplemento!
-    @else
     <div class="aprendiz-card">
-        <div>
-            <ul class="list-unstyled">
-                <li class="h4" id="name">{{ $da->nombre_completo }}</li>
-                <li>{{ $da->programa_formacion }}</li>
-            </ul>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li class="h4">{{ $da->nombre_completo }}</li>
+                    <!-- <div>
+                        <i class="fa fa-fw fa-info"></i>
+                        El aprendiz solo puede recibir el suplemento alimenticio una vez por día.
+                    </div> -->
+                    <li>{{ $da->numero_documento }}</li>
+                    <li class="text-uppercase">{{ $da->programa_formacion }}</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ url('admin/history_record/'.$da->id) }}" class="btn btn-modal-historial">Ver historial</a>
+            </div>
         </div>
     </div>
+    @if(isset($fecha) && $fecha == date('Y-m-d'))
+    <div class="entrega-warning">
+        <i class="fa fa-fw fa-warning"></i>El aprendiz ya recibió el suplemento! Última fecha: <strong>{{ $da->historyrecords->last()->fecha}}</strong>
+    </div>
+    @else
     <form action="{{ url('admin/'.$da->id.'/entrega_suplemento') }}" id="formEntrega">
         {{ csrf_field() }}
         <input type="hidden" name="apprentice_id" value="{{ $da->id }}">

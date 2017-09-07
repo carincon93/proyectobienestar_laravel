@@ -1,29 +1,21 @@
 @extends('layouts.app')
 
-    @section('navbar-top')
-    <div class="search-navbar-wrapper">
-        <i class="fa fa-fw fa-search"></i>
-        <input type="text" id="myInputAprendiz" onkeyup="filterTableAprendiz()" placeholder="Buscar por nombre de aprendiz" class="form-control search-navbar">
-    </div>
+    @section('big-content-desc')
+    <h4>
+        <i class="fa fa-fw fa-file-text-o"></i>
+        En la siguiente tabla se listan todas las solicitudes de aprendices que requieren el suplemento alimenticio.
+    </h4>
+    <p>
+        <blockquote class="blockquote blockquote-success">
+            <i class="fa fa-fw fa-info"></i>
+            Por favor de clic en <span class="btn">Ver solicitud</span> verifica todos los datos y da clic en
+            <span class="btn">Aprobar solicitud</span> si el aprendiz cumple con los requisitos.
+        </blockquote>
+    </p>
+
     @endsection
 
     @section('content')
-        <div class="modal fade" id="confirm-delete">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title text-capitalize" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-danger" id="btn-delete"></button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Modal Solicitud -->
         <div class="modal fade" id="modalSolicitud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -41,17 +33,23 @@
             </div>
         </div>
         <!-- Session Mensajes -->
-        <a href="{{ url('/admin/apprentice/create') }}" class="action-round"><i class="fa fa-fw fa-plus"></i></a>
+        <a href="{{ url('/admin/apprentice/create') }}" class="action-round text-center"><i class="fa fa-fw fa-plus"></i></a>
 
-        <form class="" action="{{ url('/admin/import') }}" method="post" enctype="multipart/form-data">
-            {!! csrf_field() !!}
-            <input type="file" name="imported-file" class="form-control" accept=".xlsx">
-            <button type="submit">Importar</button>
-
-        </form>
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10">
             <div class="panel panel-default card">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-8 table-desc">
+                            <i class="fa fa-fw fa-list"></i>
+                            Lista de solicitudes.
+                        </div>
+                        <div class="col-md-4">
+                            <div class="search-table">
+                                <input type="text" id="myInputAprendiz" onkeyup="filterTableAprendiz()" placeholder="Buscar por nombre de aprendiz" class="form-control search-navbar custom-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @if (session('status'))
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span
@@ -79,11 +77,11 @@
                                 <tr>
                                     <td>{{ $count++ }}</td>
                                     <td>{{ $da->nombre_completo }}</td>
-                                    <td>{{ $da->tipo_documento }}</td>
+                                    <td>{{ $da->tipo_documento === "CEDULA" ? "Cédula" : ($da->tipo_documento ==="TI" ? "Tarjeta de identidad" : "") }}</td>
                                     <td>{{ $da->numero_documento }}</td>
                                     <td class="td-actions">
-                                        <button class="btn btn-round" data-toggle="modal" data-target="#modalSolicitud" data-id="{{ $da->id }}" data-nombre="{{ $da->nombre_completo }}">
-                                            <i class="fa fa-fw fa-search"></i>
+                                        <button class="btn btn-solicitud" data-toggle="modal" data-target="#modalSolicitud" data-id="{{ $da->id }}" data-nombre="{{ $da->nombre_completo }}">
+                                            Ver solicitud
                                         </button>
                                         <a class="btn btn-round" href="{{ url('/admin/apprentice/'.$da->id.'/edit') }}">
                                             <i class="fa fa-fw fa-pencil"></i>
@@ -93,10 +91,6 @@
                                             {!! csrf_field()  !!}
                                             <i class="fa fa-fw fa-trash"></i>
                                         </form>
-                                        <!-- @if($da->estado_beneficio == 0)
-                                        <a class="btn btn-success" href="{{url('admin/'.$da->id.'/solicitudaceptado')}}">Aceptado</a>
-                                        <a class="btn btn-danger" href="{{url('admin/'.$da->id.'/solicitudrechazado')}}">No Aceptado</a>
-                                        @endif -->
                                     </td>
                                 </tr>
                                 @endforeach
@@ -105,6 +99,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-2 text-center">
+            <span class="h5">
+                Total de solicitudes:
+            </span>
+            <h2>{{ $nroApprentices }}</h2>
         </div>
     @endsection
     @push('scripts')
