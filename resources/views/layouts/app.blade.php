@@ -206,6 +206,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.es.min.js') }}"></script>
+
     @stack('scripts')
 
     <script>
@@ -226,6 +228,13 @@
             // }
             //
             // $curentPageLink.parents('li').addClass('active');
+
+
+            $('.datapickerr').datepicker({
+                format: "dd/mm/yyyy",
+                language: "es",
+                autoclose: true
+            });
 
         });
     </script>
