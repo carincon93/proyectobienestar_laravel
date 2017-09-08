@@ -122,4 +122,13 @@ class HistoryRecordController extends Controller
             return view('history_records.ajax')->with('hr', $hr);
         }
     }
+    public function excel()
+    {
+        \Excel:: create('Listahistoriales' , function($excel) {
+            $excel->sheet('Historial' , function($sheet) {
+                $his = HistoryRecord:: all();
+                $sheet->loadView('history_records.excel' , array('his' => $his));
+            });
+        })->download('xls' );
+    }
 }

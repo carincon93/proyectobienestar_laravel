@@ -18,7 +18,7 @@
 <p>
     <blockquote class="blockquote historial-desc">
         Si quieres descargar el historial en un archivo excel, por favor da clic en el siguieten botón
-        <a href="{{ url('admin/history_record/excel') }}" class="btn">
+        <a href="{{ url('/excel') }}" class="btn">
             <i class="fa fa-fw fa-download"></i>
             Exportar a excel
         </a>
