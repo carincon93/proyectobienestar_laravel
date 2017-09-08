@@ -4,7 +4,7 @@ $count = 1;
 @foreach($hr as $h)
 <tr>
     <td>{{ $count++ }}</td>
-    <td>{{ $h->apprentice->nombre_completo }}</td>
+    <td>{{ $h->nombre_completo }}</td>
     <td>{{ $h->fecha }}</td>
 </tr>
 @endforeach

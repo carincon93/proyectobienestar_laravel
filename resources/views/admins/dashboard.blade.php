@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
     @section('big-content-desc')
-    <h4>
+    <!-- <h4>
         <i class="fa fa-fw fa-file-text-o"></i>
         En la siguiente tabla se listan todas las solicitudes de aprendices que requieren el suplemento alimenticio.
-    </h4>
+    </h4> -->
     <p>
         <blockquote class="blockquote blockquote-success">
             <i class="fa fa-fw fa-info"></i>

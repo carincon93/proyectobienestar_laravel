@@ -54,9 +54,9 @@
                     </a>
                 </li>
 
-                <li class="li-item li-item-import">
-                    <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-list"></i>
-                        Historial de aprendices
+                <li class="li-item">
+                    <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-calendar-o"></i>
+                        Historial de entregas
                     </a>
                 </li>
                 <!-- <li>

@@ -97,16 +97,29 @@ class HistoryRecordController extends Controller
     {
         //
     }
+
     public function datesearch(Request $request)
     {
-        if ($request->get('inicio')=='' && $request->get('fin')=='') {
-            $hr = HistoryRecord::orderBy('fecha', 'DESC')->paginate(15);
-            return view('history_records.ajax')->with('hr',$hr);
+        $fechaInicio = $request->get('inicio');
+        $fechaFin    = $request->get('fin');
+
+        if ($fechaInicio == '' && $fechaFin == '') {
+            $hr = DB::table('history_records')
+                    ->select('apprentices.id', 'apprentices.nombre_completo', 'history_records.fecha')
+                    ->join('apprentices', 'apprentices.id', '=', 'history_records.apprentice_id')
+                    ->groupBy('apprentices.id', 'apprentices.nombre_completo', 'history_records.fecha')
+                    ->get();
+            return view('history_records.ajax')->with('hr', $hr);
         }
         else{
-            $hr=HistoryRecord::whereBetween('fecha',[$request->get('inicio'),$request->get('fin')])->get();
-            return view('history_records.ajax')->with('hr',$hr);
-            
+            // $hr = HistoryRecord::whereBetween('fecha', [$fechaInicio, $fechaFin])->get();
+            $hr = DB::table('history_records')
+                    ->select('apprentices.id', 'apprentices.nombre_completo', 'history_records.fecha')
+                    ->join('apprentices', 'apprentices.id', '=', 'history_records.apprentice_id')
+                    ->whereBetween(DB::raw('cast(fecha as date)'), [$fechaInicio, $fechaFin])
+                    ->groupBy('apprentices.id', 'apprentices.nombre_completo', 'history_records.fecha')
+                    ->get();
+            return view('history_records.ajax')->with('hr', $hr);
         }
     }
 }

@@ -21,7 +21,7 @@ const app = new Vue({
     el: '#app'
 });
 
-$('.top-login').on('click', '.selector', function(event) {
+$('.top-login').on('click', '.selector', function (event) {
     event.preventDefault();
     $('form').find('input[name=email]').focus();
 });
@@ -38,7 +38,7 @@ $('.modal').on('shown.bs.modal', function () {
     });
 });
 
-$('body').on('click', 'button[data-target="#modalSolicitud"]', function(event) {
+$('body').on('click', 'button[data-target="#modalSolicitud"]', function (event) {
     event.preventDefault();
     $id = $(this).attr('data-id');
     $nombre_aprendiz = $('button[data-target="#modalSolicitud"]').attr('data-nombre');
@@ -46,20 +46,18 @@ $('body').on('click', 'button[data-target="#modalSolicitud"]', function(event) {
     $modalSolicitud.find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
     $modalSolicitud.find('a[id="cancelarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudrechazado');
     $modalSolicitud.find('button[data-id]').attr('data-id', $id);
-    $.get('/obtener_solicitud/', { id: $id }, function(data, textStatus, xhr) {
+    $.get('/obtener_solicitud/', { id: $id }, function (data, textStatus, xhr) {
         $('#mbody-solicitud').html(data);
     });
 });
 /**
- * [description]
- * @param  {[type]} event [description]
- * @return {[type]}       [description]
+ * @author Cristian Vasquez
+ * @description Evento que encarga de registrar en el historial la entrega del suplemento
  */
-$('body').on('click', '#entregarSuplemento', function(event) {
+$('body').on('click', '#entregarSuplemento', function (event) {
     $id = $('#formEntrega').find('input[name=apprentice_id]').val();
     $token = $('#formEntrega').find('input[name=_token]').val();
-    $.post('/history_record/store/'+ $id, {_token: $token, id: $id}, function(data, textStatus, xhr) {
-    });
+    $.post('/history_record/store/' + $id, { _token: $token, id: $id }, function (data, textStatus, xhr) {});
 });
 /**
  * @author Cristian Vasquez
@@ -67,19 +65,18 @@ $('body').on('click', '#entregarSuplemento', function(event) {
  * @return Si se encuentra el aprendiz, la función retorna un htm donde esta el formulario con los datos del aprendiz
  *         Si no lo encuentra arroja mensaje de error
  */
-$('body').on('keyup', '#numero_documento', function(event) {
+$('body').on('keyup', '#numero_documento', function (event) {
     event.preventDefault();
     var $numero_documento = $(this).val();
     if ($numero_documento > 0) {
         if (request != null) request.abort();
 
         request = $.get('/apprenticeajax', { numero_documento: $numero_documento }, function (data, textStatus, xhr) {
-            if(data) {
+            if (data) {
                 $('#apprentice').html(data);
             } else {
                 $('#apprentice').text('El aprendiz no existe o su solicitud no ha sido aceptada aun!');
             }
-
         });
     } else {
         setTimeout(function () {
@@ -115,12 +112,47 @@ $('.table-full').on('click', '.btn-delete-tbl', function (e) {
     $('#confirm-delete').modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
         $formDel.submit();
     });
+});
+// Búsqueda por fechas
+$('body').on('click', '.enviarfechas', function(event) {
+  event.preventDefault();
+  $inicio = $('input[name=inicio]').val();
+  $fin    = $('input[name=fin]').val();
+  $token  = $('input[name=_token]').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $token
+            }
+        });
 
+        $.post('/datesearch', { _token: $token, inicio: $inicio, fin: $fin}, function (data, textStatus, xhr) {
+           $('.history').html(data);
+        });
+});
+
+$('body').on('click', '.reset', function(event) {
+    $('input[name=inicio]').val("");
+    $('input[name=fin]').val("");
+    $(".enviarfechas").click();
 });
 
 /**
- *
- */
+* @author Cristian Vasquez
+* @description Evento que se encarga de setear la imágen con la inicial del nombre del usuario autenticado
+*/
 var name = $('#nameUser').text();
 var $intials = $('#nameUser').text().charAt(0);
 $('#userImage').text($intials);
+
+/**
+* @author Cristian Vasquez
+* @description Cambiar color de iconos de fechas a dar clic en los input
+*/
+$('input[name="inicio"], input[name="fin"]').focus(function(){
+    $(this).parent().addClass('focus');
+    $(this).css('border-color', '#ff9526');
+});
+$('input[name="inicio"], input[name="fin"]').blur(function(){
+    $(this).parent().removeClass('focus');
+    $(this).css('border-color', 'inherit');
+});

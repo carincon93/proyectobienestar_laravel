@@ -133,6 +133,7 @@ button:focus {
     padding: 0.4rem 4rem;
 }
 
+.blockquote a,
 .blockquote-success span.btn {
     background: #fff;
     color: #666;
@@ -233,6 +234,19 @@ a:hover, a:focus, a.focus,
     margin-bottom: 30px;
     position: relative;
 }
+.card-header {
+    padding: 15px 20px;
+}
+.card-content {
+    padding: 15px 20px;
+}
+
+.datepicker table tr td.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active:hover {
+    background-image: -webkit-linear-gradient(256deg, #ffa705 50%, #ff8f2f 100%) !important;
+    background-image: -o-linear-gradient(256deg, #ffa705 50%, #ff8f2f 100%) !important;
+    background-image: linear-gradient(346deg, #ffa705 50%, #ff8f2f 100%) !important;
+}
+
 
 // Top Navbar
 .navbar-default .navbar-nav > li > a.top-login {
@@ -291,8 +305,12 @@ li.li-entrega {
 }
 .li-item {
     color: #fff;
+    background: -webkit-linear-gradient(346deg, #4e4e4e 0%, #464646 100%);
+    background: -o-linear-gradient(346deg, #4e4e4e 0%, #464646 100%);
+    background: linear-gradient(76deg, #4e4e4e 0%, #464646 100%);
+    transition: all 0.3s ease;
 }
-.li-item-solicitudes {
+.li-item-solicitudes:hover {
     background : -moz-linear-gradient(18.74% -37.89% -26.76deg,rgba(36, 205, 0, 1) 0%,rgba(89, 215, 53, 1) 100%);
     background : -webkit-linear-gradient(-26.76deg, rgba(36, 205, 0, 1) 0%, rgba(89, 215, 53, 1) 100%);
     background : -webkit-gradient(linear,18.74% -37.89% ,131.26% 278.48% ,color-stop(0,rgba(36, 205, 0, 1) ),color-stop(1,rgba(89, 215, 53, 1) ));
@@ -390,16 +408,30 @@ li.li-entrega {
 .mas-entregas {
     border: 1px solid #f7dd17;
 }
-.mas-entregas i {
+.mas-entregas:before {
+    content: "\F091";
     color: #f7dd17;
-    font-size: 4rem;
+    font-size: 2rem;
+    font-family: FontAwesome;
     display: block;
+    position: absolute;
+    top: -3rem;
+    left: 41%;
+    text-align: center;
+    background: #fff;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    padding: 0.5rem;
 }
 table caption {
     padding: 10px 15px;
 }
 .table-desc {
     margin-top: 0.8rem;
+}
+.table > thead > tr > th {
+    border-bottom: 0px solid #ddd;
 }
 .search-table {
     position: relative;
@@ -730,4 +762,80 @@ table caption {
     background: #E91E63;
     color: #fff;
     padding: 0.3rem 1rem;
+}
+
+// Historial
+.card-historial {
+    display: block;
+    height: 15rem;
+}
+.card-header-historial {
+    color: #fff;
+    position: relative;
+
+    i {
+        font-size: 6rem !important;
+        left: 7.5rem;
+        position: absolute;
+        top: 4rem;
+    }
+}
+.card-header-historial i.fa-calendar {
+    top: 2rem;
+}
+.card-footer-historial {
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+.blockquote.historial-desc {
+    background: -webkit-linear-gradient(256deg, #ffa705 0%, #ff8f2f 100%);
+    background: -o-linear-gradient(256deg, #ffa705 0%, #ff8f2f 100%);
+    background: linear-gradient(346deg, #ffa705 0%, #ff8f2f 100%);
+    color: #fff;
+}
+
+#datepicker .input-group-addon {
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: #fff;
+}
+.input-date-wrapper.focus {
+    label {
+        color: #ff8f2f;
+    }
+    &:before {
+        color: #ff8f2f;
+    }
+}
+.input-date-wrapper {
+    position: relative;
+
+    label {
+        font-size: 12px;
+        font-weight: lighter;
+        margin-bottom: 0px;
+    }
+    &:before {
+        bottom: 0;
+        content: "\F073";
+        font-family: 'FontAwesome';
+        font-size: 20px;
+        position: absolute;
+        left: -0.8rem;
+    }
+}
+input[name="inicio"],
+input[name="fin"] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #333;
+    border-radius: 0px !important;
+    box-shadow: none;
+    text-align: left;
+    // color: #fff;
+}
+input[name="inicio"]:hover,
+input[name="fin"]:hover {
+    cursor: pointer;
 }
