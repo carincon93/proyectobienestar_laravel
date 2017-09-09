@@ -1,3 +1,6 @@
-
-*Busqueda de entregas de suplementos HISTORIAL por fechas
+cuadrar colores de acuerdo al del logo,
+hacer modal de novedad,
+cuando se teclee en el input que dio error que se quite
+acomodar el modal de ver solicitud
+que se pueda mirar las veces que recibio el algo la persona seleccionada
 
