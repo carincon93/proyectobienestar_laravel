@@ -17,11 +17,12 @@ class HistoryRecordController extends Controller
      */
     public function index()
     {
-        $history_records = HistoryRecord::all();
+        $history_records = HistoryRecord::orderBy('fecha', 'DESC')->get();
         $hh = DB::table('history_records')
                     ->select('apprentices.id', 'apprentices.nombre_completo', DB::raw('count(history_records.apprentice_id) as total'))
                     ->join('apprentices', 'apprentices.id', '=', 'history_records.apprentice_id')
                     ->groupBy('apprentices.id', 'apprentices.nombre_completo')
+                    ->orderBy('total', 'DESC')
                     ->take(5)
                     ->get();
         return view('history_records.index', compact('history_records', 'hh'));
@@ -60,7 +61,7 @@ class HistoryRecordController extends Controller
      */
     public function show($id)
     {
-        $history_records = HistoryRecord::all()->where('apprentice_id', '=', $id);
+        $history_records = HistoryRecord::where('apprentice_id', '=', $id)->orderBy('fecha', 'DESC')->get();
         return view('history_records.show', compact('history_records'));
     }
 
@@ -121,14 +122,5 @@ class HistoryRecordController extends Controller
                     ->get();
             return view('history_records.ajax')->with('hr', $hr);
         }
-    }
-    public function excel()
-    {
-        \Excel:: create('Listahistoriales' , function($excel) {
-            $excel->sheet('Historial' , function($sheet) {
-                $his = HistoryRecord:: all();
-                $sheet->loadView('history_records.excel' , array('his' => $his));
-            });
-        })->download('xls' );
     }
 }

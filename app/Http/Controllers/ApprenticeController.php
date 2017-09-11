@@ -8,6 +8,7 @@ use App\Http\Requests\ApprenticeRequest;
 use Auth;
 use Excel;
 use App\Apprentice;
+use App\HistoryRecord;
 
 
 class ApprenticeController extends Controller
@@ -138,21 +139,34 @@ class ApprenticeController extends Controller
         return redirect('/admin/dashboard')->with('status', 'El aprendiz fue eliminado con éxito');
     }
 
-    public function solicitudAceptado($id)
+    public function solicitud(Request $request, $id)
     {
         $dataApprentice = Apprentice::find($id);
-        $dataApprentice->estado_solicitud = 1;
-        if($dataApprentice->save()){
-            return redirect('admin/dashboard')->with('status', 'El Aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
-            fue modificado con exito!');
+        $dataApprentice->novedad_solicitud = $request->get('novedad_solicitud');
+        if ($request->get('estado') == 1) {
+            $dataApprentice->estado_solicitud = 1;
+            $msj = 'La solicitud del aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+            fue aceptada!';
+        } else {
+            $dataApprentice->estado_solicitud = 0;
+            $msj = 'La solicitud del aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+            fue rechazada!';
+        }
+        if($dataApprentice->save()) {
+            return redirect('admin/dashboard')->with('status', $msj);
         }
     }
 
-    public function solicitudRechazado($id)
-    {
-        Apprentice::destroy($id);
-        return redirect('admin/dashboard')->with('status', 'La solicitud del aprendiz fue rechazada!');
-    }
+    // public function solicitudRechazado(Request $request, $id)
+    // {
+    //     $dataApprentice = Apprentice::find($id);
+    //     $dataApprentice->novedad_solicitud = $request->get('novedad_solicitud');
+    //     $dataApprentice->estado_solicitud  = 0;
+    //     if($dataApprentice->save())
+    //         return redirect('admin/dashboard')->with('status', 'La solicitud del aprendiz <strong>'.$dataApprentice->nombre_completo.'</strong>
+    //         fue rechazada!');
+    //
+    // }
 
     public function obtener_solicitud(Request $id)
     {
@@ -186,6 +200,7 @@ class ApprenticeController extends Controller
     {
         return view('apprentices.import');
     }
+
     public function store_import(Request $request)
     {
         if($request->file('imported-file'))
@@ -219,34 +234,53 @@ class ApprenticeController extends Controller
                         }
                         $dataArray[] =
                         [
-                            'nombre_completo' => $row['nombre_completo'],
-                            'tipo_documento' => $row['tipo_de_documento_de_identidad'],
-                            'numero_documento' => $row['numero_de_documento'],
-                            'direccion' => $row['direccion'],
-                            'barrio' => $row['barrio'],
-                            'estrato' => $row['estrato'],
-                            'telefono' => $row['telefono'],
-                            'email' => $row['email'],
+                            'nombre_completo'    => $row['nombre_completo'],
+                            'tipo_documento'     => strtolower($row['tipo_de_documento_de_identidad']),
+                            'numero_documento'   => $row['numero_de_documento'],
+                            'direccion'          => $row['direccion'],
+                            'barrio'             => $row['barrio'],
+                            'estrato'            => $row['estrato'],
+                            'telefono'           => $row['telefono'],
+                            'email'              => $row['email'],
                             'programa_formacion' => $row['programa_de_formacion'],
-                            'numero_ficha' => $row['n0_de_ficha'],
-                            'jornada' => $row['jornada'],
-                            'pregunta1' => $row['de_quien_depende_usted'],
-                            'pregunta2' => $row['oficio_que_realiza_de_quien_depende.'],
-                            'pregunta3' => $row['tiene_personas_que_dependan_de_usted'],
-                            'otro_apoyo' => $row['es_usted_beneficiario_de_algun_apoyo'],
+                            'numero_ficha'       => $row['n0_de_ficha'],
+                            'jornada'            => $row['jornada'],
+                            'pregunta1'          => $row['de_quien_depende_usted'],
+                            'pregunta2'          => $row['oficio_que_realiza_de_quien_depende.'],
+                            'pregunta3'          => $row['tiene_personas_que_dependan_de_usted'],
+                            'otro_apoyo'         => strtolower($row['es_usted_beneficiario_de_algun_apoyo']),
                             'compromiso_informar' => $compromiso_informar,
-                            'compromiso_normas' => $compromiso_normas,
+                            'compromiso_normas'  => $compromiso_normas,
                             'justificacion_suplemento' => $row['explique_a_profundidad_por_que_requiere_el_suplemento.'],
                         ];
                     }
                 }
                 if(!empty($dataArray))
                 {
-                    Apprentice::insert($dataArray);
-                    return redirect('/admin')->with('status', 'Se ha importado el archivo con éxito!');
+                    Apprentice::insertIgnore($dataArray);
+                    return redirect('/admin/dashboard')->with('status', 'Se ha importado el archivo con éxito!');
                 }
             }
         }
+    }
+
+
+    public function excel()
+    {
+        Excel:: create('Registros_Backup' , function($excel) {
+            $excel->sheet('Historial' , function($sheet) {
+                $his = HistoryRecord::all();
+                $sheet->loadView('apprentices.historial' , array('his' => $his));
+            });
+            $excel->sheet('Solicitudes Aceptadas' , function($sheet) {
+                $sa = Apprentice::where('estado_solicitud', 1)->orderBy('nombre_completo', 'DESC')->get();
+                $sheet->loadView('apprentices.solicitudes_aceptadas' , array('sa' => $sa));
+            });
+            $excel->sheet('Solicitudes Rechazadas' , function($sheet) {
+                $sd = Apprentice::where('estado_solicitud', 0)->orderBy('nombre_completo', 'DESC')->get();
+                $sheet->loadView('apprentices.solicitudes_denegadas' , array('sd' => $sd));
+            });
+        })->download('xls' );
     }
 
 }

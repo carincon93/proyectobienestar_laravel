@@ -10,15 +10,31 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+// Authentication Routes...
+	// Auth::routes();
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+    // Registration Routes...
+    // Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    // Route::post('register', 'Auth\RegisterController@register');
+
+    // Password Reset Routes...
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // Welcome
 Route::get('/', 'WelcomeController@index')->name('welcome');
+
 
 // Admin
 Route::get('/admin', function () {
 	return redirect('admin/dashboard');
 });
+Route::post('admin/aprendiz_solicitud/{id}', 'ApprenticeController@solicitud');
 
 Route::get('/admin/dashboard', 'AdminController@index');
 Route::post('/admin/truncate', 'AdminController@truncateAll');
@@ -34,18 +50,20 @@ Route::resource('/admin/apprentice','ApprenticeController');
 Route::get('/apprenticeajax','ApprenticeController@ajax');
 Route::get('/obtener_solicitud', 'ApprenticeController@obtener_solicitud');
 Route::get('/admin/{id}/solicitudaceptado', 'ApprenticeController@solicitudAceptado');
-Route::get('/admin/{id}/solicitudrechazado', 'ApprenticeController@solicitudRechazado');
 Route::get('/admin/{id}/entrega_suplemento', 'ApprenticeController@entrega_suplemento');
 
 // Historial
 Route::resource('/admin/history_record','HistoryRecordController');
 Route::post('/history_record/store/{id}', 'HistoryRecordController@store');
-Route::post('/datesearch','HistoryRecordController@datesearch');
-Route::get('/excel','HistoryRecordController@excel');
+Route::get('/datesearch','HistoryRecordController@datesearch');
+Route::get('/excel','ApprenticeController@excel');
 
 // Cambio de contraseña
 Route::get('admin/password', 'AdminController@password');
 Route::post('admin/updatepassword', 'AdminController@updatePassword');
+
+
+
 
 // Redirección - Error 404
 Route::get('error', function()

@@ -825,12 +825,27 @@ $('body').on('click', 'button[data-target="#modalSolicitud"]', function (event) 
     $id = $(this).attr('data-id');
     $nombre_aprendiz = $('button[data-target="#modalSolicitud"]').attr('data-nombre');
     $modalSolicitud.find('a[id="aceptarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudaceptado');
-    $modalSolicitud.find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
-    $modalSolicitud.find('a[id="cancelarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudrechazado');
+    // $modalSolicitud.find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
+    // $modalSolicitud.find('a[id="cancelarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudrechazado');
     $modalSolicitud.find('button[data-id]').attr('data-id', $id);
     $.get('/obtener_solicitud/', { id: $id }, function (data, textStatus, xhr) {
         $('#mbody-solicitud').html(data);
     });
+});
+
+$('body').on('click', 'button[id="rechazarSolicitud"]', function (event) {
+    event.preventDefault();
+    $('input[name="estado"]').val(0);
+    setTimeout(function () {
+        $('#solicitud').submit();
+    }, 500);
+});
+$('body').on('click', 'button[id="aceptarSolicitud"]', function (event) {
+    event.preventDefault();
+    $('input[name="estado"]').val(1);
+    setTimeout(function () {
+        $('#solicitud').submit();
+    }, 500);
 });
 /**
  * @author Cristian Vasquez
@@ -873,7 +888,7 @@ $('body').on('click', '.form-truncate-aprendiz', function (e) {
     var $formTruncFic = $(this),
         $modalTrun = $('#confirm-delete');
     $modalTrun.find('.modal-title').text('Eliminar todos los registros');
-    $modalTrun.find('.modal-body').text('Va a eliminar todos los registros de esta tabla. ¿Está seguro que desea eliminar todos los registros?');
+    $modalTrun.find('.modal-body').text('Va a eliminar todos los registros. ¿Está seguro que los desea eliminar?');
     $modalTrun.find('#btn-delete').text('Eliminar todo');
     $modalTrun.modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
         setTimeout(function () {
@@ -900,14 +915,7 @@ $('body').on('click', '.enviarfechas', function (event) {
     event.preventDefault();
     $inicio = $('input[name=inicio]').val();
     $fin = $('input[name=fin]').val();
-    $token = $('input[name=_token]').val();
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-Token': $token
-        }
-    });
-
-    $.post('/datesearch', { _token: $token, inicio: $inicio, fin: $fin }, function (data, textStatus, xhr) {
+    $.get('/datesearch', { inicio: $inicio, fin: $fin }, function (data, textStatus, xhr) {
         $('.history').html(data);
     });
 });
@@ -928,7 +936,7 @@ $('#userImage').text($intials);
 
 /**
 * @author Cristian Vasquez
-* @description Cambiar color de iconos de fechas a dar clic en los input
+* @description Cambiar color de iconos de fechas al dar clic en los input
 */
 $('input[name="inicio"], input[name="fin"]').focus(function () {
     $(this).parent().addClass('focus');
@@ -937,6 +945,45 @@ $('input[name="inicio"], input[name="fin"]').focus(function () {
 $('input[name="inicio"], input[name="fin"]').blur(function () {
     $(this).parent().removeClass('focus');
     $(this).css('border-color', 'inherit');
+});
+
+setTimeout(function () {
+    $(".alert-dismissible").addClass('fadeOutDown');
+}, 2000);
+
+$('button[name="button-import"]').attr('disabled', true);
+$('input[name="imported-file"]').change(function () {
+    if ($(this).val().length != 0) $('button[name="button-import"]').attr('disabled', false);else $('button[name="button-import"]').attr('disabled', true);
+});
+// $('body').on('blur', 'input[name="imported-file"]', function(event) {
+//     event.preventDefault();
+//     /* Act on the event */
+//     $importFile = $(this).val();
+//     if ($importFile != '') {
+//         // alert($importFile);
+//         $('button[name="button-import"]').removeAttr('disabled');
+//     } else {
+//         $('button[name="button-import"]').attr('disabled', '');
+//     }
+// });
+
+$('.form-control').keyup(function (event) {
+    /* Act on the event */
+    $input_val = $(this).val();
+    if ($input_val != '' || $input_val > 0) {
+        $(this).parent().removeClass('has-error');
+    } else {
+        $(this).parent().addClass('has-error');
+    }
+});
+$('select').change(function (event) {
+    /* Act on the event */
+    $input_val = $(this).val();
+    if ($input_val != '' || $input_val > 0) {
+        $(this).parent().removeClass('has-error');
+    } else {
+        $(this).parent().addClass('has-error');
+    }
 });
 
 /***/ }),

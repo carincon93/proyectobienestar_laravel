@@ -31,8 +31,8 @@
 						Tipo de documento *
 					</label>
 					<select name="tipo_documento" class="form-control">
-						<option value="CEDULA" {{ $dataApprentice->tipo_documento == 'CEDULA' ? 'selected="selected"' : '' }}>Cédula de ciudadanía</option>
-						<option value="TI" {{ $dataApprentice->tipo_documento == 'TI' ? 'selected="selected"' : '' }}>Tarjeta de identidad</option>
+						<option value="cedula" {{ $dataApprentice->tipo_documento == 'cedula' ? 'selected="selected"' : '' }}>Cédula de ciudadanía</option>
+						<option value="ti" {{ $dataApprentice->tipo_documento == 'ti' ? 'selected="selected"' : '' }}>Tarjeta de identidad</option>
 					</select>
 					@if ($errors->has('tipo_documento'))
 						<span class="help-block">
@@ -51,7 +51,7 @@
 						</span>
 					@endif
 				</div>
-				<div class="form-group{{ $errors->has('numero_documento') ? ' has-error' : '' }}">
+				<div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
 					<label for="direccion" class="control-label">
 						Dirección *
 					</label>
@@ -174,14 +174,14 @@
 					</label>
 					<select name="otro_apoyo" class="form-control">
 						<option value="">Seleccione el tipo de apoyo...</option>
-						<option value="monitoria" {{ $dataApprentice->otro_apoyo == 'monitoria' ? 'selected="selected"' : '' }}>MONITORIA</option>
+						<option value="monitoria" {{ $dataApprentice->otro_apoyo == 'monitoria' ? 'selected="selected"' : '' }}>Monitoría</option>
 						<option value="fic" {{ $dataApprentice->otro_apoyo == 'fic' ? 'selected="selected"' : '' }}>FIC</option>
-						<option value="apoyo de sostenimiento" {{ $dataApprentice->otro_apoyo == 'apoyo de sostenimiento' ? 'selected="selected"' : '' }}>APOYO DE SOSTENIMIENTO</option>
+						<option value="apoyo de sostenimiento" {{ $dataApprentice->otro_apoyo == 'apoyo de sostenimiento' ? 'selected="selected"' : '' }}>Apoyo de sostenimiento</option>
 						<option value="dps" {{ $dataApprentice->otro_apoyo == 'dps' ? 'selected="selected"' : '' }}>DPS</option>
-						<option value="patrocinio" {{ $dataApprentice->otro_apoyo == 'patrocinio' ? 'selected="selected"' : '' }}>PATROCINIO</option>
-						<option value="vinculo laboral" {{ $dataApprentice->otro_apoyo == 'vinculo laboral' ? 'selected="selected"' : '' }}>VÍNCULO LABORAL</option>
-						<option value="auxilio almuerzo" {{ $dataApprentice->otro_apoyo == 'auxilio almuerzo' ? 'selected="selected"' : '' }}>AUXILIO ALMUERZO</option>
-						<option value="ninguno" {{ $dataApprentice->otro_apoyo == 'ninguno' ? 'selected="selected"' : '' }}>NINGUNO</option>
+						<option value="patrocinio" {{ $dataApprentice->otro_apoyo == 'patrocinio' ? 'selected="selected"' : '' }}>Patrocinio</option>
+						<option value="vinculo laboral" {{ $dataApprentice->otro_apoyo == 'vinculo laboral' ? 'selected="selected"' : '' }}>Vínculo laboral</option>
+						<option value="auxilio almuerzo" {{ $dataApprentice->otro_apoyo == 'auxilio almuerzo' ? 'selected="selected"' : '' }}>Auxilio de almuerzo</option>
+						<option value="ninguno" {{ $dataApprentice->otro_apoyo == 'ninguno' ? 'selected="selected"' : '' }}>Ninguno</option>
 					</select>
 					@if ($errors->has('otro_apoyo'))
 					<span class="help-block">
@@ -190,13 +190,15 @@
 					@endif
 				</div>
 				<div class="checkbox form-group">
-					<label>
+					<label class="control control--checkbox">
 						<input type="checkbox" name="compromiso_informar" value="si" {{ $dataApprentice->compromiso_informar == 'si' ? 'checked="checked"' : '' }}>Se compromete a informar en la oficina de Bienestar al Aprendiz el momento en que usted reciba contrato de aprendizaje, consiguió empleo, o cualquier otro beneficio del Gobierno o del SENA (Monitorias, FIC, Apoyos de sostenimiento, entre otros).
+						<div class="control__indicator"></div>
 					</label>
 				</div>
 				<div class="checkbox form-group">
-					<label>
-						<input type="checkbox" name="compromiso_normas" value="si" {{ $dataApprentice->compromiso_informar == 'si' ? 'checked="checked"' : '' }}>Se compromete acatar las normas sobre el manejo adecuado del suplemento.
+					<label class="control control--checkbox">
+						<input type="checkbox" name="compromiso_normas" value="si" {{ $dataApprentice->compromiso_normas == 'si' ? 'checked="checked"' : '' }}>Se compromete acatar las normas sobre el manejo adecuado del suplemento.
+						<div class="control__indicator"></div>
 					</label>
 				</div>
 				<div class="form-group{{ $errors->has('justificacion_suplemento') ? ' has-error' : '' }}">

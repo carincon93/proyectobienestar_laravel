@@ -15,9 +15,16 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
     <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
 </head>
 <body>
+    @if (session('status'))
+    <div class="alert alert-success alert-dismissible animated" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+        {!! html_entity_decode(session('status')) !!}
+    </div>
+    @endif
     @include('layouts.modal')
     @if (Auth::check())
     <aside id="sidebar">
@@ -60,13 +67,6 @@
                         Historial de entregas
                     </a>
                 </li>
-                <!-- <li>
-                    <form action="{{ url('/admin/truncate') }}" method="POST" style="display: inline-block;" class="form-truncate-aprendiz btn">
-                        {!! csrf_field() !!}
-                        <i class="fa fa-fw fa-trash"></i>
-                        Eliminar todos los registros
-                    </form>
-                </li> -->
             </ul>
         </div>
     </aside>
@@ -183,8 +183,8 @@
                 </div><!-- /.container-fluid -->
             </nav>
         <div class="main-content">
-
-            <div class="row no-gutter">
+            <!-- <div class="row no-gutter"> -->
+            <div>
                 <div class="col-md-12 big-content">
                 <!-- <div class="{{ Auth::guest() ? 'col-md-9' : 'col-md-12' }} big-content"> -->
                     <div class="big-content-desc clearfix">
@@ -208,6 +208,8 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.es.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/custom-file-input.js') }}"></script>
 
     @stack('scripts')
@@ -231,7 +233,7 @@
             //
             // $curentPageLink.parents('li').addClass('active');
 
-
+            $('#myTable').DataTable();
             $('.datapickerr').datepicker({
                 format: "yyyy/mm/dd",
                 language: "es",

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\InsertOnDuplicateKey;
 
 class Apprentice extends Model
 {
+    use InsertOnDuplicateKey;
+
     protected $fillable = [
         'nombre_completo',
         'tipo_documento',
@@ -25,8 +28,8 @@ class Apprentice extends Model
         'compromiso_informar',
         'compromiso_normas',
         'justificacion_suplemento',
+        'novedad_solicitud',
         'estado_beneficio',
-        'fecha_entrega',
         'estado_solicitud',
     ];
 

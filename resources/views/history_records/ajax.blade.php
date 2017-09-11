@@ -1,5 +1,5 @@
 @php
-$count = 1;
+    $count = 1;
 @endphp
 @foreach($hr as $h)
 <tr>

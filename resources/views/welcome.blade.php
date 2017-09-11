@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
+    @section('title', 'Suplemento alimenticio')
+
     @section('big-content-desc')
         <section class="page-section">
             <div>
                 <img src="{{ asset('/images/suplemento.png') }}" alt="" class="img-responsive center-block img-welc-suplemento">
-                <button class="btn center-block btn-welc-entrega" type="button" data-toggle="modal" data-target="#modalEntrega">
+                <button class="btn btn-success center-block btn-welc-entrega" type="button" data-toggle="modal" data-target="#modalEntrega">
                     Entregar suplemento
                 </button>
                 <div class="row">
@@ -38,6 +40,9 @@
                         {!! html_entity_decode(session('status')) !!}
                     </div>
                     @endif
+                    @if ($errors->has('token_error'))
+                        {{ $errors->first('token_error') }}
+                    @endif
 
                     <div>
                         <div class="table-responsive">
@@ -61,7 +66,7 @@
                                     <tr>
                                         <td>{{ $count++ }}</td>
                                         <td>{{ $da->nombre_completo }}</td>
-                                        <td>{{ $da->tipo_documento === "CEDULA" ? "Cédula" : ($da->tipo_documento ==="TI" ? "Tarjeta de identidad" : "") }}</td>
+                                        <td>{{ $da->tipo_documento === "cedula" ? "Cédula" : ($da->tipo_documento ==="ti" ? "Tarjeta de identidad" : "") }}</td>
                                         <td>{{ $da->numero_documento }}</td>
                                         <td>{{ $da->programa_formacion }}</td>
                                     </tr>

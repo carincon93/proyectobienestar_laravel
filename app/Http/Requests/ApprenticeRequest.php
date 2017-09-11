@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Apprentice;
+
 class ApprenticeRequest extends FormRequest
 {
     /**
@@ -23,44 +25,58 @@ class ApprenticeRequest extends FormRequest
      */
     public function rules()
    {
-       if ($this->method() == 'PUT') {
-           return [
-              'nombre_completo'=>'required',
-              'tipo_documento'=>'required',
-              'numero_documento'=>'required',
-              'direccion'=>'required',
-              'barrio'=>'required',
-              'estrato'=>'required',
-              'email'=>'required|unique:apprentices,id,:id',
-              'programa_formacion'=>'required',
-              'numero_ficha'=>'required',
-              'jornada'=>'required',
-              'pregunta1'=>'required',
-              'pregunta2'=>'required',
-              'pregunta3'=>'required',
-              'otro_apoyo'=>'required',
-              'justificacion_suplemento'=>'required',
-           ];
-       }
-       else {
-           return [
-              'nombre_completo'=>'required',
-              'tipo_documento'=>'required',
-              'numero_documento'=>'required',
-              'direccion'=>'required',
-              'barrio'=>'required',
-              'estrato'=>'required',
-              'email'=>'required|unique:apprentices',
-              'programa_formacion'=>'required',
-              'numero_ficha'=>'required',
-              'jornada'=>'required',
-              'pregunta1'=>'required',
-              'pregunta2'=>'required',
-              'pregunta3'=>'required',
-              'otro_apoyo'=>'required',
-              'justificacion_suplemento'=>'required',
-           ];
-       }
+        // $apprentice = Apprentice::find($this->apprentices->id);
+
+        switch($this->method())
+        {
+            case 'GET':
+            case 'DELETE':
+            {
+                return [];
+            }
+            case 'POST':
+            {
+                return [
+                    'nombre_completo'=>'required',
+                    'tipo_documento'=>'required',
+                    'numero_documento'=>'required|unique:apprentices',
+                    'direccion'=>'required',
+                    'barrio'=>'required',
+                    'estrato'=>'required',
+                    'email'=>'required|unique:apprentices',
+                    'programa_formacion'=>'required',
+                    'numero_ficha'=>'required',
+                    'jornada'=>'required',
+                    'pregunta1'=>'required',
+                    'pregunta2'=>'required',
+                    'pregunta3'=>'required',
+                    'otro_apoyo'=>'required',
+                    'justificacion_suplemento'=>'required',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'nombre_completo'=>'required',
+                    'tipo_documento'=>'required',
+                    'numero_documento'=>'required|unique:apprentices,id,:id',
+                    'direccion'=>'required',
+                    'barrio'=>'required',
+                    'estrato'=>'required',
+                    'email'=>'required|unique:apprentices,id,:id',
+                    'programa_formacion'=>'required',
+                    'numero_ficha'=>'required',
+                    'jornada'=>'required',
+                    'pregunta1'=>'required',
+                    'pregunta2'=>'required',
+                    'pregunta3'=>'required',
+                    'otro_apoyo'=>'required',
+                    'justificacion_suplemento'=>'required',
+                ];
+            }
+            default:break;
+        }
    }
    public function messages()
    {
@@ -68,6 +84,7 @@ class ApprenticeRequest extends FormRequest
            'nombre_completo.required'=>'El campo nombre completo es requerido',
            'tipo_documento.required'=>'El campo tipo de documento es requerido',
            'numero_documento.required'=>'El campo número de documento es requerido',
+           'numero_documento.unique'=>'Este número de documento ya existe',
            'direccion.required'=>'El campo dirección es requerido',
            'barrio.required'=>'El campo barrio es requerido',
            'estrato.required'=>'El campo estrato es requerido',
