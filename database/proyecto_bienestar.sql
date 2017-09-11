@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-09-2017 a las 05:05:05
+-- Tiempo de generación: 11-09-2017 a las 05:30:53
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -48,6 +48,7 @@ CREATE TABLE `apprentices` (
   `compromiso_informar` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT 'no',
   `compromiso_normas` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT 'no',
   `justificacion_suplemento` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `novedad_solicitud` longtext COLLATE utf8mb4_unicode_ci,
   `estado_beneficio` tinyint(1) DEFAULT NULL,
   `estado_solicitud` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -121,7 +122,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'angela', 'angela@mail.com', '$2y$10$lZ01/Ua9YxZqCFaiEuFXUe1fOhocwo3xG2LHyiKxoQpOWYz7Ke08C', '5RBjN12UsffalZGzVb5WLtI2DvO4b28O7SfM5cWb7P0Y5nRcuLimCOUkToDK', '2017-08-21 07:16:26', '2017-08-29 19:35:15');
+(1, 'angela', 'angela@mail.com', '$2y$10$lZ01/Ua9YxZqCFaiEuFXUe1fOhocwo3xG2LHyiKxoQpOWYz7Ke08C', '5RBjN12UsffalZGzVb5WLtI2DvO4b28O7SfM5cWb7P0Y5nRcuLimCOUkToDK', '2017-08-21 12:16:26', '2017-08-30 00:35:15');
 
 --
 -- Índices para tablas volcadas
@@ -132,6 +133,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 --
 ALTER TABLE `apprentices`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `apprentices_numero_documento_unique` (`numero_documento`),
   ADD UNIQUE KEY `apprentices_email_unique` (`email`);
 
 --
