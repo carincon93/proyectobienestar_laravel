@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-6">
             <h5>Tipo de documento</h5>
-            <p>{{ $da->tipo_documento === "cedula" ? "Cédula" : ($sa->tipo_documento ==="ti" ? "Tarjeta de identidad" : "") }}</p>
+            <p>{{ $da->tipo_documento === "cedula" ? "Cédula" : ($da->tipo_documento ==="ti" ? "Tarjeta de identidad" : "") }}</p>
         </div>
         <div class="col-md-6">
             <h5>Número de documento</h5>
