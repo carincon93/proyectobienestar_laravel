@@ -31,15 +31,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Session Mensajes -->
-                    @if (session('status'))
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert"><span
-                            aria-hidden="true">&times;</span>
-                        </button>
-                        {!! html_entity_decode(session('status')) !!}
-                    </div>
-                    @endif
                     @if ($errors->has('token_error'))
                         {{ $errors->first('token_error') }}
                     @endif

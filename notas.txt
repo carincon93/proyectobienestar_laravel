@@ -1,7 +1,8 @@
-cuadrar colores de acuerdo al del logo,
 cuando se teclee en el input que dio error que se quite - Resuelto a medias, problema en el campo email y telefono. el email lo deja enviar sin el @
 verificar las palabras en mayúsculas en el archivo de excel
 diseño a la validacion del login
 mensaje de no hay historial, cuando el aprendiz consultado no tiene historial
 cambiar numero de mes por la palabra con carbon
 si la novedad se va vacia y ya habia algun dato en ese campo, se reemplaza por contenido vacio
+historial para todos y eliminar por fecha
+hacer reportes por fecha
