@@ -26,6 +26,7 @@
     </div>
     @endif
     @include('layouts.modal')
+    @include('layouts.modal_eliminar')
     @if (Auth::check())
     <aside id="sidebar">
         <div id="sidebar-logo">

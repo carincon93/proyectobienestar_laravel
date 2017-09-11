@@ -925,6 +925,19 @@ $('body').on('click', '.reset', function (event) {
     $('input[name=fin]').val("");
     $(".enviarfechas").click();
 });
+// Eliminar registros - Modal eliminar
+$('.table-full').on('click', '.btn-delete-tbl', function (e) {
+    e.preventDefault();
+    var $formDel = $(this),
+        $nombre_elemento = $formDel.attr('data-nombre');
+
+    $('#confirm-delete').find('.modal-title').text('Nombre: ' + $nombre_elemento);
+    $('#confirm-delete').find('.modal-body').text('Está seguro que desea eliminar este registro?');
+    $('#btn-delete').text('Eliminar');
+    $('#confirm-delete').modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
+        $formDel.submit();
+    });
+});
 
 /**
 * @author Cristian Vasquez

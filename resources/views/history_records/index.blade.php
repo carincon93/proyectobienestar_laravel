@@ -42,12 +42,13 @@
                 </h4>
             </div>
             <div class="table-responsive card-content">
-                <table class="table table-full table-hover" id="myTable">
+                <table class="table table-full table-hover" id="myTable" data-form="deleteForm">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Nombre aprendiz</th>
                             <th>Fecha de entrega</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="history" id="myTableAprendiz">
@@ -59,6 +60,14 @@
                             <td>{{ $count++ }}</td>
                             <td>{{ $his->apprentice->nombre_completo }}</td>
                             <td>{{ $his->fecha }}</td>
+                            <td>
+                                <form action="{{ url('/admin/history_records/'.$his->id) }}" style="display: inline-block;" data-nombre="{{ $his->apprentice->nombre_completo }}"  method="POST" class="btn-delete-tbl btn btn-round">
+
+                                    {{ method_field('delete') }}
+                                    {!! csrf_field()  !!}
+                                    <i class="fa fa-fw fa-trash"></i>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
