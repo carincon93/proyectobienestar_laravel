@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
-            return redirect('/')->withErrors(['token_error' => 'Sorry, your session seems to have expired. Please try again.']);
+            return redirect('/')->withErrors(['token_error' => 'Disculpa, su sesión parece haber caducado. Vuelve a intentarlo.']);
         }
         return parent::render($request, $exception);
     }

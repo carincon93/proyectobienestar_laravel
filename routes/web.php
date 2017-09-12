@@ -43,7 +43,7 @@ Route::post('/admin/truncate', 'AdminController@truncateAll');
 Route::resource('/admin/collaborator', 'CollaboratorController');
 
 // Importar aprendices
-Route::get('/admin/apprentice/import', 'ApprenticeController@import');
+Route::get('/admin/sistema', 'AdminController@view_sistema');
 Route::post('/admin/apprentice/store_import', 'ApprenticeController@store_import');
 // Aprendiz
 Route::resource('/admin/apprentice','ApprenticeController');
@@ -57,6 +57,7 @@ Route::resource('/admin/history_record','HistoryRecordController');
 Route::post('/history_record/store/{id}', 'HistoryRecordController@store');
 Route::get('/datesearch','HistoryRecordController@datesearch');
 Route::get('/excel','ApprenticeController@excel');
+Route::post('/generar_reporte','HistoryRecordController@generar_reporte');
 
 // Cambio de contraseña
 Route::get('admin/password', 'AdminController@password');

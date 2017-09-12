@@ -1,7 +1,5 @@
 cuando se teclee en el input que dio error que se quite - Resuelto a medias, problema en el campo email y telefono. el email lo deja enviar sin el @
-diseño a la validacion del login
 cambiar numero de mes por la palabra con carbon
 si la novedad se va vacia y ya habia algun dato en ese campo, se reemplaza por contenido vacio
 historial por modal vista principal
-eliminar por fecha 
-hacer reportes por fecha
+eliminar por fecha

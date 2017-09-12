@@ -8578,18 +8578,16 @@ fieldset[disabled] .btn {
   background: #eb1616;
 }
 
-.btn-import {
-  background: #67bb0f;
-  color: #fff;
-  font-size: 2rem;
-}
-
 .btn-success {
   background: #67bb0f;
 }
 
 .btn-success:hover {
   background-color: #5aa50c;
+}
+
+.width-button {
+  width: 20rem;
 }
 
 button[name="button-import"] {
@@ -8622,6 +8620,12 @@ button[name="button-import"] {
   color: #333333;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
+}
+
+.help-block {
+  background: red;
+  color: #fff !important;
+  padding: 0.8rem;
 }
 
 .no-margin {
@@ -9308,7 +9312,6 @@ input[name="fin"]:hover {
 }
 
 .inputfile + label {
-  max-width: 80%;
   font-size: 1.25rem;
   /* 20px */
   font-weight: 700;
@@ -9323,11 +9326,6 @@ input[name="fin"]:hover {
 
 .no-js .inputfile + label {
   display: none;
-}
-
-.inputfile + label * {
-  /* pointer-events: none; */
-  /* in case of FastClick lib use */
 }
 
 .inputfile + label svg {
@@ -9348,6 +9346,10 @@ input[name="fin"]:hover {
   display: block;
   margin: 0;
   text-align: center;
+}
+
+.inputfile-5 + label:hover svg {
+  fill: #666;
 }
 
 .inputfile-5 + label figure {
@@ -9371,7 +9373,14 @@ input[name="fin"]:hover {
 .inputfile-5 + label svg {
   width: 100%;
   height: 100%;
-  fill: #666;
+  fill: #989898;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.import-img {
+  margin: 2rem auto;
+  width: 20%;
 }
 
 @media screen and (max-width: 50em) {
@@ -9421,6 +9430,54 @@ input[name="fin"]:hover {
 .panel-heading .fa-trophy {
   display: block;
   font-size: 2rem;
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.d-flex #sidebar-system {
+  -ms-flex-preferred-size: 230px;
+      flex-basis: 230px;
+}
+
+.d-flex #sidebar-system .nav-tabs > li.active > a,
+.d-flex #sidebar-system .nav-tabs > li.active > a:hover,
+.d-flex #sidebar-system .nav-tabs > li.active > a:focus {
+  background-color: rgba(9, 30, 66, 0.04);
+  border: 0px;
+  border-radius: 3px;
+}
+
+.d-flex #sidebar-system .nav-tabs > li > a:hover {
+  border-color: transparent;
+}
+
+.d-flex #sidebar-system .nav > li > a:hover,
+.d-flex #sidebar-system .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+
+.d-flex #sidebar-system .nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.6;
+  border: 0px;
+  border-radius: 3px;
+}
+
+.d-flex #sidebar-system li[role="presentation"] {
+  display: block;
+  float: none;
+}
+
+.d-flex .tab-content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0 1rem;
 }
 
 @media (min-width: 768px) {

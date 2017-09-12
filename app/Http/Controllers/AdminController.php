@@ -31,9 +31,11 @@ class AdminController extends Controller
         $solicitudDenegado  = Apprentice::where('estado_solicitud', 0)->get()->sortBy('nombre_completo');
         return view('admins.dashboard', compact('solicitudAceptado', 'solicitudDenegado'));
     }
+
     public function password(){
-        return View('admins.password');
+        return View('auth.passwords.password');
     }
+
     public function updatePassword(PasswordRequest $request){
         $admin = Auth::User();
         if (Hash::check($request->mypassword, $admin->password)){
@@ -54,5 +56,10 @@ class AdminController extends Controller
         HistoryRecord::truncate();
         Schema::enableForeignKeyConstraints();
         return redirect('/admin/dashboard')->with('status', 'Todos los registros del sistem fueron eliminados con éxito!');
+    }
+
+    public function view_sistema()
+    {
+        return view('admins.sistema');
     }
 }

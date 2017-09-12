@@ -196,11 +196,6 @@ class ApprenticeController extends Controller
         return view('apprentices.documentoajax', compact('query'));
     }
 
-    public function import()
-    {
-        return view('apprentices.import');
-    }
-
     public function store_import(Request $request)
     {
         if($request->file('imported-file'))

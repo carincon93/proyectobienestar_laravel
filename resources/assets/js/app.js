@@ -133,6 +133,15 @@ $('body').on('click', '.enviarfechas', function (event) {
     event.preventDefault();
     $inicio = $('input[name=inicio]').val();
     $fin = $('input[name=fin]').val();
+
+    $('#formReporte').find('input[name=fechaInicio]').val($inicio);
+    $('#formReporte').find('input[name=fechaFin]').val($fin);
+
+    if($inicio != 0 && $fin != 0)
+        $('button[name="button-export-reporte"]').attr('disabled', false);
+    else
+        $('button[name="button-export-reporte"]').attr('disabled', true);
+
     $.get('/datesearch', { inicio: $inicio, fin: $fin }, function (data, textStatus, xhr) {
         $('.history').html(data);
     });
@@ -168,6 +177,9 @@ $('input[name="inicio"], input[name="fin"]').blur(function () {
 setTimeout(function(){
     $(".alert-dismissible").addClass('fadeOutDown');
 }, 2000);
+setTimeout(function(){
+    $(".alert-dismissible").css('display', 'none');
+}, 3000);
 
 
 $('button[name="button-import"]').attr('disabled', true);
@@ -177,17 +189,6 @@ $('button[name="button-import"]').attr('disabled', true);
         else
             $('button[name="button-import"]').attr('disabled', true);
     })
-// $('body').on('blur', 'input[name="imported-file"]', function(event) {
-//     event.preventDefault();
-//     /* Act on the event */
-//     $importFile = $(this).val();
-//     if ($importFile != '') {
-//         // alert($importFile);
-//         $('button[name="button-import"]').removeAttr('disabled');
-//     } else {
-//         $('button[name="button-import"]').attr('disabled', '');
-//     }
-// });
 
 $('.form-control').keyup(function(event) {
     /* Act on the event */
@@ -207,3 +208,15 @@ $('select').change(function(event) {
         $(this).parent().addClass('has-error');
     }
 });
+
+$(window).on('load',function(){
+    $('#modalSession').modal({backdrop: 'static', keyboard: false})  ;
+});
+
+// $('body').on('click', '#formReporte', function(event) {
+//     setTimeout(function () {
+//         $('input[name=inicio]').val("");
+//         $('input[name=fin]').val("");
+//         $(".enviarfechas").click();
+//     }, 1000);
+// });

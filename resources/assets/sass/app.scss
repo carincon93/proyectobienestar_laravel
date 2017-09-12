@@ -4,6 +4,7 @@
 
 // Variables
 @import "variables";
+$color-success: #67bb0f;
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
@@ -33,7 +34,7 @@ input,
     border-radius: 0px;
 }
 ::selection {
-    background-color: #67bb0f;
+    background-color: $color-success;
     color: #fff;
 }
 
@@ -91,7 +92,7 @@ button:focus {
 }
 
 .action-round {
-    background: #67bb0f;
+    background: $color-success;
     border-radius: 50%;
     bottom: 3rem;
     color: #fff;
@@ -223,17 +224,14 @@ button:focus {
     background: rgb(235, 22, 22);
 }
 
-.btn-import {
-    background: #67bb0f;
-    color: #fff;
-    font-size: 2rem;
-    // width: 40rem;
-}
 .btn-success {
-    background: #67bb0f;
+    background: $color-success;
 }
 .btn-success:hover {
     background-color: #5aa50c;
+}
+.width-button {
+    width: 20rem;
 }
 button[name="button-import"] {
     margin-top: 1rem;
@@ -272,6 +270,11 @@ button[name="button-import"] {
     color: #333333;
     border: 0;
     border-bottom: 1px solid #e5e5e5;
+}
+.help-block {
+    background: rgb(255, 0, 0);
+    color: #fff !important;
+    padding: 0.8rem;
 }
 
 .no-margin {
@@ -950,7 +953,6 @@ input[name="fin"]:hover {
 }
 
 .inputfile + label {
-    max-width: 80%;
     font-size: 1.25rem;
     /* 20px */
     font-weight: 700;
@@ -967,16 +969,6 @@ input[name="fin"]:hover {
     display: none;
 }
 
-// .inputfile:focus + label,
-// .inputfile.has-focus + label {
-//     outline: 1px dotted #000;
-//     outline: -webkit-focus-ring-color auto 5px;
-// }
-
-.inputfile + label * {
-    /* pointer-events: none; */
-    /* in case of FastClick lib use */
-}
 
 .inputfile + label svg {
     width: 1em;
@@ -997,13 +989,12 @@ input[name="fin"]:hover {
     display: block;
     margin: 0;
     text-align: center;
+
+    &:hover svg {
+        fill: #666;
+    }
 }
 
-// .inputfile-5:focus + label,
-// .inputfile-5.has-focus + label,
-// .inputfile-5 + label:hover {
-//     color: #722040;
-// }
 
 .inputfile-5 + label figure {
     width: 100px;
@@ -1015,22 +1006,6 @@ input[name="fin"]:hover {
     margin: 0 auto 10px;
 }
 
-// .inputfile-5:focus + label figure,
-// .inputfile-5.has-focus + label figure,
-// .inputfile-5 + label:hover figure {
-//     background-color: #722040;
-// }
-
-// .inputfile-5 + label figure::before,
-// .inputfile-5 + label figure::after {
-//     width: 0;
-//     height: 0;
-//     content: '';
-//     position: absolute;
-//     top: 0;
-//     right: 0;
-// }
-
 .inputfile-5 + label figure::before {
     border-top: 20px solid #f9f9f9;
     border-left: 20px solid transparent;
@@ -1041,16 +1016,16 @@ input[name="fin"]:hover {
     border-right: 20px solid transparent;
 }
 
-// .inputfile-5:focus + label figure::after,
-// .inputfile-5.has-focus + label figure::after,
-// .inputfile-5 + label:hover figure::after {
-//     border-bottom-color: #d3394c;
-// }
-
 .inputfile-5 + label svg {
     width: 100%;
     height: 100%;
-    fill: #666;
+    fill: #989898;
+    transition: all 0.2s ease-in;
+}
+
+.import-img {
+    margin: 2rem auto;
+    width: 20%;
 }
 
 @media screen and (max-width: 50em) {
@@ -1100,6 +1075,44 @@ input[name="fin"]:hover {
 .panel-heading .fa-trophy {
     display: block;
     font-size: 2rem;
+}
+
+
+// System
+.d-flex {
+    #sidebar-system {
+        flex-basis: 230px;
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+            background-color: rgba(9, 30, 66, 0.04);
+            border: 0px;
+            border-radius: 3px;
+        }
+        .nav-tabs > li > a:hover {
+            border-color: transparent;
+        }
+        .nav > li > a:hover, .nav > li > a:focus {
+            text-decoration: none;
+            background-color: #eeeeee;
+        }
+        .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.6;
+            border: 0px;
+            border-radius: 3px;
+        }
+
+        li[role="presentation"] {
+            display: block;
+            float: none;
+        }
+    }
+    display: flex;
+
+    .tab-content {
+        flex: 1;
+        padding: 0 1rem;
+    }
 }
 
 @media (min-width: 768px) {

@@ -57,7 +57,7 @@
                 </li>
 
                 <li class="li-item li-item-import">
-                    <a href="{{ url('/admin/apprentice/import') }}">
+                    <a href="{{ url('/admin/sistema') }}">
                         <i class="fa fa-fw fa-upload"></i>
                         Importar solicitudes
                     </a>

@@ -3,6 +3,27 @@
     @section('title', 'Suplemento alimenticio')
 
     @section('big-content-desc')
+
+        @if ($errors->has('token_error'))
+        <!-- Modal -->
+        <div class="modal fade" id="modalSession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Sesión expirada</h4>
+                    </div>
+                    <div class="modal-body">
+                        {{ $errors->first('token_error') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">
+                            <a href="{{ url('/') }}">Volver a la página principal</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
         <section class="page-section">
             <div>
                 <img src="{{ asset('/images/suplemento.png') }}" alt="" class="img-responsive center-block img-welc-suplemento">
@@ -31,9 +52,6 @@
                             </div>
                         </div>
                     </div>
-                    @if ($errors->has('token_error'))
-                        {{ $errors->first('token_error') }}
-                    @endif
 
                     <div>
                         <div class="table-responsive">

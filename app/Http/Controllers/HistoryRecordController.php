@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+use Excel;
+
 use App\Apprentice;
 use App\HistoryRecord;
 
 class HistoryRecordController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('store', 'destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -123,5 +129,25 @@ class HistoryRecordController extends Controller
                     ->get();
             return view('history_records.ajax')->with('hr', $hr);
         }
+    }
+
+    public function generar_reporte(Request $request)
+    {
+        $data = $request->all();
+        $fechaInicio = $data['fechaInicio'];
+        $fechaFin    = $data['fechaFin'];
+
+        Excel:: create('Reporte-'.date('d-m-Y') , function($excel) use($fechaInicio, $fechaFin)
+        {
+            $excel->sheet('Historial' , function($sheet) use($fechaInicio, $fechaFin) {
+                $his = DB::table('history_records')
+                ->select('apprentices.id', 'apprentices.nombre_completo', 'history_records.fecha')
+                ->join('apprentices', 'apprentices.id', '=', 'history_records.apprentice_id')
+                ->whereBetween(DB::raw('cast(fecha as date)'), [$fechaInicio, $fechaFin])
+                ->groupBy('apprentices.id', 'apprentices.nombre_completo', 'history_records.fecha')
+                ->get();
+                $sheet->loadView('history_records.reporte' , array('his' => $his));
+            });
+        })->export('xls');
     }
 }

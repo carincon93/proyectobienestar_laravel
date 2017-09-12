@@ -22,9 +22,19 @@
                 </div>
                 <div class="search-dates-wrapper">
                     <button type="button" class="btn-no-style reset text-uppercase">Limpiar</button>
+
                     <button type="button" class="btn-no-style enviarfechas text-uppercase pull-right">Buscar</button>
                 </div>
             </fieldset>
+        </form>
+    </div>
+    <div class="col-md-6">
+
+        <form action="{{ url('/generar_reporte') }}" style="display: inline-block;" method="POST" class="text-uppercase" id="formReporte">
+            {!! csrf_field()  !!}
+            <input type="hidden" name="fechaInicio">
+            <input type="hidden" name="fechaFin">
+            <button type="submit" class="btn btn-success" name="button-export-reporte" disabled>Generar reporte</button>
         </form>
     </div>
 
