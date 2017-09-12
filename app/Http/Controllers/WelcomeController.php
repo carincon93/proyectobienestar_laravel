@@ -20,11 +20,12 @@ class WelcomeController extends Controller
     public function index()
     {
         $dataApprentice = Apprentice::where('estado_solicitud', 1)->orderBy('nombre_completo')->get();
+        $history= HistoryRecord::all();
         // $history_records = DB::table('history_records')
         //             ->select('apprentices.id', 'apprentices.nombre_completo', DB::raw('count(history_records.apprentice_id) as total'))
         //             ->join('apprentices', 'apprentices.id', '=', 'history_records.apprentice_id')
         //             ->groupBy('apprentices.id', 'apprentices.nombre_completo')
         //             ->get();
-        return view('welcome', compact('dataApprentice', 'history_records'));
+        return view('welcome', compact('dataApprentice', 'history'));
     }
 }

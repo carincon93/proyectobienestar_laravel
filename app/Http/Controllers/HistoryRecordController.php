@@ -130,7 +130,7 @@ class HistoryRecordController extends Controller
             return view('history_records.ajax')->with('hr', $hr);
         }
     }
-
+    
     public function generar_reporte(Request $request)
     {
         $data = $request->all();
@@ -149,5 +149,11 @@ class HistoryRecordController extends Controller
                 $sheet->loadView('history_records.reporte' , array('his' => $his));
             });
         })->export('xls');
+    }
+
+    public function obtener_Historial(Request $id)
+    {
+        $history_records = HistoryRecord::where('apprentice_id', '=', $id)->orderBy('fecha', 'DESC')->get();
+        return view('history_records.fechas', compact('history_records'));
     }
 }

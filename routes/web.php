@@ -51,13 +51,19 @@ Route::get('/apprenticeajax','ApprenticeController@ajax');
 Route::get('/obtener_solicitud', 'ApprenticeController@obtener_solicitud');
 Route::get('/admin/{id}/solicitudaceptado', 'ApprenticeController@solicitudAceptado');
 Route::get('/admin/{id}/entrega_suplemento', 'ApprenticeController@entrega_suplemento');
+Route::get('/excel','ApprenticeController@excel');
 
 // Historial
 Route::resource('/admin/history_record','HistoryRecordController');
 Route::post('/history_record/store/{id}', 'HistoryRecordController@store');
 Route::get('/datesearch','HistoryRecordController@datesearch');
+
 Route::get('/excel','ApprenticeController@excel');
 Route::post('/generar_reporte','HistoryRecordController@generar_reporte');
+
+Route::get('/obtener_historial','HistoryRecordController@obtener_historial');
+
+
 
 // Cambio de contraseña
 Route::get('admin/password', 'AdminController@password');
