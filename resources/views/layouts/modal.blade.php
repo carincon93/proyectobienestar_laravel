@@ -10,7 +10,8 @@
                 Ingresa el número de documento del aprendiz o pasa el lector sobre el código de barras del carné del aprendiz,
                 una vez la persona es identificada, dale clic en 'Entregar suplemento'.
 
-                <i class="fa fa-fw fa-barcode"></i>
+                <!-- <i class="fa fa-fw fa-barcode"></i> -->
+                <img src="{{ asset('images/document-img.png') }}" alt="" class="img-responsive">
                 <input type="text" class="form-control" placeholder="Número de documento del aprendiz" id="numero_documento" autofocus autocomplete="off">
                 <div id="apprentice"></div>
             </div>

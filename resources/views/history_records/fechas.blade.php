@@ -11,7 +11,7 @@
     </thead>
     <tbody  id="myTableAprendiz">
         @php
-            $count = 1;
+        $count = 1;
         @endphp
         @if(count($history_records) > 0)
             @foreach($history_records as $his)
@@ -43,11 +43,11 @@
             </tr>
             @endforeach
         @else
-            <tr>
-                <td colspan="3">
-                    No se encuentran registros para este aprendiz.</p>
-                </td>
-            </tr>
+        <tr>
+            <td colspan="4">
+                No se encuentran registros para este aprendiz.</p>
+            </td>
+        </tr>
 
         @endif
     </tbody>
