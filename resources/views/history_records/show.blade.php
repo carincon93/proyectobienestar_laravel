@@ -22,23 +22,22 @@
                     </thead>
                     <tbody  id="myTableAprendiz">
                         @php
-                        $count = 1;
+                            $count = 1;
                         @endphp
-                        @if(count($history_records)>0)
-                        @foreach($history_records as $his)
-                        <tr>
-                            <td>{{ $count++ }}</td>
-                            <td>{{ $his->apprentice->nombre_completo }}</td>
-                            <td>{{ $his->fecha }}</td>
-                        </tr>
-                        @endforeach
-                        @else
-                        <div class="alert alert-dismissable alert-warning">
-                          <button type="button" class="close" data-dismiss="alert">×</button>
-                          <h4>Mensaje del sistema!</h4>
-                          <p>No se encuentran registros para este periodo.</p>
-                        </div>
-
+                        @if(count($history_records) > 0)
+                            @foreach($history_records as $his)
+                            <tr>
+                                <td>{{ $count++ }}</td>
+                                <td>{{ $his->apprentice->nombre_completo }}</td>
+                                <td>{{ $his->fecha }}</td>
+                            </tr>
+                            @endforeach
+                            @else
+                            <tr>
+                                <td colspan="3">
+                                    No se encuentran registros para este aprendiz.</p>
+                                </td>
+                            </tr>
                         @endif
                     </tbody>
                 </table>
