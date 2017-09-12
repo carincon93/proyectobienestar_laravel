@@ -62,6 +62,7 @@ Route::get('/excel','ApprenticeController@excel');
 Route::post('/generar_reporte','HistoryRecordController@generar_reporte');
 
 Route::get('/obtener_historial','HistoryRecordController@obtener_historial');
+Route::delete('/admin/history_records/{id}','HistoryRecordController@destroy');
 
 
 

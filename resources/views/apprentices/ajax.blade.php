@@ -121,12 +121,6 @@
             <p>{{ $da->justificacion_suplemento }}</p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h5>Novedad</h5>
-            <p>{{ $da->novedad_solicitud != '' ? $da->novedad_solicitud : 'No tiene novedad'}}</p>
-        </div>
-    </div>
 </div>
 
 <h4 class="text-center">Novedad</h4>
@@ -141,7 +135,7 @@
                 <i class="fa fa-fw fa-info"></i>
                 El siguiente campo le permite añadir una novedad a esta solicitud
             </blockquote>
-            <textarea name="novedad_solicitud" rows="5" cols="50" class="form-control"></textarea>
+            <textarea name="novedad_solicitud" rows="5" cols="50" class="form-control">{{$da->novedad_solicitud != '' ? $da->novedad_solicitud : 'No tiene novedad'  }}</textarea>
         </div>
     </form>
 </div>

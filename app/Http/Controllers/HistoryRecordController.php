@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use Excel;
 
@@ -14,7 +15,7 @@ class HistoryRecordController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('store', 'destroy');
+        $this->middleware('auth')->except('obtener_historial','store', 'destroy');
     }
     /**
      * Display a listing of the resource.
@@ -32,6 +33,7 @@ class HistoryRecordController extends Controller
                     ->take(5)
                     ->get();
         return view('history_records.index', compact('history_records', 'hh'));
+        
     }
 
     /**
@@ -151,7 +153,7 @@ class HistoryRecordController extends Controller
         })->export('xls');
     }
 
-    public function obtener_Historial(Request $id)
+    public function obtener_historial(Request $id)
     {
         $history_records = HistoryRecord::where('apprentice_id', $id['id'])->orderBy('fecha', 'DESC')->get();
         return view('history_records.fechas', compact('history_records'));

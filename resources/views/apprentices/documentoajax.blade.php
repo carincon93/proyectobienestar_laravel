@@ -23,8 +23,13 @@
         </div>
     </div>
     @if(isset($fecha) && $fecha == date('Y-m-d'))
+    @php
+
+                                $dt=new \Carbon\Carbon($da->historyrecords->last()->fecha);
+
+                            @endphp
     <div class="entrega-warning">
-        <i class="fa fa-fw fa-warning"></i>El aprendiz ya recibió el suplemento! Última fecha: <strong>{{ $da->historyrecords->last()->fecha}}</strong>
+        <i class="fa fa-fw fa-warning"></i>El aprendiz ya recibió el suplemento! Última fecha: <strong>{{ $dt->format('d F \\of Y h:i A')}}</strong>
     </div>
     @else
     <form action="{{ url('admin/'.$da->id.'/entrega_suplemento') }}" id="formEntrega">

@@ -965,25 +965,6 @@ $('input[name="imported-file"]').change(function () {
     if ($(this).val().length != 0) $('button[name="button-import"]').attr('disabled', false);else $('button[name="button-import"]').attr('disabled', true);
 });
 
-$('.form-control').keyup(function (event) {
-    /* Act on the event */
-    $input_val = $(this).val();
-    if ($input_val != '' || $input_val > 0) {
-        $(this).parent().removeClass('has-error');
-    } else {
-        $(this).parent().addClass('has-error');
-    }
-});
-$('select').change(function (event) {
-    /* Act on the event */
-    $input_val = $(this).val();
-    if ($input_val != '' || $input_val > 0) {
-        $(this).parent().removeClass('has-error');
-    } else {
-        $(this).parent().addClass('has-error');
-    }
-});
-
 $(window).on('load', function () {
     $('#modalSession').modal({ backdrop: 'static', keyboard: false });
 });
@@ -1000,8 +981,8 @@ $(window).on('load', function () {
 $('body').on('click', 'button[data-target="#modalHistorial"]', function (event) {
     event.preventDefault();
     $id = $(this).attr('data-id');
-    $nombre_aprendiz = $('button[data-target="#modalHistorial"]').attr('data-nombre');
-    $('#modalHistorial').find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
+    // $nombre_aprendiz = $('button[data-target="#modalHistorial"]').attr('data-nombre');
+    // $('#modalHistorial').find('.modal-title').text('Nombre: ' + $nombre_aprendiz); 
     $('#modalHistorial').find('button[data-id]').attr('data-id', $id);
     $.get('/obtener_historial/', { id: $id }, function (data, textStatus, xhr) {
         $('#mbody-Historial').html(data);

@@ -29,7 +29,12 @@
                             <tr>
                                 <td>{{ $count++ }}</td>
                                 <td>{{ $his->apprentice->nombre_completo }}</td>
-                                <td>{{ $his->fecha }}</td>
+                                @php
+
+                                    $dt=new \Carbon\Carbon($his->fecha);
+
+                                @endphp
+                                <td>{{ $dt->format('d F \\of Y h:i A')}}</td>
                             </tr>
                             @endforeach
                             @else

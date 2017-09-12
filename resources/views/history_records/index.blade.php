@@ -69,7 +69,13 @@
                         <tr>
                             <td>{{ $count++ }}</td>
                             <td>{{ $his->apprentice->nombre_completo }}</td>
-                            <td>{{ $his->fecha }}</td>
+                            @php
+
+                                $dt=new \Carbon\Carbon($his->fecha);
+
+                            @endphp
+                            <td>{{ $dt->format('d F \\of Y h:i A') }}</td>
+
                             <td>
                                 <form action="{{ url('/admin/history_records/'.$his->id) }}" style="display: inline-block;" data-nombre="{{ $his->apprentice->nombre_completo }}"  method="POST" class="btn-delete-tbl btn btn-round">
 
