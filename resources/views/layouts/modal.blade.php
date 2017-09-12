@@ -11,7 +11,7 @@
                 una vez la persona es identificada, dale clic en 'Entregar suplemento'.
 
                 <!-- <i class="fa fa-fw fa-barcode"></i> -->
-                <img src="{{ asset('images/document-img.png') }}" alt="" class="img-responsive">
+                <img src="{{ asset('images/document-img.png') }}" alt="" class="img-responsive document-img">
                 <input type="text" class="form-control" placeholder="Número de documento del aprendiz" id="numero_documento" autofocus autocomplete="off">
                 <div id="apprentice"></div>
             </div>
