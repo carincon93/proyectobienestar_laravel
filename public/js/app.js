@@ -847,11 +847,11 @@ $('body').on('click', 'button[data-target="#modalHistorial"]', function (event) 
     event.preventDefault();
     $id = $(this).attr('data-id');
     $nombre_aprendiz = $('button[data-target="#modalHistorial"]').attr('data-nombre');
-    // $modalSolicitud.find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
+    $modalHistorial.find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
     // $modalSolicitud.find('a[id="cancelarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudrechazado');
     $modalHistorial.find('button[data-id]').attr('data-id', $id);
     $.get('/obtener_historial/', { id: $id }, function (data, textStatus, xhr) {
-        $('#mbody-historial').html(data);
+        $('#mbody-Historial').html(data);
     });
 });
 

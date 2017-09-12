@@ -63,7 +63,9 @@
                                         <td>{{ $da->programa_formacion }}</td>
                                         <td><button class="btn btn-historial" data-toggle="modal" data-target="#modalHistorial" data-id="{{ $da->id }}" data-nombre="{{ $da->nombre_completo }}">
                                                     mostrar historial
-                                                </button></td>
+                                                </button>
+                                            
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
