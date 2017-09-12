@@ -220,3 +220,15 @@ $(window).on('load',function(){
 //         $(".enviarfechas").click();
 //     }, 1000);
 // });
+//
+
+$('body').on('click', 'button[data-target="#modalHistorial"]', function (event) {
+    event.preventDefault();
+    $id = $(this).attr('data-id');
+    $nombre_aprendiz = $('button[data-target="#modalHistorial"]').attr('data-nombre');
+    $('#modalHistorial').find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
+    $('#modalHistorial').find('button[data-id]').attr('data-id', $id);
+    $.get('/obtener_historial/', { id: $id }, function (data, textStatus, xhr) {
+        $('#mbody-Historial').html(data);
+    });
+});

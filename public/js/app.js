@@ -832,28 +832,6 @@ $('body').on('click', 'button[data-target="#modalSolicitud"]', function (event) 
         $('#mbody-solicitud').html(data);
     });
 });
-$modalHistorial = $('#modalHistorial');
-var request = null;
-var url = window.location.href.split("/");
-url = url[0] + "//" + url[2] + "/";
-
-$('.modal').on('shown.bs.modal', function () {
-    $(this).find('[autofocus]').focus();
-    $('.modal-body').click(function (event) {
-        $(this).find('[autofocus]').focus();
-    });
-});
-$('body').on('click', 'button[data-target="#modalHistorial"]', function (event) {
-    event.preventDefault();
-    $id = $(this).attr('data-id');
-    $nombre_aprendiz = $('button[data-target="#modalHistorial"]').attr('data-nombre');
-    $modalHistorial.find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
-    // $modalSolicitud.find('a[id="cancelarSolicitud"]').attr('href', url + 'admin/' + $id + '/solicitudrechazado');
-    $modalHistorial.find('button[data-id]').attr('data-id', $id);
-    $.get('/obtener_historial/', { id: $id }, function (data, textStatus, xhr) {
-        $('#mbody-Historial').html(data);
-    });
-});
 
 $('body').on('click', 'button[id="rechazarSolicitud"]', function (event) {
     event.preventDefault();
@@ -1017,6 +995,18 @@ $(window).on('load', function () {
 //         $(".enviarfechas").click();
 //     }, 1000);
 // });
+//
+
+$('body').on('click', 'button[data-target="#modalHistorial"]', function (event) {
+    event.preventDefault();
+    $id = $(this).attr('data-id');
+    $nombre_aprendiz = $('button[data-target="#modalHistorial"]').attr('data-nombre');
+    $('#modalHistorial').find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
+    $('#modalHistorial').find('button[data-id]').attr('data-id', $id);
+    $.get('/obtener_historial/', { id: $id }, function (data, textStatus, xhr) {
+        $('#mbody-Historial').html(data);
+    });
+});
 
 /***/ }),
 /* 10 */
