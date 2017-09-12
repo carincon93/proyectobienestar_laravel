@@ -21,10 +21,10 @@
                 <td>{{ $his->apprentice->nombre_completo }}</td>
                 @php
 
-                    $dt=new \Carbon\Carbon($his->fecha);
+                    $dt=new Jenssegers\Date\Date($his->fecha);
 
                 @endphp
-                <td>{{ $dt->format('d F \\of Y h:i A') }}</td>
+                <td>{{ $dt->format('d F Y h:i A') }}</td>
                 <td>
                                 <div class="dropdown">
                                 <a href="#" class="dropdown-toggle text-capitalize user-name" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-trash"></i><span class="caret"></span></a>

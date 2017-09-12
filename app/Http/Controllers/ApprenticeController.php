@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ApprenticeRequest;
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 use Auth;
 use Excel;

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\InsertOnDuplicateKey;
+use App\Traits\DateTranslator;
 
 class Apprentice extends Model
 {

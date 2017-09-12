@@ -31,10 +31,10 @@
                                 <td>{{ $his->apprentice->nombre_completo }}</td>
                                 @php
 
-                                    $dt=new \Carbon\Carbon($his->fecha);
+                                    $dt=new Jenssegers\Date\Date($his->fecha);
 
                                 @endphp
-                                <td>{{ $dt->format('d F \\of Y h:i A')}}</td>
+                                <td>{{ $dt->format('d F Y h:i A')}}</td>
                             </tr>
                             @endforeach
                             @else
