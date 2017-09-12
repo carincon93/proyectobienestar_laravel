@@ -61,7 +61,7 @@
                                         <td>{{ $da->tipo_documento === "cedula" ? "Cédula" : ($da->tipo_documento ==="ti" ? "Tarjeta de identidad" : "") }}</td>
                                         <td>{{ $da->numero_documento }}</td>
                                         <td>{{ $da->programa_formacion }}</td>
-                                        <td><button class="btn btn-solicitud" data-toggle="modal" data-target="#modalSolicitud" data-id="{{ $da->id }}" data-nombre="{{ $da->nombre_completo }}">
+                                        <td><button class="btn btn-historial" data-toggle="modal" data-target="#modalHistorial" data-id="{{ $da->id }}" data-nombre="{{ $da->nombre_completo }}">
                                                     mostrar historial
                                                 </button></td>
                                     </tr>

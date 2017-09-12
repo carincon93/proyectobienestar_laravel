@@ -57,6 +57,8 @@ Route::resource('/admin/history_record','HistoryRecordController');
 Route::post('/history_record/store/{id}', 'HistoryRecordController@store');
 Route::get('/datesearch','HistoryRecordController@datesearch');
 Route::get('/excel','ApprenticeController@excel');
+Route::get('obtener_historial','HistoryRecordController@obtener_historial');
+
 
 // Cambio de contraseña
 Route::get('admin/password', 'AdminController@password');

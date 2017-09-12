@@ -124,4 +124,10 @@ class HistoryRecordController extends Controller
             return view('history_records.ajax')->with('hr', $hr);
         }
     }
+    public function obtener_Historial(Request $id)
+    {
+        // $history_records = HistoryRecord::where('apprentice_id', '=', $id)->orderBy('fecha', 'DESC')->get();
+        // return view('history_records.fechas', compact('history_records'));
+        return "hola";
+    }
 }
