@@ -11,43 +11,44 @@
     </thead>
     <tbody  id="myTableAprendiz">
         @php
-            $count = 1;
+        $count = 1;
         @endphp
         @if(count($history_records) > 0)
-            @foreach($history_records as $his)
+        @foreach($history_records as $his)
 
-            <tr>
-                <td>{{ $count++ }}</td>
-                <td>{{ $his->apprentice->nombre_completo }}</td>
-                @php
+        <tr>
+            <td>{{ $count++ }}</td>
+            <td>{{ $his->apprentice->nombre_completo }}</td>
+            @php
 
-                    $dt=new \Carbon\Carbon($his->fecha);
+            $dt=new \Carbon\Carbon($his->fecha);
 
-                @endphp
-                <td>{{ $dt->format('d F \\of Y h:i A') }}</td>
-                <td>
-                                <div class="dropdown">
-                                <a href="#" class="dropdown-toggle text-capitalize user-name" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-trash"></i><span class="caret"></span></a>
-                                    
-                                <ul class="dropdown-menu">
-                                    <li><form action="{{ url('/admin/history_records/'.$his->id) }}" style="display: inline-block;" method="GET">
+            @endphp
+            <td>{{ $dt->format('d F \\of Y h:i A') }}</td>
+            <td>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle text-capitalize user-name" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-trash"></i><span class="caret"></span></a>
 
-                                    {{ method_field('delete') }}
-                                    {!! csrf_field()  !!}
-                                    <button type="submit">si</button>
-                                </form></li>
-                                    
-                                </ul>
-                            </div>
-                            </td>
-            </tr>
-            @endforeach
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form action="{{ url('/admin/history_records/'.$his->id) }}" style="display: inline-block;" method="POST">
+                            {{ method_field('delete') }}
+                            {!! csrf_field()  !!}
+                            <button type="submit">si</button>
+                        </form>
+                    </li>
+
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        @endforeach
         @else
-            <tr>
-                <td colspan="3">
-                    No se encuentran registros para este aprendiz.</p>
-                </td>
-            </tr>
+        <tr>
+            <td colspan="4">
+                No se encuentran registros para este aprendiz.</p>
+            </td>
+        </tr>
 
         @endif
     </tbody>

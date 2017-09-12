@@ -33,7 +33,7 @@ class HistoryRecordController extends Controller
                     ->take(5)
                     ->get();
         return view('history_records.index', compact('history_records', 'hh'));
-        
+
     }
 
     /**
@@ -105,7 +105,7 @@ class HistoryRecordController extends Controller
     public function destroy($id)
     {
         HistoryRecord::destroy($id);
-        return redirect('/admin/history_records')->with('status', 'El historial fue eliminado con éxito');
+        return redirect('/admin/history_record')->with('status', 'El historial fue eliminado con éxito');
     }
 
     public function datesearch(Request $request)
