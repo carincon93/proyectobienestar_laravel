@@ -156,7 +156,7 @@ class HistoryRecordController extends Controller
 
     public function obtener_historial(Request $id)
     {
-        $history_records = HistoryRecord::where('apprentice_id', $id['id'])->orderBy('fecha', 'DESC')->get();
+        $history_records = HistoryRecord::where('apprentice_id', $id['id'])->orderBy('fecha', 'DESC')->paginate(5);
         return view('history_records.fechas', compact('history_records'));
     }
 }
