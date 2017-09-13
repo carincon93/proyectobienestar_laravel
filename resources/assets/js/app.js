@@ -51,14 +51,14 @@ $('body').on('click', 'button[data-target="#modalSolicitud"]', function (event) 
     });
 });
 
-$('body').on('click', 'button[id="rechazarSolicitud"]', function(event) {
+$('body').on('click', 'button[id="rechazarSolicitud"]', function (event) {
     event.preventDefault();
     $('input[name="estado"]').val(0);
     setTimeout(function () {
         $('#solicitud').submit();
     }, 500);
 });
-$('body').on('click', 'button[id="aceptarSolicitud"]', function(event) {
+$('body').on('click', 'button[id="aceptarSolicitud"]', function (event) {
     event.preventDefault();
     $('input[name="estado"]').val(1);
     setTimeout(function () {
@@ -137,10 +137,7 @@ $('body').on('click', '.enviarfechas', function (event) {
     $('#formReporte').find('input[name=fechaInicio]').val($inicio);
     $('#formReporte').find('input[name=fechaFin]').val($fin);
 
-    if($inicio != 0 && $fin != 0)
-        $('button[name="button-export-reporte"]').attr('disabled', false);
-    else
-        $('button[name="button-export-reporte"]').attr('disabled', true);
+    if ($inicio != 0 && $fin != 0) $('button[name="button-export-reporte"]').attr('disabled', false);else $('button[name="button-export-reporte"]').attr('disabled', true);
 
     $.get('/datesearch', { inicio: $inicio, fin: $fin }, function (data, textStatus, xhr) {
         $('.history').html(data);
@@ -174,43 +171,20 @@ $('input[name="inicio"], input[name="fin"]').blur(function () {
     $(this).css('border-color', 'inherit');
 });
 
-setTimeout(function(){
+setTimeout(function () {
     $(".alert-dismissible").addClass('fadeOutDown');
 }, 2000);
-setTimeout(function(){
+setTimeout(function () {
     $(".alert-dismissible").css('display', 'none');
 }, 3000);
 
-
 $('button[name="button-import"]').attr('disabled', true);
-    $('input[name="imported-file"]').change(function(){
-        if($(this).val().length !=0)
-            $('button[name="button-import"]').attr('disabled', false);
-        else
-            $('button[name="button-import"]').attr('disabled', true);
-    })
-
-$('.form-control').keyup(function(event) {
-    /* Act on the event */
-    $input_val = $(this).val();
-    if ($input_val != '' || $input_val > 0) {
-        $(this).parent().removeClass('has-error');
-    } else {
-        $(this).parent().addClass('has-error');
-    }
-});
-$('select').change(function(event) {
-    /* Act on the event */
-    $input_val = $(this).val();
-    if ($input_val != '' || $input_val > 0) {
-        $(this).parent().removeClass('has-error');
-    } else {
-        $(this).parent().addClass('has-error');
-    }
+$('input[name="imported-file"]').change(function () {
+    if ($(this).val().length != 0) $('button[name="button-import"]').attr('disabled', false);else $('button[name="button-import"]').attr('disabled', true);
 });
 
-$(window).on('load',function(){
-    $('#modalSession').modal({backdrop: 'static', keyboard: false})  ;
+$(window).on('load', function () {
+    $('#modalSession').modal({ backdrop: 'static', keyboard: false });
 });
 
 // $('body').on('click', '#formReporte', function(event) {
@@ -225,8 +199,8 @@ $(window).on('load',function(){
 $('body').on('click', 'button[data-target="#modalHistorial"]', function (event) {
     event.preventDefault();
     $id = $(this).attr('data-id');
-    $nombre_aprendiz = $('button[data-target="#modalHistorial"]').attr('data-nombre');
-    $('#modalHistorial').find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
+    // $nombre_aprendiz = $('button[data-target="#modalHistorial"]').attr('data-nombre');
+    // $('#modalHistorial').find('.modal-title').text('Nombre: ' + $nombre_aprendiz);
     $('#modalHistorial').find('button[data-id]').attr('data-id', $id);
     $.get('/obtener_historial/', { id: $id }, function (data, textStatus, xhr) {
         $('#mbody-Historial').html(data);
