@@ -74,7 +74,7 @@
                                 $dt=new Jenssegers\Date\Date($his->fecha);
 
                             @endphp
-                            <td>{{ $dt->format('d F  Y h:i A') }}</td>
+                            <td>{{ $dt->format('l d F  Y h:i A') }}</td>
 
                             <td>
                                 <form action="{{ url('/admin/history_records/'.$his->id) }}" style="display: inline-block;" data-nombre="{{ $his->apprentice->nombre_completo }}"  method="POST" class="btn-delete-tbl btn btn-round">

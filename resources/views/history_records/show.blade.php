@@ -34,7 +34,7 @@
                                     $dt=new Jenssegers\Date\Date($his->fecha);
 
                                 @endphp
-                                <td>{{ $dt->format('d F Y h:i A')}}</td>
+                                <td>{{ $dt->format('l d F Y h:i A')}}</td>
                             </tr>
                             @endforeach
                             @else
