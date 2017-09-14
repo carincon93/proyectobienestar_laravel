@@ -969,14 +969,11 @@ $(window).on('load', function () {
     $('#modalSession').modal({ backdrop: 'static', keyboard: false });
 });
 
-// $('body').on('click', '#formReporte', function(event) {
-//     setTimeout(function () {
-//         $('input[name=inicio]').val("");
-//         $('input[name=fin]').val("");
-//         $(".enviarfechas").click();
-//     }, 1000);
-// });
-//
+$('#login').one('click',(function(event) {
+  event.preventDefault();
+  $(this).closest('form').submit();
+  $(this).prop('disabled',true);
+}));
 
 $('body').on('click', 'button[data-target="#modalHistorial"]', function (event) {
     event.preventDefault();
