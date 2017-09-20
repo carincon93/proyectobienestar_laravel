@@ -29,7 +29,11 @@
         </form>
     </div>
     <div class="col-md-6">
-
+        <blockquote class="blockquote">
+            <i class="fa fa-fw fa-info"></i>
+            Para generar un reporte, primero debe realizar una búsqueda entre dos fechas.
+        </blockquote>
+        <br>
         <form action="{{ url('/generar_reporte') }}" style="display: inline-block;" method="POST" class="text-uppercase" id="formReporte">
             {!! csrf_field()  !!}
             <input type="hidden" name="fechaInicio">

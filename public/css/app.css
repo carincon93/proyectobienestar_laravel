@@ -8586,6 +8586,10 @@ fieldset[disabled] .btn {
   background-color: #5aa50c;
 }
 
+.button-width {
+  width: 100%;
+}
+
 .width-button {
   width: 20rem;
 }
@@ -8708,7 +8712,7 @@ a.top-login:after {
   width: 100%;
 }
 
-.dropdown:after {
+.dropdown-custom:after {
   content: "";
   width: 1px;
   height: 24px;
@@ -8752,8 +8756,8 @@ li.li-entrega div:nth-child(2) {
 .li-item {
   color: #fff;
   background: linear-gradient(76deg, #4e4e4e 0%, #464646 100%);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
 }
 
 .li-item a {
@@ -8790,7 +8794,6 @@ li.li-entrega div:nth-child(2) {
 
 #sidebar #sidebar-content ul li {
   margin: 8px 0;
-  padding: 0.8rem;
 }
 
 #sidebar #sidebar-content ul li.active {
@@ -8802,7 +8805,7 @@ li.li-entrega div:nth-child(2) {
   font-size: 14px;
   font-weight: 400;
   line-height: 32px;
-  padding: 0.2rem;
+  padding: 0.8rem;
   position: relative;
 }
 
@@ -8879,7 +8882,6 @@ table caption {
 .table-full thead tr th,
 .table-full tbody tr td {
   border-top: 1px solid #e8e8e8;
-  padding: 1rem 2rem;
 }
 
 .table-small {
@@ -8945,10 +8947,6 @@ table caption {
   border: 1px solid #eee;
   padding: 1rem;
   margin: 1.6rem 0rem;
-}
-
-.big-content .big-content-desc a i {
-  font-size: 2rem;
 }
 
 .big-content-desc h4 {
@@ -9172,6 +9170,18 @@ table caption {
   left: 35px;
   position: absolute;
   top: 1.1rem;
+}
+
+#numero_documento {
+  float: left;
+  width: 90%;
+}
+
+#buscar_aprendiz {
+  border: none;
+  height: inherit;
+  padding: 7px 12px;
+  width: 10%;
 }
 
 .aprendiz-card {
@@ -9482,7 +9492,7 @@ input[name="fin"]:hover {
 
 .document-img {
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
   margin: 1rem auto;
 }
 

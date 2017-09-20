@@ -78,13 +78,11 @@
                             <i class="fa fa-fw fa-info"></i>
                             Si quieres descargar todos los registros en un archivo excel, por favor da clic en el botón <span class="btn">Exportar a excel</span>
                         </blockquote>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a href="{{ url('/excel') }}" class="btn btn-success center-block width-button">
-                                    <i class="fa fa-fw fa-download"></i>
-                                    Exportar a excel
-                                </a>
-                            </div>
+                        <div>
+                            <a href="{{ url('/excel') }}" class="btn btn-success center-block width-button">
+                                <i class="fa fa-fw fa-download"></i>
+                                Exportar a excel
+                            </a>
                         </div>
                     </section>
                 </div>
@@ -92,18 +90,21 @@
                     <section class="import-section">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4 class="legend">Eliminar todo</h4>
+                                <div class="text-center">
+                                    <i class="fa fa-warning fa-4x"></i>
+                                    <p>Si quieres eliminar todos los registros, da clic en el botón <span class="btn">Eliminar todos los registros</span></p>
+                                </div>
                                 <blockquote class="blockquote blockquote-danger">
                                     <i class="fa fa-fw fa-warning"></i>
-                                    Si quieres eliminar todos los registros, da clic en el botón <span class="btn">Eliminar todos los registros</span>
-                                    <br>
-                                    <br>
                                     Se recomienda primero exportar todo a un archivo en excel antes de eliminar.
                                 </blockquote>
-                                <form action="{{ url('/admin/truncate') }}" method="POST" style="display: inline-block;" class="form-truncate-aprendiz btn btn-danger">
-                                    {!! csrf_field() !!}
-                                    Eliminar todos los registros
-                                </form>
+                                <br>
+                                <div>
+                                    <form action="{{ url('/admin/truncate') }}" method="POST" class="form-truncate-aprendiz btn btn-danger center-block width-button">
+                                        {!! csrf_field() !!}
+                                        Eliminar todos los registros
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </section>

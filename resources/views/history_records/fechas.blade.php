@@ -17,7 +17,7 @@
                 <td>{{ $count++ }}</td>
                 <td>{{ $his->apprentice->nombre_completo }}</td>
                 @php
-                    $dt=new Jenssegers\Date\Date($his->fecha);
+                    $dt = new Jenssegers\Date\Date($his->fecha);
                 @endphp
                 <td>{{ $dt->format('l d F Y h:i A') }}</td>
                 <td>
@@ -26,13 +26,12 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <form action="{{ url('/admin/history_records/'.$his->id) }}" style="display: inline-block;" method="GET">
-                            {{ method_field('delete') }}
-                            {!! csrf_field()  !!}
-                            <button type="submit">si</button>
-                        </form>
-                    </li>
-
+                            <form action="{{ url('/admin/history_records/'.$his->id) }}" method="POST">
+                                {{ method_field('delete') }}
+                                {!! csrf_field()  !!}
+                                <button type="submit" class="btn-no-style text-center button-width">Está seguro?</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 </td>
@@ -41,10 +40,9 @@
         @else
         <tr>
             <td colspan="4">
-                No se encuentran registros para este aprendiz.</p>
+                No se encuentran registros para este aprendiz.
             </td>
         </tr>
-
         @endif
     </tbody>
 </table>

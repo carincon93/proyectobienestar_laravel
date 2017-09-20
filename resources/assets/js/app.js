@@ -1,19 +1,19 @@
 
 /**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+* First we will load all of this project's JavaScript dependencies which
+* includes Vue and other libraries. It is a great starting point when
+* building robust, powerful web applications using Vue and Laravel.
+*/
 
 require('./bootstrap');
 
 window.Vue = require('vue');
 
 /**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+* Next, we will create a fresh Vue application instance and attach it to
+* the page. Then, you may begin adding components to this application
+* or customize the JavaScript scaffolding to fit your unique needs.
+*/
 
 Vue.component('example', require('./components/Example.vue'));
 
@@ -65,21 +65,24 @@ $('body').on('click', 'button[id="aceptarSolicitud"]', function (event) {
         $('#solicitud').submit();
     }, 500);
 });
+
 /**
- * @author Cristian Vasquez
- * @description Evento que encarga de registrar en el historial la entrega del suplemento
- */
+* @author Cristian Vasquez
+* @description Evento que encarga de registrar en el historial la entrega del suplemento
+*/
 $('body').on('click', '#entregarSuplemento', function (event) {
     $id = $('#formEntrega').find('input[name=apprentice_id]').val();
     $token = $('#formEntrega').find('input[name=_token]').val();
     $.post('/history_record/store/' + $id, { _token: $token, id: $id }, function (data, textStatus, xhr) {});
 });
+
+
 /**
- * @author Cristian Vasquez
- * @description Evento que encarga de  buscar el aprendiz por el número de documento
- * @return Si se encuentra el aprendiz, la función retorna un htm donde esta el formulario con los datos del aprendiz
- *         Si no lo encuentra arroja mensaje de error
- */
+* @author Cristian Vasquez
+* @description Evento que encarga de  buscar el aprendiz por el número de documento
+* @return Si se encuentra el aprendiz, la función retorna un htm donde esta el formulario con los datos del aprendiz
+*         Si no lo encuentra arroja mensaje de error
+*/
 $('body').on('keyup', '#numero_documento', function (event) {
     event.preventDefault();
     var $numero_documento = $(this).val();
@@ -99,12 +102,27 @@ $('body').on('keyup', '#numero_documento', function (event) {
         }, 500);
     }
 });
+$('body').on('click', '#buscar_aprendiz', function (event) {
+    event.preventDefault();
+    var $numero_documento = $('#numero_documento').val();
+    if ($numero_documento > 0) {
+        if (request != null) request.abort();
+
+        request = $.get('/apprenticeajax', { numero_documento: $numero_documento }, function (data, textStatus, xhr) {
+            if (data) {
+                $('#apprentice').html(data);
+            } else {
+                $('#apprentice').text('El aprendiz no existe o su solicitud no ha sido aceptada aun!');
+            }
+        });
+    }
+});
 
 // ======================== Truncate solicitudes - historial ========================================
 $('body').on('click', '.form-truncate-aprendiz', function (e) {
     e.preventDefault();
     var $formTruncFic = $(this),
-        $modalTrun = $('#confirm-delete');
+    $modalTrun = $('#confirm-delete');
     $modalTrun.find('.modal-title').text('Eliminar todos los registros');
     $modalTrun.find('.modal-body').text('Va a eliminar todos los registros. ¿Está seguro que los desea eliminar?');
     $modalTrun.find('#btn-delete').text('Eliminar todo');
@@ -119,7 +137,7 @@ $('body').on('click', '.form-truncate-aprendiz', function (e) {
 $('.table-full').on('click', '.btn-delete-tbl', function (e) {
     e.preventDefault();
     var $formDel = $(this),
-        $nombre_elemento = $formDel.attr('data-nombre');
+    $nombre_elemento = $formDel.attr('data-nombre');
 
     $('.modal').find('.modal-title').text('Nombre: ' + $nombre_elemento);
     $('.modal').find('.modal-body').text('Está seguro que desea eliminar este registro?');
@@ -188,9 +206,9 @@ $(window).on('load', function () {
 });
 
 $('#login').one('click',(function(event) {
-  event.preventDefault();
-  $(this).closest('form').submit();
-  $(this).prop('disabled',true);
+    event.preventDefault();
+    $(this).closest('form').submit();
+    $(this).prop('disabled',true);
 }));
 
 $('body').on('click', 'button[data-target="#modalHistorial"]', function (event) {

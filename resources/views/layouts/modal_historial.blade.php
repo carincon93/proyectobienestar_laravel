@@ -6,8 +6,7 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div id="mbody-Historial"></div>
-            <div class="modal-footer">
-            </div>
+            <div class="modal-footer"></div>
         </div>
     </div>
 </div>

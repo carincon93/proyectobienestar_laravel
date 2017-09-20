@@ -3,6 +3,8 @@
     @section('title', 'Suplemento alimenticio')
 
     @section('big-content-desc')
+        <!-- Modal historial -->
+        @include('layouts.modal_historial')
 
         @if ($errors->has('token_error'))
         <!-- Modal -->

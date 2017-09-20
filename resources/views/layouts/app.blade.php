@@ -27,7 +27,6 @@
     @endif
     @include('layouts.modal')
     @include('layouts.modal_eliminar')
-    @include('layouts.modal_historial')
     @if (Auth::check())
     <aside id="sidebar">
         <div id="sidebar-logo">
@@ -92,7 +91,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             @if(!Auth::check())
                             <li><img src="{{ url('/images/logo1.png') }}" class="img-responsive logobienestar-navbar"></li>
-                            <li class="dropdown {{ count($errors) > 0 ? 'open' : '' }}">
+                            <li class="dropdown dropdown-custom {{ count($errors) > 0 ? 'open' : '' }}">
                                 <a class="top-login dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Iniciar sesión</a>
                                 <div class="dropdown-menu login-box">
                                     <div class="">
@@ -162,7 +161,7 @@
                             </li>
                             @else
                             <li><span id="userImage" class="text-uppercase"></span></li>
-                            <li class="dropdown">
+                            <li class="dropdown dropdown-custom">
                                 <a id="nameUser" href="#" class="dropdown-toggle text-capitalize user-name" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{url('admin/password')}}">Cambiar mi contraseña</a></li>
@@ -218,30 +217,12 @@
 
     <script>
         $(document).ready(function() {
-            // =========================== Active Links =================================
-            // var current_url = "{{ Request::fullUrl() }}";
-            // var full_url = current_url+location.search;
-            // var $navLinks = $("ul.sidebar-menu li a");
-            // // First look for an exact match including the search string
-            // var $curentPageLink = $navLinks.filter(
-            //     function() { return $(this).attr('href') === full_url; }
-            // );
-            // // If not found, look for the link that starts with the url
-            // if(!$curentPageLink.length > 0){
-            //     $curentPageLink = $navLinks.filter(
-            //         function() { return $(this).attr('href').startsWith(current_url) || current_url.startsWith($(this).attr('href')); }
-            //     );
-            // }
-            //
-            // $curentPageLink.parents('li').addClass('active');
-
             $('#myTable').DataTable();
             $('.datapickerr').datepicker({
                 format: "yyyy/mm/dd",
                 language: "es",
                 autoclose: true
             });
-
         });
     </script>
 </body>

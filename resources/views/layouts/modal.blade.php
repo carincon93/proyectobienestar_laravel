@@ -12,7 +12,8 @@
 
                 <!-- <i class="fa fa-fw fa-barcode"></i> -->
                 <img src="{{ asset('images/document-img.png') }}" alt="" class="img-responsive document-img">
-                <input type="text" class="form-control" placeholder="Número de documento del aprendiz" id="numero_documento" autofocus autocomplete="off">
+                <input type="number" class="form-control" placeholder="Número de documento del aprendiz" id="numero_documento" autofocus autocomplete="off" min="0">
+                <button id="buscar_aprendiz" type="button"><i class="fa fa-search"></i></button>
                 <div id="apprentice"></div>
             </div>
         </div>
