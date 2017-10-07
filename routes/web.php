@@ -47,8 +47,8 @@ Route::get('/admin/sistema', 'AdminController@view_sistema');
 Route::post('/admin/apprentice/store_import', 'ApprenticeController@store_import');
 // Aprendiz
 Route::resource('/admin/apprentice','ApprenticeController');
-Route::get('/apprenticeajax','ApprenticeController@ajax');
-Route::get('/obtener_solicitud', 'ApprenticeController@obtener_solicitud');
+Route::get('admin/apprenticeajax','ApprenticeController@ajax');
+Route::get('admin/obtener_solicitud', 'ApprenticeController@obtener_solicitud');
 Route::get('/admin/{id}/solicitudaceptado', 'ApprenticeController@solicitudAceptado');
 Route::get('/admin/{id}/entrega_suplemento', 'ApprenticeController@entrega_suplemento');
 Route::get('/excel','ApprenticeController@excel');
@@ -56,7 +56,7 @@ Route::get('/excel','ApprenticeController@excel');
 // Historial
 Route::resource('/admin/history_record','HistoryRecordController');
 Route::post('/history_record/store/{id}', 'HistoryRecordController@store');
-Route::get('/datesearch','HistoryRecordController@datesearch');
+Route::get('admin/datesearch','HistoryRecordController@datesearch');
 
 Route::get('/excel','ApprenticeController@excel');
 Route::post('/generar_reporte','HistoryRecordController@generar_reporte');

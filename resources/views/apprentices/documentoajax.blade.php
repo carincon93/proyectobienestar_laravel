@@ -29,7 +29,9 @@
         $dt=new Jenssegers\Date\Date($da->historyrecords->last()->fecha);
     @endphp
     <div class="entrega-warning">
-        <i class="fa fa-fw fa-warning"></i>El aprendiz ya recibió el suplemento! Última fecha: <strong>{{ $dt->format('l d F Y h:i A')}}</strong>
+        <p>
+            <i class="fa fa-fw fa-warning"></i>El aprendiz ya recibió el suplemento! Última fecha: <strong>{{ $dt->format('l d F Y h:i A')}}</strong>            
+        </p>
     </div>
     @else
     <form action="{{ url('admin/'.$da->id.'/entrega_suplemento') }}" id="formEntrega">
