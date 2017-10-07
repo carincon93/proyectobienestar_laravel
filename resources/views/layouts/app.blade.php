@@ -152,9 +152,6 @@
                                                 <a class="btn-link" href="{{ route('password.request') }}">
                                                     ¿Olvidaste tu contraseña?
                                                 </a>
-                                                <!-- / -->
-                                                angela@mail.com
-                                                pwd: admin123
                                             </div>
                                         </form>
                                     </div>

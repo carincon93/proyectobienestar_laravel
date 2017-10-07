@@ -51,7 +51,7 @@ $(document).ready(function() {
     $('body').on('click', '#entregarSuplemento', function (event) {
         $id = $('#formEntrega').find('input[name=apprentice_id]').val();
         $token = $('#formEntrega').find('input[name=_token]').val();
-        $.post('history_record/store/' + $id, { _token: $token, id: $id }, function (data, textStatus, xhr) {});
+        $.post('/history_record/store/' + $id, { _token: $token, id: $id }, function (data, textStatus, xhr) {});
     });
 
 
