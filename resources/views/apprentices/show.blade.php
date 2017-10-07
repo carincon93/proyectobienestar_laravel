@@ -2,9 +2,9 @@
 
 @section('title', 'Ver aprendiz')
 
-@section('navbar-top')
+@section('big-content-desc')
 <ul class="breadcrumb">
-	<li><a href="{{ url('/admin/apprentice') }}" class="btn-link">Lista de aprendices</a></li>
+	<li><a href="{{ url('/admin/dashboard') }}" class="btn-link">Lista de aprendices</a></li>
 	<li>Ver Aprendiz</li>
 </ul>
 @endsection
