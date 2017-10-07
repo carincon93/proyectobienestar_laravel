@@ -46,8 +46,10 @@
 @endsection
 @section('content')
 @include('layouts.modal')
+<hr>
 <div class="row">
     <div class="col-md-8">
+        <p>Historial de aprendices que han recibido suplementos.</p>
         <div class="card">
             <div class="card-header">
                 <h4>
@@ -97,7 +99,7 @@
     </div>
     <div class="col-md-4">
         <p class="text-center">
-            Lista de aprendices que más han recibido el suplemento alimenticio.
+            Aprendices más beneficiados con el suplemento alimenticio.
         </p>
         <div class="card">
             <div class="panel-heading">

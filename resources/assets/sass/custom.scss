@@ -41,6 +41,10 @@ input,
     padding-left: 0;
     width: 22rem;
 }
+input[name="inicio"],
+input[name="fin"] {
+    padding-left: 3rem;
+}
 
 .has-error .form-control:focus,
 .form-control:focus {
@@ -412,7 +416,7 @@ li.li-entrega div:nth-child(2) {
     color: #fff;
 }
 
-.li-item-solicitudes:hover {
+.li-item:hover {
     background: -ms-linear-gradient(-26.76deg, #24cd00 0%, #59d735 100%);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#24CD00', endColorstr='#59D735' ,GradientType=0)";
     background: linear-gradient(116.76deg, #24cd00 0%, #59d735 100%);
@@ -442,6 +446,7 @@ li.li-entrega div:nth-child(2) {
 
 #sidebar #sidebar-content ul li {
     margin: 8px 0;
+    padding: 1rem;
 }
 
 #sidebar #sidebar-content ul li.active {

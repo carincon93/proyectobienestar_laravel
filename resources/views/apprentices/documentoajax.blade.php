@@ -30,7 +30,7 @@
     @endphp
     <div class="entrega-warning">
         <p>
-            <i class="fa fa-fw fa-warning"></i>El aprendiz ya recibió el suplemento! Última fecha: <strong>{{ $dt->format('l d F Y h:i A')}}</strong>            
+            <i class="fa fa-fw fa-warning"></i>El aprendiz ya recibió el suplemento! Última fecha: <strong>{{ $dt->format('l d F Y h:i A')}}</strong>
         </p>
     </div>
     @else

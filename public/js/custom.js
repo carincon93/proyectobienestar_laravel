@@ -77,10 +77,10 @@ module.exports = __webpack_require__(43);
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-    $('.top-login').on('click', '.selector', function (event) {
-        event.preventDefault();
-        $('form').find('input[name=email]').focus();
-    });
+    // $('.top-login').on('click', '.selector', function (event) {
+    //     event.preventDefault();
+    //     $('form').find('input[name=email]').focus();
+    // });
 
     $modalSolicitud = $('#modalSolicitud');
     var request = null;

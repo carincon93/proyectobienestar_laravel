@@ -47,6 +47,8 @@
                 </div>
             </div>
         </div>
+            <p>En la siguiente tabla encontrará dos listas, lista de todas las solicitudes y la lista de las solicitudes no aprobadas.</p>
+
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#firstTable" aria-controls="firstTable" role="tab" data-toggle="tab"><i class="fa fa-fw fa-list"></i>Lista de solicitudes</a></li>
                 <li role="presentation"><a href="#secondTable" aria-controls="secondTable" role="tab" data-toggle="tab"><i class="fa fa-fw fa-list"></i>Lista de solicitudes <strong>no aceptadas</strong></a></li>

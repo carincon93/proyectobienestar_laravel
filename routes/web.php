@@ -55,7 +55,7 @@ Route::get('/excel','ApprenticeController@excel');
 
 // Historial
 Route::resource('/admin/history_record','HistoryRecordController');
-Route::post('/history_record/store/{id}', 'HistoryRecordController@store');
+Route::post('admin/history_record/store/{id}', 'HistoryRecordController@store');
 Route::get('admin/datesearch','HistoryRecordController@datesearch');
 
 Route::get('/excel','ApprenticeController@excel');
