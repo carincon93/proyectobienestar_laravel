@@ -2,7 +2,7 @@
 
 @section('title','Adicionar aprendiz')
 
-@section('navbar-top')
+@section('big-content-desc')
 <ul class="breadcrumb">
 	<li><a href="{{ url('/admin/dashboard') }}" class="btn-link">Lista de aprendices</a></li>
 	<li>Adicionar aprendiz</li>
@@ -10,7 +10,6 @@
 @endsection
 
 @section('big-content-desc')
-<h4>Adicionar aprendiz</h4>
 @endsection
 
 @section('content')
