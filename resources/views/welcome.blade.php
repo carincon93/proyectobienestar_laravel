@@ -18,9 +18,7 @@
                         {{ $errors->first('token_error') }}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">
-                            <a href="{{ url('/') }}">Volver a la página principal</a>
-                        </button>
+                        <a href="{{ url('/') }}" class="btn-link">Volver a la página principal</a>
                     </div>
                 </div>
             </div>
@@ -116,5 +114,9 @@
                     }
                 }
             }
+
+            $(window).on('load', function () {
+                $('#modalSession').modal({ backdrop: 'static', keyboard: false });
+            });
         </script>
     @endpush

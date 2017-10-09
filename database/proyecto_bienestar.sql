@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2017 a las 05:30:53
+-- Tiempo de generación: 09-10-2017 a las 01:29:02
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -122,7 +122,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'angela', 'angela@mail.com', '$2y$10$lZ01/Ua9YxZqCFaiEuFXUe1fOhocwo3xG2LHyiKxoQpOWYz7Ke08C', '5RBjN12UsffalZGzVb5WLtI2DvO4b28O7SfM5cWb7P0Y5nRcuLimCOUkToDK', '2017-08-21 12:16:26', '2017-08-30 00:35:15');
+(1, 'Administrador del sistema', 'admin@bienestar.com', '$2y$10$FVeE8Cc9IcxgOVbIvy4.1OdX7/YYBTIhOhZU8gJiYCJs488sygLrG', NULL, '2017-10-08 23:28:15', '2017-10-08 23:28:15');
 
 --
 -- Índices para tablas volcadas

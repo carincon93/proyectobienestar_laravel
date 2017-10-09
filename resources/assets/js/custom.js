@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    // $('.top-login').on('click', '.selector', function (event) {
-    //     event.preventDefault();
-    //     $('form').find('input[name=email]').focus();
-    // });
+    $('body').on('click', '.top-login', function (event) {
+        event.preventDefault();
+        $('form').find('input[name=email]').focus();
+    });
 
     $modalSolicitud = $('#modalSolicitud');
     var request = null;

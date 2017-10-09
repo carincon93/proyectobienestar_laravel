@@ -149,9 +149,6 @@
 
                                                     </div>
                                                 </div>
-                                                <a class="btn-link" href="{{ route('password.request') }}">
-                                                    ¿Olvidaste tu contraseña?
-                                                </a>
                                             </div>
                                         </form>
                                     </div>
