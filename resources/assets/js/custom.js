@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $(function () {
+        $('.tooltip-anadir').tooltip("show");
+        $('.tooltip-anadir').find(".tooltip.fade.top").removeClass("in");
+    });
+
     $('body').on('click', '.top-login', function (event) {
         event.preventDefault();
         $('form').find('input[name=email]').focus();

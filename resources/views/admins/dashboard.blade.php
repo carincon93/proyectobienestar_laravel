@@ -14,7 +14,7 @@
     </p>
     @endsection
     @section('content')
-        <a href="{{ url('/admin/apprentice/create') }}" class="action-round text-center"><i class="fa fa-fw fa-plus"></i></a>
+        <a href="{{ url('/admin/apprentice/create') }}" class="action-round text-center tooltip-anadir" data-toggle="tooltip" data-placement="top" title="Anadir solicitud"><i class="fa fa-fw fa-plus"></i></a>
         <div class="modal fade" id="confirm-delete">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -41,7 +41,7 @@
                     </div>
                     <div class="" id="mbody-solicitud"></div>
                     <div class="modal-footer">
-                        <button type="button" class="text-uppercase btn-no-style" id="rechazarSolicitud">Rechazar solicitud</button>
+                        <button type="button" class="text-uppercase btn-no-style pull-left" id="rechazarSolicitud">Rechazar solicitud</button>
                         <button type="button" class="text-uppercase btn-no-style" id="aceptarSolicitud">Aprobar solicitud</button>
                     </div>
                 </div>
@@ -49,8 +49,8 @@
         </div>
             <p>En la siguiente tabla encontrará dos listas, lista de todas las solicitudes y la lista de las solicitudes no aprobadas.</p>
 
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#firstTable" aria-controls="firstTable" role="tab" data-toggle="tab"><i class="fa fa-fw fa-list"></i>Lista de solicitudes</a></li>
+            <ul class="nav nav-tabs lista-aprendices-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#firstTable" aria-controls="firstTable" role="tab" data-toggle="tab"><i class="fa fa-fw fa-list"></i>Lista de todas las solicitudes</a></li>
                 <li role="presentation"><a href="#secondTable" aria-controls="secondTable" role="tab" data-toggle="tab"><i class="fa fa-fw fa-list"></i>Lista de solicitudes <strong>no aceptadas</strong></a></li>
             </ul>
         <div class="tab-content">
@@ -96,15 +96,15 @@
                                                 <button class="btn btn-solicitud" data-toggle="modal" data-target="#modalSolicitud" data-id="{{ $sa->id }}" data-nombre="{{ $sa->nombre_completo }}">
                                                     Ver solicitud
                                                 </button>
-                                                <a class="btn btn-round" href="{{ url('/admin/apprentice/'.$sa->id.'/edit') }}">
+                                                <a class="btn btn-round" href="{{ url('/admin/apprentice/'.$sa->id.'/edit') }}" data-toggle="tooltip" data-placement="top" title="Editar solicitud">
                                                     <i class="fa fa-fw fa-pencil"></i>
                                                 </a>
-                                                <form action="{{ url('/admin/apprentice/'.$sa->id) }}" style="display: inline-block;" data-nombre="{{ $sa->nombre_ficha }}" method="POST" class="btn-delete-tbl btn btn-round">
+                                                <form action="{{ url('/admin/apprentice/'.$sa->id) }}" style="display: inline-block;" data-nombre="{{ $sa->nombre_ficha }}" method="POST" class="btn-delete-tbl btn btn-round" data-toggle="tooltip" data-placement="top" title="Eliminar solicitud">
                                                     {{ method_field('delete') }}
                                                     {!! csrf_field()  !!}
                                                     <i class="fa fa-fw fa-trash"></i>
                                                 </form>
-                                                <a href="{{ url('admin/history_record/'.$sa->id) }}" class="btn btn-round">
+                                                <a href="{{ url('admin/history_record/'.$sa->id) }}" class="btn btn-round" data-toggle="tooltip" data-placement="top" title="Ver historial">
                                                     <i class="fa fa-fw fa-external-link"></i>
                                                 </a>
                                             </td>
