@@ -1,14 +1,19 @@
 <?php
 namespace App\Http\Controllers;
+
+use Auth;
+
+use Illuminate\Http\Request;
+use App\Http\Requests\PasswordRequest;
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use App\Http\Requests\PasswordRequest;
-use Auth;
+
 use App\User;
-use App\Apprentice;
-use App\HistoryRecord;
+use App\Aprendiz;
+use App\RegistroHistorico;
+
 class AdminController extends Controller
 {
     /**
@@ -20,6 +25,7 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
     }
+    
     /**
      * Show the application dashboard.
      *
@@ -27,8 +33,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $solicitudAceptado  = Apprentice::where('estado_solicitud', '!=', 0)->orWhere('estado_solicitud', NULL)->get()->sortBy('nombre_completo');
-        $solicitudDenegado  = Apprentice::where('estado_solicitud', 0)->get()->sortBy('nombre_completo');
+        $solicitudAceptado  = Aprendiz::where('estado_solicitud', '!=', 0)->orWhere('estado_solicitud', NULL)->get()->sortBy('nombre_completo');
+        $solicitudDenegado  = Aprendiz::where('estado_solicitud', 0)->get()->sortBy('nombre_completo');
         return view('admins.dashboard', compact('solicitudAceptado', 'solicitudDenegado'));
     }
 
@@ -52,10 +58,10 @@ class AdminController extends Controller
     public function truncateAll()
     {
         Schema::disableForeignKeyConstraints();
-        Apprentice::truncate();
-        HistoryRecord::truncate();
+        Aprendiz::truncate();
+        RegistroHistorico::truncate();
         Schema::enableForeignKeyConstraints();
-        return redirect('/admin/dashboard')->with('status', 'Todos los registros del sistem fueron eliminados con éxito!');
+        return redirect('admin/dashboard')->with('status', 'Todos los registros del sistem fueron eliminados con éxito!');
     }
 
     public function view_sistema()

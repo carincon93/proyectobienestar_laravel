@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+
 use App\Traits\InsertOnDuplicateKey;
 use App\Traits\DateTranslator;
 
-class Apprentice extends Model
+class Aprendiz extends Model
 {
     use InsertOnDuplicateKey;
+
+    protected $table = 'aprendices';
 
     protected $fillable = [
         'nombre_completo',
@@ -41,7 +44,8 @@ class Apprentice extends Model
         }
     }
 
-    public function historyrecords() {
-    	return $this->hasMany('App\HistoryRecord');
+    public function registros_historicos()
+    {
+    	return $this->hasMany('App\RegistroHistorico');
     }
 }

@@ -11,68 +11,57 @@
 |
 */
 // Authentication Routes...
-	// Auth::routes();
-    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-    Route::post('login', 'Auth\LoginController@login');
-    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Auth::routes();
 
-    // Registration Routes...
-    // Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-    // Route::post('register', 'Auth\RegisterController@register');
+// Index
+Route::get('/', 'IndexController@index');
 
-    // Password Reset Routes...
-    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::group(['prefix' => 'admin'], function() {
 
-// Welcome
-Route::get('/', 'WelcomeController@index')->name('welcome');
+	Route::get('/', function() {
+		return redirect('admin/dashboard');
+	});
+	Route::get('dashboard', 'AdminController@index');
+	Route::get('reportes', function() {
+		return view('reportes.reportes');
+	});
+
+	// Aprendiz
+	Route::resource('aprendiz','AprendizController');
+	// Historial
+	Route::resource('registro_historico','RegistroHistoricoController');
+    // Aceptar o cancelar solicitud de aprendiz
+	Route::post('aprendiz_solicitud/{id}', 'AprendizController@solicitud');
+
+	Route::post('truncate', 'AdminController@truncateAll');
+	Route::get('sistema', 'AdminController@view_sistema');
+
+	// Importar aprendices
+	Route::post('aprendiz/store_import', 'AprendizController@store_import');
+
+	Route::get('obtener_solicitud', 'AprendizController@obtener_solicitud');
+	Route::get('{id}/solicitudaceptado', 'AprendizController@solicitudAceptado');
+
+	Route::get('excel','AprendizController@excel');
+
+	Route::get('datesearch','RegistroHistoricoController@datesearch');
+
+	Route::get('excel','AprendizController@excel');
+	Route::post('generar_reporte','RegistroHistoricoController@generar_reporte');
 
 
-// Admin
-Route::get('/admin', function () {
-	return redirect('admin/dashboard');
+	// Cambio de contraseña
+	Route::get('password', 'AdminController@password');
+	Route::post('updatepassword', 'AdminController@updatePassword');
 });
-Route::post('admin/aprendiz_solicitud/{id}', 'ApprenticeController@solicitud');
 
-Route::get('/admin/dashboard', 'AdminController@index');
-Route::post('/admin/truncate', 'AdminController@truncateAll');
+Route::get('buscar_aprendiz','AprendizController@ajax');
+Route::post('{id}/entrega_suplemento', 'AprendizController@entrega_suplemento');
 
-// Collaborador
-Route::resource('/admin/collaborator', 'CollaboratorController');
+Route::post('registro_historico/store/{id}', 'RegistroHistoricoController@store');
+Route::delete('registro_historico/{id}','RegistroHistoricoController@destroy');
 
-// Importar aprendices
-Route::get('/admin/sistema', 'AdminController@view_sistema');
-Route::post('/admin/apprentice/store_import', 'ApprenticeController@store_import');
-// Aprendiz
-Route::resource('/admin/apprentice','ApprenticeController');
-Route::get('admin/apprenticeajax','ApprenticeController@ajax');
-Route::get('admin/obtener_solicitud', 'ApprenticeController@obtener_solicitud');
-Route::get('/admin/{id}/solicitudaceptado', 'ApprenticeController@solicitudAceptado');
-Route::get('/admin/{id}/entrega_suplemento', 'ApprenticeController@entrega_suplemento');
-Route::get('/excel','ApprenticeController@excel');
-
-// Historial
-Route::resource('/admin/history_record','HistoryRecordController');
-Route::post('admin/history_record/store/{id}', 'HistoryRecordController@store');
-Route::post('history_record/store/{id}', 'HistoryRecordController@store');
-Route::get('admin/datesearch','HistoryRecordController@datesearch');
-
-Route::get('/excel','ApprenticeController@excel');
-Route::post('/generar_reporte','HistoryRecordController@generar_reporte');
-
-Route::get('/obtener_historial','HistoryRecordController@obtener_historial');
-Route::delete('/admin/history_records/{id}','HistoryRecordController@destroy');
-
-
-
-// Cambio de contraseña
-Route::get('admin/password', 'AdminController@password');
-Route::post('admin/updatepassword', 'AdminController@updatePassword');
-
-
-
+Route::get('obtener_historial','RegistroHistoricoController@obtener_historial');
 
 // Redirección - Error 404
 Route::get('error', function()

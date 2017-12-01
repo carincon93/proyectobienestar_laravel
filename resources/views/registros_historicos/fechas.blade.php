@@ -11,13 +11,13 @@
         @php
         $count = 1;
         @endphp
-        @if(count($history_records) > 0)
-            @foreach($history_records as $his)
+        @if(count($registros_historicos) > 0)
+            @foreach($registros_historicos as $registro_historico)
             <tr>
                 <td>{{ $count++ }}</td>
-                <td>{{ $his->apprentice->nombre_completo }}</td>
+                <td>{{ $registro_historico->aprendiz->nombre_completo }}</td>
                 @php
-                    $dt = new Jenssegers\Date\Date($his->fecha);
+                    $dt = new Jenssegers\Date\Date($registro_historico->fecha);
                 @endphp
                 <td>{{ $dt->format('l d F Y h:i A') }}</td>
                 <td>
@@ -26,9 +26,9 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <form action="{{ url('/admin/history_records/'.$his->id) }}" method="POST">
+                            <form action="{{ url('admin/registro_historico/'.$registro_historico->id) }}" method="POST">
                                 {{ method_field('delete') }}
-                                {!! csrf_field()  !!}
+                                {{ csrf_field()  }}
                                 <button type="submit" class="btn-no-style text-center button-width">Está seguro?</button>
                             </form>
                         </li>

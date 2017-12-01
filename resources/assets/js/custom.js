@@ -56,11 +56,11 @@ $(document).ready(function() {
     * @author Cristian Vasquez
     * @description Evento que encarga de registrar en el historial la entrega del suplemento
     */
-    $('body').on('click', '#entregarSuplemento', function (event) {
-        $id = $('#formEntrega').find('input[name=apprentice_id]').val();
-        $token = $('#formEntrega').find('input[name=_token]').val();
-        $.post('/history_record/store/' + $id, { _token: $token, id: $id }, function (data, textStatus, xhr) {});
-    });
+    // $('body').on('click', '#entregarSuplemento', function (event) {
+    //     $id = $('#formEntrega').find('input[name=aprendiz_id]').val();
+    //     $token = $('#formEntrega').find('input[name=_token]').val();
+    //     $.post('/registro_historico/store/' + $id, { _token: $token, id: $id }, function (data, textStatus, xhr) {});
+    // });
 
 
     /**
@@ -75,11 +75,11 @@ $(document).ready(function() {
         if ($numero_documento > 0) {
             if (request != null) request.abort();
 
-            request = $.get('/admin/apprenticeajax', { numero_documento: $numero_documento }, function (data, textStatus, xhr) {
+            request = $.get('/buscar_aprendiz', { numero_documento: $numero_documento }, function (data, textStatus, xhr) {
                 if (data) {
-                    $('#apprentice').html(data);
+                    $('.apprentice').html(data);
                 } else {
-                    $('#apprentice').text('El aprendiz no existe o su solicitud no ha sido aceptada aun!');
+                    $('.apprentice').text('El aprendiz no existe o su solicitud no ha sido aceptada aun!');
                 }
             });
         } else {
@@ -94,7 +94,7 @@ $(document).ready(function() {
         if ($numero_documento > 0) {
             if (request != null) request.abort();
 
-            request = $.get('apprenticeajax', { numero_documento: $numero_documento }, function (data, textStatus, xhr) {
+            request = $.get('/buscar_aprendiz', { numero_documento: $numero_documento }, function (data, textStatus, xhr) {
                 if (data) {
                     $('#apprentice').html(data);
                 } else {
@@ -131,6 +131,15 @@ $(document).ready(function() {
         $('#confirm-delete').modal({ backdrop: 'static', keyboard: false }).on('click', '#btn-delete', function () {
             $formDel.submit();
         });
+    });
+    $('#modalEntrega').on('hidden.bs.modal', function (e) {
+        $(this)
+        .find("input,textarea,select")
+        .val('')
+        .end()
+        .find("input[type=checkbox], input[type=radio]")
+        .prop("checked", "")
+        .end();
     });
     // Búsqueda por fechas
     $('body').on('click', '.enviarfechas', function (event) {
@@ -207,5 +216,7 @@ $(document).ready(function() {
             $('#mbody-Historial').html(data);
         });
     });
+
+    $('#numero_documento').focus();
 
 });

@@ -31,7 +31,7 @@
     @if (Auth::check())
     <aside id="sidebar">
         <div id="sidebar-logo">
-            <a href="{{ url('/admin/dashboard') }}"><img src="{{ asset('/images/logo-bienestar.svg') }}" alt="" class="img-responsive"></a>
+            <a href="{{ url('admin/dashboard') }}"><img src="{{ asset('/images/logo-bienestar.svg') }}" alt="" class="img-responsive"></a>
         </div>
         <div id="sidebar-admin">
             <div>
@@ -43,7 +43,7 @@
             <ul class="sidebar-menu list-unstyled">
                 <li class="li-item li-entrega clearfix" data-toggle="modal" data-target="#modalEntrega">
                     <div class="col-md-8">
-                        <img src="{{ url('/images/suplemento.png') }}" alt="" class="img-responsive logo-suplemento-sidebar">
+                        <img src="{{ asset('images/suplemento.png') }}" alt="" class="img-responsive logo-suplemento-sidebar">
                     </div>
                     <div class="col-md-4">
                         Entregar
@@ -51,22 +51,28 @@
                 </li>
 
                 <li class="li-item li-item-solicitudes">
-                    <a href="{{ url('/admin/dashboard') }}">
+                    <a href="{{ url('admin/dashboard') }}">
                         <i class="fa fa-fw fa-file-excel-o"></i>
                         Solicitudes
                     </a>
                 </li>
 
                 <li class="li-item li-item-import">
-                    <a href="{{ url('/admin/sistema') }}">
+                    <a href="{{ url('admin/sistema') }}">
                         <i class="fa fa-fw fa-upload"></i>
                         Importar solicitudes
                     </a>
                 </li>
 
                 <li class="li-item">
-                    <a href="{{ url('/admin/history_record') }}"><i class="fa fa-fw fa-calendar-o"></i>
+                    <a href="{{ url('admin/registro_historico') }}"><i class="fa fa-fw fa-calendar-o"></i>
                         Historial de entregas
+                    </a>
+                </li>
+
+                <li class="li-item">
+                    <a href="{{ url('admin/reportes') }}">
+                        Reportes
                     </a>
                 </li>
             </ul>

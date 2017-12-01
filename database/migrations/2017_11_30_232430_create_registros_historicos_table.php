@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableHistoryRecords extends Migration
+class CreateRegistrosHistoricosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTableHistoryRecords extends Migration
      */
     public function up()
     {
-        Schema::create('history_records', function (Blueprint $table) {
+        Schema::create('registros_historicos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('apprentice_id')->unsigned();
+            $table->integer('aprendiz_id')->unsigned();
             $table->dateTime('fecha');
-            $table->foreign('apprentice_id')->references('id')->on('apprentices')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('aprendiz_id')->references('id')->on('aprendices')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
             $table->dropColumn(['created_at', 'updated_at']);
@@ -31,6 +31,6 @@ class CreateTableHistoryRecords extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('history_records');
+        Schema::dropIfExists('registros_historicos');
     }
 }

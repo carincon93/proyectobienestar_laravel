@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableApprentices extends Migration
+class CreateAprendicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTableApprentices extends Migration
      */
     public function up()
     {
-        Schema::create('apprentices', function (Blueprint $table) {
+        Schema::create('aprendices', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_completo', 128);
         	$table->string('tipo_documento', 32);
-        	$table->integer('numero_documento')->unique()->unsigned();
+        	$table->bigInteger('numero_documento')->unique()->unsigned();
         	$table->string('direccion', 91);
         	$table->string('barrio', 64);
         	$table->smallInteger('estrato');
@@ -47,6 +47,6 @@ class CreateTableApprentices extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apprentices');
+        Schema::dropIfExists('aprendices');
     }
 }

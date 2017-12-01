@@ -8,7 +8,7 @@
 	<tbody>
 		@foreach($his as $h)
 		<tr>
-			<td>{{ $h->apprentice->nombre_completo }}</td>
+			<td>{{ $h->aprendiz->nombre_completo }}</td>
 			<td>{{ $h->fecha }}</td>
 		</tr>
 		@endforeach

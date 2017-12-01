@@ -26,10 +26,20 @@
         @endif
         <section class="page-section">
             <div>
-                <img src="{{ asset('/images/suplemento.png') }}" alt="" class="img-responsive center-block img-welc-suplemento">
+                <div class="modal-body clearfix">
+                    Ingresa el número de documento del aprendiz o pasa el lector sobre el código de barras del carné del aprendiz,
+                    una vez la persona es identificada, dale clic en 'Entregar suplemento'.
+
+                    <!-- <i class="fa fa-fw fa-barcode"></i> -->
+                    <img src="{{ asset('images/document-img.png') }}" alt="" class="img-responsive document-img">
+                    <input type="number" class="form-control" placeholder="Número de documento del aprendiz" id="numero_documento" autofocus autocomplete="off" min="0">
+                    <button id="buscar_aprendiz" type="button"><i class="fa fa-search"></i></button>
+                    <div class="apprentice"></div>
+                </div>
+                {{-- <img src="{{ asset('images/suplemento.png') }}" alt="" class="img-responsive center-block img-welc-suplemento">
                 <button class="btn btn-success center-block btn-welc-entrega" type="button" data-toggle="modal" data-target="#modalEntrega">
                     Entregar suplemento
-                </button>
+                </button> --}}
                 <div class="row">
                     <div class="col-md-6">
                         <div>
@@ -72,15 +82,15 @@
                                     @php
                                         $count = 1;
                                     @endphp
-                                    @foreach($dataApprentice as $da)
+                                    @foreach($aprendices as $aprendiz)
                                     <tr>
                                         <td>{{ $count++ }}</td>
-                                        <td>{{ $da->nombre_completo }}</td>
-                                        <td>{{ $da->tipo_documento === "cedula" ? "Cédula" : ($da->tipo_documento ==="ti" ? "Tarjeta de identidad" : "") }}</td>
-                                        <td>{{ $da->numero_documento }}</td>
-                                        <td>{{ $da->programa_formacion }}</td>
+                                        <td>{{ $aprendiz->nombre_completo }}</td>
+                                        <td>{{ $aprendiz->tipo_documento === "cedula" ? "Cédula" : ($aprendiz->tipo_documento ==="ti" ? "Tarjeta de identidad" : "") }}</td>
+                                        <td>{{ $aprendiz->numero_documento }}</td>
+                                        <td>{{ $aprendiz->programa_formacion }}</td>
                                         <td>
-                                            <button class="btn btn-historial" data-toggle="modal" data-target="#modalHistorial" data-id="{{ $da->id }}" data-nombre="{{ $da->nombre_completo }}">
+                                            <button class="btn btn-historial" data-toggle="modal" data-target="#modalHistorial" data-id="{{ $aprendiz->id }}" data-nombre="{{ $aprendiz->nombre_completo }}">
                                                 Ver historial
                                             </button>
                                         </td>

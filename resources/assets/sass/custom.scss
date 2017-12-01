@@ -93,19 +93,19 @@ fieldset[disabled] .btn {
     padding: 0.1rem 1rem;
 }
 
-.action-round {
-    background: #67bb0f;
-    border-radius: 50%;
-    bottom: 3rem;
-    color: #fff;
-    height: 60px;
-    line-height: 60px;
-    padding: 0;
-    position: fixed;
-    right: 3rem;
-    width: 60px;
-    z-index: 3;
-}
+// .action-round {
+//     background: #67bb0f;
+//     border-radius: 50%;
+//     bottom: 3rem;
+//     color: #fff;
+//     height: 60px;
+//     line-height: 60px;
+//     padding: 0;
+//     position: fixed;
+//     right: 3rem;
+//     width: 60px;
+//     z-index: 3;
+// }
 
 .action-round:hover {
     -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
@@ -429,6 +429,14 @@ li.li-entrega div:nth-child(2) {
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#24CD00', endColorstr='#59D735' ,GradientType=0)";
     background: linear-gradient(116.76deg, #24cd00 0%, #59d735 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#24CD00',endColorstr='#59D735' , GradientType=1);
+}
+
+.requerido {
+    color: #f00;
+}
+
+.circle-green {
+    color: #67bb0f;
 }
 
 #sidebar {
@@ -1092,6 +1100,24 @@ input[name="fin"]:hover {
         position: absolute;
         top: 0.6rem;
     }
+}
+
+#aceptarSolicitud {
+    background: #67bb0f;
+    color: #fff;
+    padding: 2rem;
+}
+
+#aceptarSolicitud,
+#rechazarSolicitud {
+    color: #fff;
+    padding: 2rem;
+}
+#rechazarSolicitud {
+    background: #f00;
+}
+#aceptarSolicitud {
+    background: #67bb0f;
 }
 
 #formEntrega {
