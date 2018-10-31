@@ -328,7 +328,7 @@ class AprendizController extends Controller
                     return redirect('admin/dashboard')->with('status', 'Se ha importado el archivo con éxito!');
                 }
             } else {
-                return redirect('admin/dashboard')->with('status-danger', 'No se ha podido importar el archivo!');
+                return redirect('admin/sistema')->with('status-danger', 'Por favor revisa que el nombre de la hoja sea Hoja1 o verifica que el archivo si tenga registros');
             }
         }
     }

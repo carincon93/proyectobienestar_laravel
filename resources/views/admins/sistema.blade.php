@@ -108,11 +108,11 @@
     </div>
 
     @if ($errors->any())
-        <div class="modal fade in" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block">
+        <div class="modal fade" id="erroresExcelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title text-center" id="exampleModalLabel"><i class="fa fa-fw fa-exclamation-triangle"></i>&nbsp Atención</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -120,7 +120,7 @@
                     <div class="modal-body">
                         <div>
                             <p>
-                                Hay un error en el nombre de las columnas del archivo. Por favor verifica que tenga exactamente los siguientes nombres, si no por favor corrigelos.
+                                Hay errores en los nombres de las columnas del archivo. Por favor verifica que tenga exactamente los siguientes nombres, si no por favor corrígelos.
                             </p>
 
                             <ul>
@@ -138,3 +138,10 @@
         </div>
     @endif
 @endsection
+@push('scripts')
+    <script>
+        $(window).on('load', function () {
+            $('#erroresExcelModal').modal({ backdrop: 'static', keyboard: false });
+        });
+    </script>
+@endpush
