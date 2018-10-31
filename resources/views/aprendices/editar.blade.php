@@ -2,7 +2,7 @@
 
 @section('title','Editar aprendiz')
 
-@section('big-content-desc')
+@section('informacion')
 	<ul class="breadcrumb">
 		<li><a href="{{ url('admin/dashboard') }}" class="btn-link">Lista de aprendices</a></li>
 		<li>Editar aprendiz</li>
@@ -15,6 +15,7 @@
 			<form action="{{ url('admin/aprendiz/'.$aprendiz->id) }}" method="POST">
 				{{ csrf_field()  }}
 				{{ method_field('PUT') }}
+				<p class="note note-danger">{{ count($errors) > 0 ? 'Información: Por favor echa un vistazo a los errores y asegurate de llenar bien cada campo.' : '' }}</p>
 				<div class="form-group{{ $errors->has('nombre_completo') ? ' has-error' : '' }}">
 					<label for="nombre_completo" class="control-label">
 						Nombre completo *
@@ -126,7 +127,7 @@
 				</div>
 				<div class="form-group{{ $errors->has('jornada') ? ' has-error' : '' }}">
 					<label for="jornada" class="control-label">
-						jornada*
+						Jornada *
 					</label>
 					<input type="text" name="jornada" class="form-control" value="{{ $aprendiz->jornada }}">
 					@if ($errors->has('jornada'))
@@ -146,17 +147,6 @@
 						</span>
 					@endif
 				</div>
-				<div class="form-group{{ $errors->has('pregunta2') ? ' has-error' : '' }}">
-					<label for="pregunta2" class="control-label">
-						Oficio que realiza de quien depende? *
-					</label>
-					<input type="text" name="pregunta2" class="form-control" value="{{ $aprendiz->pregunta2 }}">
-					@if ($errors->has('pregunta2'))
-						<span class="help-block">
-							{{ $errors->first('pregunta2') }}
-						</span>
-					@endif
-				</div>
 				<div class="form-group{{ $errors->has('pregunta3') ? ' has-error' : '' }}">
 					<label for="pregunta3" class="control-label">
 						Tiene personas que dependan de usted? *
@@ -172,7 +162,8 @@
 					<label for="otro_apoyo" class="control-label">
 						Es usted beneficiario de algún tipo de apoyo? *
 					</label>
-					<select name="otro_apoyo" class="form-control">
+					<input type="text" name="otro_apoyo" class="form-control" value="{{ $aprendiz->otro_apoyo }}">
+					{{-- <select name="otro_apoyo" class="form-control">
 						<option value="">Seleccione el tipo de apoyo...</option>
 						<option value="monitoria" {{ $aprendiz->otro_apoyo == 'monitoria' ? 'selected="selected"' : '' }}>Monitoría</option>
 						<option value="fic" {{ $aprendiz->otro_apoyo == 'fic' ? 'selected="selected"' : '' }}>FIC</option>
@@ -182,30 +173,36 @@
 						<option value="vinculo laboral" {{ $aprendiz->otro_apoyo == 'vinculo laboral' ? 'selected="selected"' : '' }}>Vínculo laboral</option>
 						<option value="auxilio almuerzo" {{ $aprendiz->otro_apoyo == 'auxilio almuerzo' ? 'selected="selected"' : '' }}>Auxilio de almuerzo</option>
 						<option value="ninguno" {{ $aprendiz->otro_apoyo == 'ninguno' ? 'selected="selected"' : '' }}>Ninguno</option>
-					</select>
+					</select> --}}
 					@if ($errors->has('otro_apoyo'))
 						<span class="help-block">
 							{{ $errors->first('otro_apoyo') }}
 						</span>
 					@endif
 				</div>
+				<br>
+				<label for="">Compromisos</label>
 				<div class="checkbox form-group">
 					<label class="control control--checkbox">
 						<input type="checkbox" name="compromiso_informar" value="si" {{ $aprendiz->compromiso_informar == 'si' ? 'checked="checked"' : '' }}>Se compromete a informar en la oficina de Bienestar al Aprendiz el momento en que usted reciba contrato de aprendizaje, consiguió empleo, o cualquier otro beneficio del Gobierno o del SENA (Monitorias, FIC, Apoyos de sostenimiento, entre otros).
 						<div class="control__indicator"></div>
 					</label>
 				</div>
+				<br>
 				<div class="checkbox form-group">
 					<label class="control control--checkbox">
 						<input type="checkbox" name="compromiso_normas" value="si" {{ $aprendiz->compromiso_normas == 'si' ? 'checked="checked"' : '' }}>Se compromete acatar las normas sobre el manejo adecuado del suplemento.
 						<div class="control__indicator"></div>
 					</label>
 				</div>
+				<br>
 				<div class="form-group{{ $errors->has('justificacion_suplemento') ? ' has-error' : '' }}">
 					<label for="justificacion_suplemento" class="control-label">
 						Explíque a profundidad por que requiere el suplemento *
 					</label>
-					<textarea name="justificacion_suplemento" rows="8" cols="80" class="form-control">{{ $aprendiz->justificacion_suplemento }}</textarea>
+					<br>
+					<br>
+					<textarea name="justificacion_suplemento" rows="8" cols="80" class="form-control" placeholder="Escribe aquí">{{ $aprendiz->justificacion_suplemento }}</textarea>
 					@if ($errors->has('justificacion_suplemento'))
 						<span class="help-block">
 							{{ $errors->first('justificacion_suplemento') }}
@@ -214,7 +211,7 @@
 				</div>
 				<div class="form-group">
 					<button class="btn btn-success" type="submit">
-						<i class="fa fa-fw fa-floppy-o"></i>
+						<i class="fas fa-save"></i>
 						Guardar
 					</button>
 				</div>
@@ -222,13 +219,12 @@
 		</div>
 	</div>
 	<div class="col-md-4">
-		<h3><i class="fa fa-fw fa-plus"></i> Editar aprendiz</h3>
+		<h3><i class="fa fa-fw fa-pencil"></i> Editar aprendiz</h3>
 		<p>
 			Diligencie este formulario para Editar un aprendiz.
 		</p>
 		<blockquote class="note note-info {{ count($errors) > 0 ? 'note-danger animated shake' : '' }}">
-			Los campos que tienen asterisco <span class="btn">*</span> son obligatorios. <br>
-			{{ count($errors) > 0 ? 'Por favor echa un vistazo a los errores y asegurate de llenar bien cada campo.' : '' }}
+			Los campos que tienen asterisco <span class="btn">*</span> son obligatorios.
 		</blockquote>
 	</div>
 @endsection

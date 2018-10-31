@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('big-content-desc')
+@section('title', 'Reportes')
+
+@section('informacion')
     <h4>Generar reportes</h4>
     <blockquote class="blockquote">
         <p>
@@ -8,7 +10,7 @@
         </p>
         <ol>
             <li>Seleccione un rango de fechas, de las cuales quiere generar el reporte <strong>(fecha inicio - fecha fin)</strong>.</li>
-            <li>Una vez seleccionadas las dos fechas, dale clic en buscar.</li>
+            <li>Una vez seleccionadas las dos fechas, da click en buscar.</li>
             <li>El botón 'Descargar reporte' se habilitará (Color verde).</li>
         </ol>
     </blockquote>

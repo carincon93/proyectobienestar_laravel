@@ -2,14 +2,14 @@
 
 @section('title','Adicionar aprendiz')
 
-@section('big-content-desc')
+@section('informacion')
 	<ul class="breadcrumb">
 		<li><a href="{{ url('admin/dashboard') }}" class="btn-link">Lista de aprendices</a></li>
 		<li>Adicionar aprendiz</li>
 	</ul>
 @endsection
 
-@section('big-content-desc')
+@section('informacion')
 @endsection
 
 @section('content')
@@ -18,6 +18,7 @@
 			<div class="card-form">
 				<form action="{{ url('admin/aprendiz') }}" method="POST">
 					{{ csrf_field()  }}
+					<p>{{ count($errors) > 0 ? 'Por favor echa un vistazo a los errores y asegurate de llenar bien cada campo.' : '' }}</p>
 					<fieldset>
 						<legend>Datos personales</legend>
 						<div class="form-group{{ $errors->has('nombre_completo') ? ' has-error' : '' }}">
@@ -167,17 +168,6 @@
 							</span>
 						@endif
 					</div>
-					<div class="form-group{{ $errors->has('pregunta2') ? ' has-error' : '' }}">
-						<label for="pregunta2" class="control-label">
-							Oficio que realiza de quien depende <span class="requerido">*</span>
-						</label>
-						<input type="text" name="pregunta2" class="form-control" value="{{ old('pregunta2') }}">
-						@if ($errors->has('pregunta2'))
-							<span class="help-block">
-								{{ $errors->first('pregunta2') }}
-							</span>
-						@endif
-					</div>
 					<div class="form-group{{ $errors->has('pregunta3') ? ' has-error' : '' }}">
 						<label for="pregunta3" class="control-label">
 							Tiene personas que dependan de usted? <span class="requerido">*</span>
@@ -210,12 +200,15 @@
 							</span>
 						@endif
 					</div>
+					<br>
+					<label for="">Compromisos</label>
 					<div class="checkbox">
 						<label class="control control--checkbox">
 							<input type="checkbox" name="compromiso_informar" value="si" {{ (old("compromiso_informar") == 'si' ? "checked" : "")}}>Se compromete a informar en la oficina de Bienestar al Aprendiz el momento en que usted reciba contrato de aprendizaje, consiguió empleo, o cualquier otro beneficio del Gobierno o del SENA (Monitorias, FIC, Apoyos de sostenimiento, entre otros).
 							<div class="control__indicator"></div>
 						</label>
 					</div>
+					<br>
 					<div class="checkbox">
 						<label class="control control--checkbox">
 							<input type="checkbox" name="compromiso_normas" value="si" {{ (old("compromiso_normas") == 'si' ? "checked" : "")}}>Se compromete acatar las normas sobre el manejo adecuado del suplemento.
@@ -226,7 +219,9 @@
 						<label for="justificacion_suplemento" class="control-label">
 							Explíque a profundidad por que requiere el suplemento <span class="requerido">*</span>
 						</label>
-						<textarea name="justificacion_suplemento" class="form-control" rows="8" cols="80">{{ old('justificacion_suplemento') }}</textarea>
+						<br>
+						<br>
+						<textarea name="justificacion_suplemento" class="form-control" rows="8" cols="80" placeholder="Escribe aquí">{{ old('justificacion_suplemento') }}</textarea>
 						@if ($errors->has('justificacion_suplemento'))
 							<span class="help-block">
 								{{ $errors->first('justificacion_suplemento') }}
@@ -235,7 +230,7 @@
 					</div>
 					<div class="form-group">
 						<button class="btn btn-success" type="submit">
-							<i class="fa fa-fw fa-floppy-o"></i>
+							<i class="fas fa-save"></i>
 							Guardar
 						</button>
 					</div>
@@ -248,8 +243,7 @@
 				Diligencie este formulario para agregar un solicitud.
 			</p>
 			<blockquote class="note note-info {{ count($errors) > 0 ? 'note-danger animated shake' : '' }}">
-				Los campos que tienen asterisco <span class="btn"><span class="requerido">*</span></span> son obligatorios. <br>
-				{{ count($errors) > 0 ? 'Por favor echa un vistazo a los errores y asegurate de llenar bien cada campo.' : '' }}
+				Los campos que tienen asterisco <span class="btn"><span class="requerido">*</span></span> son obligatorios.
 			</blockquote>
 		</div>
 

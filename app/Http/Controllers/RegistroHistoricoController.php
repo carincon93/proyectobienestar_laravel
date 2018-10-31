@@ -17,7 +17,7 @@ class RegistroHistoricoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('obtener_historial','store', 'destroy');
+        $this->middleware('auth')->except('obtener_historial', 'store', 'destroy');
     }
 
     /**
@@ -37,16 +37,6 @@ class RegistroHistoricoController extends Controller
                     ->get();
         return view('registros_historicos.index', compact('registros_historicos', 'ultimos_registros'));
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -78,29 +68,6 @@ class RegistroHistoricoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -110,6 +77,11 @@ class RegistroHistoricoController extends Controller
     {
         RegistroHistorico::destroy($id);
         return back()->with('status', 'El historial fue eliminado con éxito');
+    }
+
+    public function reportes()
+    {
+        return view('reportes.reportes');
     }
 
     public function datesearch(Request $request)
@@ -139,21 +111,42 @@ class RegistroHistoricoController extends Controller
 
     public function generar_reporte(Request $request)
     {
-        $data = $request->all();
+        $data        = $request->all();
         $fechaInicio = $data['fechaInicio'];
         $fechaFin    = $data['fechaFin'];
+        $date1  = new Date($fechaInicio);
+        $date2  = new Date($fechaFin);
+        $month  = new Date($fechaFin);
+        $year   = new Date($fechaFin);
 
-        Excel:: create('Reporte-'.date('d-m-Y') , function($excel) use($fechaInicio, $fechaFin)
-        {
-            $excel->sheet('Historial' , function($sheet) use($fechaInicio, $fechaFin) {
-                $registros_historicos = DB::table('registros_historicos')
-                ->select('aprendices.id', 'aprendices.nombre_completo', 'aprendices.numero_documento', 'aprendices.programa_formacion', 'registros_historicos.fecha')
-                ->join('aprendices', 'aprendices.id', '=', 'registros_historicos.aprendiz_id')
-                ->whereBetween(DB::raw('cast(fecha as date)'), [$fechaInicio, $fechaFin])
-                ->groupBy('aprendices.id', 'aprendices.nombre_completo', 'aprendices.numero_documento', 'aprendices.programa_formacion', 'registros_historicos.fecha')
-                ->get();
-                $sheet->loadView('registros_historicos.reporte' , array('registros_historicos' => $registros_historicos));
+        $fecha1 = $date1->format('d');
+        $fecha2 = $date2->format('d');
+        $mes    = $month->format('F');
+        $ano    = $year->format('Y');
+
+        $registros_historicos = DB::table('registros_historicos')
+        ->select(DB::raw('count(registros_historicos.aprendiz_id) as total'), 'registros_historicos.aprendiz_id', 'aprendices.nombre_completo', 'aprendices.programa_formacion', 'aprendices.numero_ficha')
+        ->join('aprendices', 'aprendices.id', '=', 'registros_historicos.aprendiz_id')
+        ->whereBetween(DB::raw('cast(fecha as date)'), [$fechaInicio, $fechaFin])
+        ->groupBy('registros_historicos.aprendiz_id', 'aprendices.nombre_completo', 'aprendices.programa_formacion', 'aprendices.numero_ficha')
+        ->havingRaw('registros_historicos.aprendiz_id')
+        ->orderBy('aprendices.nombre_completo', 'ASC')
+        ->get();
+
+        Excel::load('reportes/Auxilio de Alimentación Semanal V-02.xlsx', function($reader) use($registros_historicos, $fecha1, $fecha2 ,$mes ,$ano) {
+            $reader->sheet('Hoja1', function($sheet) use ($reader, $registros_historicos, $fecha1, $fecha2 ,$mes ,$ano) {
+                $sheet->row(2, array(
+                    'CENTRO DE FORMACIÓN: PROCESOS INDUSTRIALES Y CONSTRUCCIÓN    SEMANA: ' . $fecha1. '-' .$fecha2. ' DE '. strToUpper($mes). ' DE ' .$ano
+                ));
+
+                foreach ($registros_historicos as $registro_historico) {
+                    $sheet->appendRow(array(
+                        '', '', $registro_historico->nombre_completo, $registro_historico->programa_formacion, $registro_historico->numero_ficha, $registro_historico->total, ''
+                    ));
+                }
+                $sheet->setBorder('A4:G17', 'thin');
             });
+
         })->export('xls');
     }
 

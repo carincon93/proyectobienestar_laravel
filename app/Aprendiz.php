@@ -26,7 +26,6 @@ class Aprendiz extends Model
         'numero_ficha',
         'jornada',
         'pregunta1',
-        'pregunta2',
         'pregunta3',
         'otro_apoyo',
         'compromiso_informar',

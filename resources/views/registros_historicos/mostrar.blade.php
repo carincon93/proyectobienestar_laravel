@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('big-content-desc')
+@section('informacion')
     <p>
         <blockquote class="blockquote">
-            <i class="fa fa-fw fa-calendar-o"></i>
+            <i class="far fa-calendar-alt"></i>
             Historial del aprendiz
         </blockquote>
     </p>
@@ -34,7 +34,12 @@
                                         $dt=new Jenssegers\Date\Date($registro_historico->fecha);
 
                                         @endphp
-                                        <td>{{ $dt->format('l d F Y h:i A')}}</td>
+                                        <td>
+                                            <span class="text-uppercase">{{ $dt->format('l d F') }}</span>
+                                            <div>
+                                                {{ $dt->format('Y h:i A') }}
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else

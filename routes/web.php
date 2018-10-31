@@ -10,8 +10,23 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 // Authentication Routes...
-Auth::routes();
+// Auth::routes();
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+// Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // Index
 Route::get('/', 'IndexController@index');
@@ -22,9 +37,8 @@ Route::group(['prefix' => 'admin'], function() {
 		return redirect('admin/dashboard');
 	});
 	Route::get('dashboard', 'AdminController@index');
-	Route::get('reportes', function() {
-		return view('reportes.reportes');
-	});
+
+	Route::get('reportes', 'RegistroHistoricoController@reportes');
 
 	// Aprendiz
 	Route::resource('aprendiz','AprendizController');
@@ -49,6 +63,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('excel','AprendizController@excel');
 	Route::post('generar_reporte','RegistroHistoricoController@generar_reporte');
 
+	Route::post('aceptar_solicitudes','AprendizController@aceptar_solicitudes');
 
 	// Cambio de contraseña
 	Route::get('password', 'AdminController@password');
@@ -57,6 +72,8 @@ Route::group(['prefix' => 'admin'], function() {
 
 Route::get('buscar_aprendiz','AprendizController@ajax');
 Route::post('{id}/entrega_suplemento', 'AprendizController@entrega_suplemento');
+
+Route::get('busqueda_aprendiz', 'AprendizController@busqueda_aprendiz');
 
 Route::post('registro_historico/store/{id}', 'RegistroHistoricoController@store');
 Route::delete('registro_historico/{id}','RegistroHistoricoController@destroy');
